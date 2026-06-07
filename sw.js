@@ -1,8 +1,7 @@
-const CACHE = '118pro-v2';
-const BASE = '/118pro';
+const CACHE = '118pro-v3';
 const ASSETS = [
-  BASE + '/',
-  BASE + '/index.html',
+  './',
+  './index.html',
 ];
 
 self.addEventListener('install', e => {
@@ -20,17 +19,19 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  // Only handle same-origin GET requests
+  if (e.request.method !== 'GET') return;
   e.respondWith(
-    caches.match(e.request).then(r => {
-      if (r) return r;
-      return fetch(e.request).then(response => {
-        if (!response || response.status !== 200 || response.type !== 'basic') {
-          return response;
+    caches.match(e.request).then(cached => {
+      const network = fetch(e.request).then(response => {
+        if (response && response.status === 200 && response.type === 'basic') {
+          const clone = response.clone();
+          caches.open(CACHE).then(c => c.put(e.request, clone));
         }
-        const responseToCache = response.clone();
-        caches.open(CACHE).then(cache => cache.put(e.request, responseToCache));
         return response;
-      }).catch(() => caches.match(BASE + '/index.html'));
+      });
+      // Return cached immediately; refresh cache in background (stale-while-revalidate)
+      return cached || network.catch(() => caches.match('./index.html'));
     })
   );
 });
