@@ -181,6 +181,27 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
 /* DIVIDER */
 .divider { height: 1px; background: var(--border); margin: 6px 0; }
 
+
+/* Button reset for iOS touch compatibility */
+button.home-card, button.card, button.proto-item, button.block-tab {
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+button.home-card { border: 1px solid var(--border); }
+button.card { border: 0.5px solid var(--border); }
+button.card.red-border { border-left: 3px solid var(--red); }
+button.card.orange-border { border-left: 3px solid var(--orange); }
+button.card.green-border { border-left: 3px solid var(--green); }
+button.card.blue-border { border-left: 3px solid var(--accent); }
+button.card.yellow-border { border-left: 3px solid var(--yellow); }
+button.proto-item { border: 1px solid var(--border); }
+button.block-tab { border: 1px solid var(--border); }
+
 /* SCROLL HELPER */
 #content::-webkit-scrollbar { display: none; }
 </style>
@@ -205,57 +226,57 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
     <!-- HOME -->
     <div id="panel-home" class="panel active">
       <div class="home-grid">
-        <div class="home-card" onclick="openSection('protocolli')">
+        <button class="home-card" onclick="openSection('protocolli')">
           <div class="hc-icon">🫁</div>
           <div class="hc-title">Protocolli Patologia</div>
           <div class="hc-sub">12 protocolli</div>
           <div class="hc-badge" style="background:var(--red-bg);color:var(--red)">EMERGENZA</div>
-        </div>
-        <div class="home-card" onclick="openSection('farmaci')">
+        </button>
+        <button class="home-card" onclick="openSection('farmaci')">
           <div class="hc-icon">💊</div>
           <div class="hc-title">Dosaggi Farmaci</div>
           <div class="hc-sub">Per peso/età</div>
           <div class="hc-badge" style="background:var(--orange-bg);color:var(--orange)">RAPIDO</div>
-        </div>
-        <div class="home-card" onclick="openSection('scale')">
+        </button>
+        <button class="home-card" onclick="openSection('scale')">
           <div class="hc-icon">📊</div>
           <div class="hc-title">Scale di Valut.</div>
           <div class="hc-sub">GCS · NEWS · REMS</div>
           <div class="hc-badge" style="background:var(--teal-bg);color:var(--teal)">SCORING</div>
-        </div>
-        <div class="home-card" onclick="openSection('checklist')">
+        </button>
+        <button class="home-card" onclick="openSection('checklist')">
           <div class="hc-icon">✅</div>
           <div class="hc-title">Checklist Procedure</div>
           <div class="hc-sub">Intubazione · CVC · DAE</div>
           <div class="hc-badge" style="background:var(--green-bg);color:var(--green)">PROCEDURE</div>
-        </div>
-        <div class="home-card" onclick="openSection('calcolatori')">
+        </button>
+        <button class="home-card" onclick="openSection('calcolatori')">
           <div class="hc-icon">🧮</div>
           <div class="hc-title">Calcolatori Clinici</div>
           <div class="hc-sub">Dose · Drip · GFR</div>
           <div class="hc-badge" style="background:var(--purple-bg);color:var(--purple)">CALC</div>
-        </div>
-        <div class="home-card" onclick="openSection('pacing')">
+        </button>
+        <button class="home-card" onclick="openSection('pacing')">
           <div class="hc-icon">⚡</div>
           <div class="hc-title">Pacing & Blocchi AV</div>
           <div class="hc-sub">1° · 2° · 3° grado</div>
           <div class="hc-badge" style="background:var(--yellow-bg);color:var(--yellow)">CARDIOLOGIA</div>
-        </div>
+        </button>
       </div>
 
       <div class="sec-title">Accesso rapido emergenza</div>
-      <div class="card red-border" onclick="openProto('arresto')">
+      <button class="card red-border" onclick="openProto('arresto')">
         <div class="card-title">🛑 ARRESTO CARDIACO – RCP adulto</div>
         <div class="card-body">30:2 · 100-120/min · Adrenalina 1mg ogni 3-5' · DAE appena disponibile</div>
-      </div>
-      <div class="card orange-border" onclick="openProto('anafilassi')">
+      </button>
+      <button class="card orange-border" onclick="openProto('anafilassi')">
         <div class="card-title">⚠️ ANAFILASSI GRAVE</div>
         <div class="card-body">Adrenalina 0.5mg IM coscia · Posizione · O₂ · Accesso venoso</div>
-      </div>
-      <div class="card yellow-border" onclick="openSection('pacing')">
+      </button>
+      <button class="card yellow-border" onclick="openSection('pacing')">
         <div class="card-title">⚡ BLOCCO AV COMPLETO – Pacing</div>
         <div class="card-body">FC &lt;40 · instabilità emodinamica · Atropina → TCP → automedica</div>
-      </div>
+      </button>
     </div>
 
     <!-- PROTOCOLLI -->
@@ -264,21 +285,21 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
       <div class="detail-title">Protocolli Clinici</div>
       <div class="detail-sub">Tap per aprire il protocollo completo</div>
       <div class="sec-title">Respiratorio</div>
-      <div class="proto-item" onclick="openProto('dispnea')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Dispnea acuta</div><div class="proto-tag">Asma · BPCO · Edema polm.</div></div><div class="proto-arrow">›</div></div>
-      <div class="proto-item" onclick="openProto('bpco')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">BPCO riacutizzata</div><div class="proto-tag">Broncodilatatori · NIV · O₂ controllato</div></div><div class="proto-arrow">›</div></div>
-      <div class="proto-item" onclick="openProto('asma')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Asma bronchiale acuta</div><div class="proto-tag">Salbutamolo · Magnesio · Cortisonici</div></div><div class="proto-arrow">›</div></div>
+      <button class="proto-item" onclick="openProto('dispnea')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Dispnea acuta</div><div class="proto-tag">Asma · BPCO · Edema polm.</div></div><div class="proto-arrow">›</div></button>
+      <button class="proto-item" onclick="openProto('bpco')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">BPCO riacutizzata</div><div class="proto-tag">Broncodilatatori · NIV · O₂ controllato</div></div><div class="proto-arrow">›</div></button>
+      <button class="proto-item" onclick="openProto('asma')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Asma bronchiale acuta</div><div class="proto-tag">Salbutamolo · Magnesio · Cortisonici</div></div><div class="proto-arrow">›</div></button>
       <div class="sec-title">Cardiologico</div>
-      <div class="proto-item" onclick="openProto('dolore-toracico')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Dolore toracico / IMA</div><div class="proto-tag">STEMI · NSTEMI · Aspirin · Nitrati</div></div><div class="proto-arrow">›</div></div>
-      <div class="proto-item" onclick="openProto('arresto')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Arresto cardiaco – RCP</div><div class="proto-tag">30:2 · Adrenalina · DAE · ROSC</div></div><div class="proto-arrow">›</div></div>
-      <div class="proto-item" onclick="openProto('aritmie')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Aritmie – Tachiaritmie</div><div class="proto-tag">FA · TV · FV · Cardioversione</div></div><div class="proto-arrow">›</div></div>
-      <div class="proto-item" onclick="openSection('pacing')"><div class="proto-dot" style="background:var(--yellow)"></div><div><div class="proto-name">Blocchi AV – Pacing</div><div class="proto-tag">1° · 2° · 3° grado · TCP</div></div><div class="proto-arrow">›</div></div>
+      <button class="proto-item" onclick="openProto('dolore-toracico')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Dolore toracico / IMA</div><div class="proto-tag">STEMI · NSTEMI · Aspirin · Nitrati</div></div><div class="proto-arrow">›</div></button>
+      <button class="proto-item" onclick="openProto('arresto')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Arresto cardiaco – RCP</div><div class="proto-tag">30:2 · Adrenalina · DAE · ROSC</div></div><div class="proto-arrow">›</div></button>
+      <button class="proto-item" onclick="openProto('aritmie')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Aritmie – Tachiaritmie</div><div class="proto-tag">FA · TV · FV · Cardioversione</div></div><div class="proto-arrow">›</div></button>
+      <button class="proto-item" onclick="openSection('pacing')"><div class="proto-dot" style="background:var(--yellow)"></div><div><div class="proto-name">Blocchi AV – Pacing</div><div class="proto-tag">1° · 2° · 3° grado · TCP</div></div><div class="proto-arrow">›</div></button>
       <div class="sec-title">Neurologico</div>
-      <div class="proto-item" onclick="openProto('ictus')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Ictus / TIA – Stroke</div><div class="proto-tag">FAST · Finestra terapeutica · tPA</div></div><div class="proto-arrow">›</div></div>
-      <div class="proto-item" onclick="openProto('crisi-epilettica')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Crisi epilettica / Stato epilettico</div><div class="proto-tag">Diazepam · Lorazepam · Midazolam</div></div><div class="proto-arrow">›</div></div>
+      <button class="proto-item" onclick="openProto('ictus')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Ictus / TIA – Stroke</div><div class="proto-tag">FAST · Finestra terapeutica · tPA</div></div><div class="proto-arrow">›</div></button>
+      <button class="proto-item" onclick="openProto('crisi-epilettica')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Crisi epilettica / Stato epilettico</div><div class="proto-tag">Diazepam · Lorazepam · Midazolam</div></div><div class="proto-arrow">›</div></button>
       <div class="sec-title">Altro</div>
-      <div class="proto-item" onclick="openProto('anafilassi')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Anafilassi / Shock allergico</div><div class="proto-tag">Adrenalina IM · Antistaminici · Cortisonici</div></div><div class="proto-arrow">›</div></div>
-      <div class="proto-item" onclick="openProto('trauma')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Trauma grave / Politrauma</div><div class="proto-tag">ABCDE · C-spine · Emorragia</div></div><div class="proto-arrow">›</div></div>
-      <div class="proto-item" onclick="openProto('ipoglicemia')"><div class="proto-dot" style="background:var(--green)"></div><div><div class="proto-name">Ipoglicemia grave</div><div class="proto-tag">Glucosio · Glucagone · GCS</div></div><div class="proto-arrow">›</div></div>
+      <button class="proto-item" onclick="openProto('anafilassi')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Anafilassi / Shock allergico</div><div class="proto-tag">Adrenalina IM · Antistaminici · Cortisonici</div></div><div class="proto-arrow">›</div></button>
+      <button class="proto-item" onclick="openProto('trauma')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Trauma grave / Politrauma</div><div class="proto-tag">ABCDE · C-spine · Emorragia</div></div><div class="proto-arrow">›</div></button>
+      <button class="proto-item" onclick="openProto('ipoglicemia')"><div class="proto-dot" style="background:var(--green)"></div><div><div class="proto-name">Ipoglicemia grave</div><div class="proto-tag">Glucosio · Glucagone · GCS</div></div><div class="proto-arrow">›</div></button>
     </div>
 
     <!-- PROTO DETAIL -->
@@ -293,11 +314,11 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
       <div class="detail-title">Dosaggi Farmaci</div>
       <div class="detail-sub">Dosi standard adulto – verificare sempre peso e controindicazioni</div>
       <div class="tabs">
-        <div class="tab active" onclick="farmTab(0,'Emergenza')">Emergenza</div>
-        <div class="tab" onclick="farmTab(1,'Cardiologici')">Cardio</div>
-        <div class="tab" onclick="farmTab(2,'Respiratori')">Respir.</div>
-        <div class="tab" onclick="farmTab(3,'Neurologici')">Neuro</div>
-      </div>
+        <button class="tab active" onclick="farmTab(0,'Emergenza')">Emergenza</button>
+        <button class="tab" onclick="farmTab(1,'Cardiologici')">Cardio</button>
+        <button class="tab" onclick="farmTab(2,'Respiratori')">Respir.</button>
+        <button class="tab" onclick="farmTab(3,'Neurologici')">Neuro</button>
+      </button>
       <div id="farmaci-content"></div>
     </div>
 
@@ -306,11 +327,11 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
       <button class="back-btn" onclick="goBack()">← Indietro</button>
       <div class="detail-title">Scale di Valutazione</div>
       <div class="tabs">
-        <div class="tab active" onclick="scaleTab(0)">GCS</div>
-        <div class="tab" onclick="scaleTab(1)">NEWS2</div>
-        <div class="tab" onclick="scaleTab(2)">REMS</div>
-        <div class="tab" onclick="scaleTab(3)">Cincinnati</div>
-      </div>
+        <button class="tab active" onclick="scaleTab(0)">GCS</button>
+        <button class="tab" onclick="scaleTab(1)">NEWS2</button>
+        <button class="tab" onclick="scaleTab(2)">REMS</button>
+        <button class="tab" onclick="scaleTab(3)">Cincinnati</button>
+      </button>
       <div id="scale-content"></div>
     </div>
 
@@ -319,11 +340,11 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
       <button class="back-btn" onclick="goBack()">← Indietro</button>
       <div class="detail-title">Checklist Procedure</div>
       <div class="tabs">
-        <div class="tab active" onclick="checkTab(0)">Intubazione</div>
-        <div class="tab" onclick="checkTab(1)">Accesso EV</div>
-        <div class="tab" onclick="checkTab(2)">DAE</div>
-        <div class="tab" onclick="checkTab(3)">Drenaggio</div>
-      </div>
+        <button class="tab active" onclick="checkTab(0)">Intubazione</button>
+        <button class="tab" onclick="checkTab(1)">Accesso EV</button>
+        <button class="tab" onclick="checkTab(2)">DAE</button>
+        <button class="tab" onclick="checkTab(3)">Drenaggio</button>
+      </button>
       <div id="checklist-content"></div>
     </div>
 
@@ -332,11 +353,11 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
       <button class="back-btn" onclick="goBack()">← Indietro</button>
       <div class="detail-title">Calcolatori Clinici</div>
       <div class="tabs">
-        <div class="tab active" onclick="calcTab(0)">Dose/kg</div>
-        <div class="tab" onclick="calcTab(1)">Drip Rate</div>
-        <div class="tab" onclick="calcTab(2)">Adrenalina</div>
-        <div class="tab" onclick="calcTab(3)">GFR</div>
-      </div>
+        <button class="tab active" onclick="calcTab(0)">Dose/kg</button>
+        <button class="tab" onclick="calcTab(1)">Drip Rate</button>
+        <button class="tab" onclick="calcTab(2)">Adrenalina</button>
+        <button class="tab" onclick="calcTab(3)">GFR</button>
+      </button>
       <div id="calc-content"></div>
     </div>
 
@@ -422,7 +443,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n">C</div><div class="step-text"><strong>Circulation:</strong> PA, FC, diuresi, edemi, TVC elevata?</div></li>
           <li class="step"><div class="step-n">D</div><div class="step-text"><strong>Disability:</strong> GCS, agitazione (segno ipossia!)</div></li>
         </ul>
-      </div>
+      </button>
     </div>
     <div class="card orange-border">
       <div class="card-title">2. Posizionamento</div>
@@ -436,7 +457,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n orange">!</div><div class="step-text"><strong>BPCO nota:</strong> O₂ 1-2 L/min occhialini → target SpO₂ 88-92%. MAI alto flusso!</div></li>
           <li class="step"><div class="step-n">3</div><div class="step-text"><strong>OAP / ARDS grave:</strong> maschera non rebreathing 15L/min · considera CPAP</div></li>
         </ul>
-      </div>
+      </button>
     </div>
     <div class="card">
       <div class="card-title">4. Diagnosi differenziale rapida</div>
@@ -447,7 +468,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n" style="background:var(--purple)">P</div><div class="step-text"><strong>Pneumotorace</strong> (MV assente unilat, iperdisteso) → posizione, O₂ alto, decompressione urgente</div></li>
           <li class="step"><div class="step-n" style="background:var(--orange)">E</div><div class="step-text"><strong>Embolia polm.</strong> (tachipnea, ipossemia, TV profonda) → O₂, accesso, anticoagulazione se stabile</div></li>
         </ul>
-      </div>
+      </button>
     </div>`
   },
   'arresto': {
@@ -474,7 +495,7 @@ const PROTOCOLS = {
       <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
         <div><div style="color:var(--accent);font-size:11px;font-weight:700;margin-bottom:4px">4H</div><div style="font-size:12px;color:var(--text2)">Ipossia<br>Ipovolemia<br>Ipo/iperkaliemia<br>Ipotermia</div></div>
         <div><div style="color:var(--accent);font-size:11px;font-weight:700;margin-bottom:4px">4T</div><div style="font-size:12px;color:var(--text2)">Tamponamento<br>Trombosi (EP/IMA)<br>Tensione PNX<br>Tossici/OD</div></div>
-      </div>
+      </button>
     </div>
     <div class="card green-border">
       <div class="card-title">Post-ROSC</div>
@@ -486,7 +507,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n green">✓</div><div class="step-text">Temperatura target <strong>32-36°C</strong> – evita ipertermia</div></li>
           <li class="step"><div class="step-n green">✓</div><div class="step-text">Glicemia target <strong>6-10 mmol/L</strong></div></li>
         </ul>
-      </div>
+      </button>
     </div>`
   },
   'anafilassi': {
@@ -538,7 +559,7 @@ const PROTOCOLS = {
         <span class="drug">Morfina 2-4mg IV (se dolore EVA≥7)</span>
         <span class="drug">Nitrati SL (se PAS &gt;90)</span>
         <span class="drug urgent">NO O₂ se SpO₂ ≥94%</span>
-      </div>
+      </button>
     </div>
     <div class="card blue-border">
       <div class="card-title">Contatta centrale per:</div>
@@ -567,7 +588,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n orange">M</div><div class="step-text"><strong>Moderata:</strong> SpO₂ 88-90%, FR 20-25, usa muscoli accessori → O₂ controllato + cortisonici</div></li>
           <li class="step"><div class="step-n red">G</div><div class="step-text"><strong>Grave:</strong> SpO₂ &lt;88%, FR &gt;25, cianosi, confusione → NIV, considera intubazione, automedica</div></li>
         </ul>
-      </div>
+      </button>
     </div>
     <div class="card orange-border">
       <div class="card-title">Terapia</div>
@@ -594,7 +615,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n orange">M</div><div class="step-text">Moderata: frasi corte, SpO₂ 92-95%, FR 20-25, PEF 50-75%</div></li>
           <li class="step"><div class="step-n red">G</div><div class="step-text">Grave: parole, SpO₂ &lt;92%, FR&gt;25, PEF&lt;50% → trattamento aggressivo</div></li>
         </ul>
-      </div>
+      </button>
     </div>
     <div class="card orange-border">
       <div class="card-title">Terapia crisi moderata-grave</div>
@@ -917,22 +938,22 @@ function renderScale(i) {
       <div class="card-title">Scala di Glasgow – GCS</div>
       <div class="sec-title">Apertura Occhi (E)</div>`;
     SCALE_GCS.E.forEach(r => {
-      html += `<div class="scale-row" onclick="selGCS('E',${r.v},this)">
-        <div class="scale-val" id="gE${r.v}">${r.v}</div>
+      html += `<button class="scale-row" onclick="selGCS('E',${r.v},this)">
+        <div class="scale-val" id="gE${r.v}">${r.v}</button>
         <div class="scale-label">${r.l}</div>
         <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cE${r.v}"></div></div>`;
     });
     html += `<div class="sec-title">Risposta Verbale (V)</div>`;
     SCALE_GCS.V.forEach(r => {
-      html += `<div class="scale-row" onclick="selGCS('V',${r.v},this)">
-        <div class="scale-val">${r.v}</div>
+      html += `<button class="scale-row" onclick="selGCS('V',${r.v},this)">
+        <div class="scale-val">${r.v}</button>
         <div class="scale-label">${r.l}</div>
         <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cV${r.v}"></div></div>`;
     });
     html += `<div class="sec-title">Risposta Motoria (M)</div>`;
     SCALE_GCS.M.forEach(r => {
-      html += `<div class="scale-row" onclick="selGCS('M',${r.v},this)">
-        <div class="scale-val">${r.v}</div>
+      html += `<button class="scale-row" onclick="selGCS('M',${r.v},this)">
+        <div class="scale-val">${r.v}</button>
         <div class="scale-label">${r.l}</div>
         <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cM${r.v}"></div></div>`;
     });
@@ -1081,10 +1102,11 @@ function renderCheck(i) {
   let html = `<div class="card blue-border"><div class="card-title">📋 ${cl.name}</div>`;
   cl.items.forEach((item, j) => {
     const checked = checkStates[i][j] || false;
-    html += `<div class="check-item" onclick="toggleCheck(${i},${j})">
-      <div class="check-box ${checked?'checked'}" id="cb${i}_${j}"></div>
-      <div class="check-text ${checked?'checked'}" id="ct${i}_${j}">${item}</div>
-    </div>`;
+    const ck = checked ? 'checked' : '';
+    html += `<button class="check-item" onclick="toggleCheck(${i},${j})">
+      <div class="check-box ${ck}" id="cb${i}_${j}"></div>
+      <div class="check-text ${ck}" id="ct${i}_${j}">${item}</div>
+    </button>`;
   });
   html += `</div><button class="reset-btn" onclick="resetCheck(${i})">↺ Reset checklist</button>`;
   document.getElementById('checklist-content').innerHTML = html;
@@ -1227,18 +1249,18 @@ function renderPacing() {
   const html = `
     <div class="alert yellow">⚡ Blocco AV sintomatico: FC &lt;40 · ipotensione · sincope · dolore toracico → scala terapeutica → attiva automedica se TCP</div>
     
-    <div class="block-tab active" onclick="showBlock(0)" id="bt0">
+    <button class="block-tab active" onclick="showBlock(0)" id="bt0">
       <div class="block-tab-title">Blocco AV 1° Grado</div>
       <div class="block-tab-sub">PR &gt;200ms · asintomatico</div>
-    </div>
-    <div class="block-tab" onclick="showBlock(1)" id="bt1">
+    </button>
+    <button class="block-tab" onclick="showBlock(1)" id="bt1">
       <div class="block-tab-title">Blocco AV 2° Grado</div>
       <div class="block-tab-sub">Mobitz I (Wenckebach) · Mobitz II</div>
-    </div>
-    <div class="block-tab" onclick="showBlock(2)" id="bt2">
+    </button>
+    <button class="block-tab" onclick="showBlock(2)" id="bt2">
       <div class="block-tab-title">Blocco AV 3° Grado (Completo)</div>
       <div class="block-tab-sub">Dissociazione AV completa · Emergenza</div>
-    </div>
+    </button>
 
     <div id="block-detail"></div>
   `;
@@ -1384,8 +1406,8 @@ document.getElementById('search-input').addEventListener('input', function() {
   const results = SEARCH_INDEX.filter(r => r.q.includes(q) || r.title.toLowerCase().includes(q));
   const el = document.getElementById('search-results');
   if(!results.length) { el.innerHTML='<div class="alert orange">Nessun risultato per "'+q+'"</div>'; return; }
-  el.innerHTML = results.map((r,i) => `<div class="search-result" onclick="searchGo(${i}, '${q}')">
-    <div class="sr-title">${r.title}</div>
+  el.innerHTML = results.map((r,i) => `<button class="search-result" onclick="searchGo(${i}, '${q}')">
+    <div class="sr-title">${r.title}</button>
     <div class="sr-section">${r.sec}</div>
   </div>`).join('');
   window._searchResults = results;
