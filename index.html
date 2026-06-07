@@ -211,7 +211,7 @@ button.block-tab { border: 1px solid var(--border); }
   <div id="header">
     <div id="header-row">
       <div>
-        <h1>⚕ 118 PRO</h1>
+        <h1 onclick="navTo('home')" style="cursor:pointer">⚕ 118 PRO</h1>
         <div id="header-sub">Assistente Clinico Infermiere</div>
       </div>
       <span class="header-badge">OFFLINE</span>
@@ -318,7 +318,7 @@ button.block-tab { border: 1px solid var(--border); }
         <button class="tab" onclick="farmTab(1,'Cardiologici')">Cardio</button>
         <button class="tab" onclick="farmTab(2,'Respiratori')">Respir.</button>
         <button class="tab" onclick="farmTab(3,'Neurologici')">Neuro</button>
-      </button>
+      </div>
       <div id="farmaci-content"></div>
     </div>
 
@@ -331,7 +331,7 @@ button.block-tab { border: 1px solid var(--border); }
         <button class="tab" onclick="scaleTab(1)">NEWS2</button>
         <button class="tab" onclick="scaleTab(2)">REMS</button>
         <button class="tab" onclick="scaleTab(3)">Cincinnati</button>
-      </button>
+      </div>
       <div id="scale-content"></div>
     </div>
 
@@ -344,7 +344,7 @@ button.block-tab { border: 1px solid var(--border); }
         <button class="tab" onclick="checkTab(1)">Accesso EV</button>
         <button class="tab" onclick="checkTab(2)">DAE</button>
         <button class="tab" onclick="checkTab(3)">Drenaggio</button>
-      </button>
+      </div>
       <div id="checklist-content"></div>
     </div>
 
@@ -357,7 +357,7 @@ button.block-tab { border: 1px solid var(--border); }
         <button class="tab" onclick="calcTab(1)">Drip Rate</button>
         <button class="tab" onclick="calcTab(2)">Adrenalina</button>
         <button class="tab" onclick="calcTab(3)">GFR</button>
-      </button>
+      </div>
       <div id="calc-content"></div>
     </div>
 
@@ -443,7 +443,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n">C</div><div class="step-text"><strong>Circulation:</strong> PA, FC, diuresi, edemi, TVC elevata?</div></li>
           <li class="step"><div class="step-n">D</div><div class="step-text"><strong>Disability:</strong> GCS, agitazione (segno ipossia!)</div></li>
         </ul>
-      </button>
+      </div>
     </div>
     <div class="card orange-border">
       <div class="card-title">2. Posizionamento</div>
@@ -457,7 +457,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n orange">!</div><div class="step-text"><strong>BPCO nota:</strong> O₂ 1-2 L/min occhialini → target SpO₂ 88-92%. MAI alto flusso!</div></li>
           <li class="step"><div class="step-n">3</div><div class="step-text"><strong>OAP / ARDS grave:</strong> maschera non rebreathing 15L/min · considera CPAP</div></li>
         </ul>
-      </button>
+      </div>
     </div>
     <div class="card">
       <div class="card-title">4. Diagnosi differenziale rapida</div>
@@ -468,7 +468,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n" style="background:var(--purple)">P</div><div class="step-text"><strong>Pneumotorace</strong> (MV assente unilat, iperdisteso) → posizione, O₂ alto, decompressione urgente</div></li>
           <li class="step"><div class="step-n" style="background:var(--orange)">E</div><div class="step-text"><strong>Embolia polm.</strong> (tachipnea, ipossemia, TV profonda) → O₂, accesso, anticoagulazione se stabile</div></li>
         </ul>
-      </button>
+      </div>
     </div>`
   },
   'arresto': {
@@ -495,7 +495,7 @@ const PROTOCOLS = {
       <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
         <div><div style="color:var(--accent);font-size:11px;font-weight:700;margin-bottom:4px">4H</div><div style="font-size:12px;color:var(--text2)">Ipossia<br>Ipovolemia<br>Ipo/iperkaliemia<br>Ipotermia</div></div>
         <div><div style="color:var(--accent);font-size:11px;font-weight:700;margin-bottom:4px">4T</div><div style="font-size:12px;color:var(--text2)">Tamponamento<br>Trombosi (EP/IMA)<br>Tensione PNX<br>Tossici/OD</div></div>
-      </button>
+      </div>
     </div>
     <div class="card green-border">
       <div class="card-title">Post-ROSC</div>
@@ -507,7 +507,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n green">✓</div><div class="step-text">Temperatura target <strong>32-36°C</strong> – evita ipertermia</div></li>
           <li class="step"><div class="step-n green">✓</div><div class="step-text">Glicemia target <strong>6-10 mmol/L</strong></div></li>
         </ul>
-      </button>
+      </div>
     </div>`
   },
   'anafilassi': {
@@ -559,7 +559,7 @@ const PROTOCOLS = {
         <span class="drug">Morfina 2-4mg IV (se dolore EVA≥7)</span>
         <span class="drug">Nitrati SL (se PAS &gt;90)</span>
         <span class="drug urgent">NO O₂ se SpO₂ ≥94%</span>
-      </button>
+      </div>
     </div>
     <div class="card blue-border">
       <div class="card-title">Contatta centrale per:</div>
@@ -588,7 +588,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n orange">M</div><div class="step-text"><strong>Moderata:</strong> SpO₂ 88-90%, FR 20-25, usa muscoli accessori → O₂ controllato + cortisonici</div></li>
           <li class="step"><div class="step-n red">G</div><div class="step-text"><strong>Grave:</strong> SpO₂ &lt;88%, FR &gt;25, cianosi, confusione → NIV, considera intubazione, automedica</div></li>
         </ul>
-      </button>
+      </div>
     </div>
     <div class="card orange-border">
       <div class="card-title">Terapia</div>
@@ -615,7 +615,7 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n orange">M</div><div class="step-text">Moderata: frasi corte, SpO₂ 92-95%, FR 20-25, PEF 50-75%</div></li>
           <li class="step"><div class="step-n red">G</div><div class="step-text">Grave: parole, SpO₂ &lt;92%, FR&gt;25, PEF&lt;50% → trattamento aggressivo</div></li>
         </ul>
-      </button>
+      </div>
     </div>
     <div class="card orange-border">
       <div class="card-title">Terapia crisi moderata-grave</div>
@@ -939,21 +939,21 @@ function renderScale(i) {
       <div class="sec-title">Apertura Occhi (E)</div>`;
     SCALE_GCS.E.forEach(r => {
       html += `<button class="scale-row" onclick="selGCS('E',${r.v},this)">
-        <div class="scale-val" id="gE${r.v}">${r.v}</button>
+        <div class="scale-val" id="gE${r.v}">${r.v}</div>
         <div class="scale-label">${r.l}</div>
         <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cE${r.v}"></div></div>`;
     });
     html += `<div class="sec-title">Risposta Verbale (V)</div>`;
     SCALE_GCS.V.forEach(r => {
       html += `<button class="scale-row" onclick="selGCS('V',${r.v},this)">
-        <div class="scale-val">${r.v}</button>
+        <div class="scale-val">${r.v}</div>
         <div class="scale-label">${r.l}</div>
         <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cV${r.v}"></div></div>`;
     });
     html += `<div class="sec-title">Risposta Motoria (M)</div>`;
     SCALE_GCS.M.forEach(r => {
       html += `<button class="scale-row" onclick="selGCS('M',${r.v},this)">
-        <div class="scale-val">${r.v}</button>
+        <div class="scale-val">${r.v}</div>
         <div class="scale-label">${r.l}</div>
         <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cM${r.v}"></div></div>`;
     });
@@ -1407,7 +1407,7 @@ document.getElementById('search-input').addEventListener('input', function() {
   const el = document.getElementById('search-results');
   if(!results.length) { el.innerHTML='<div class="alert orange">Nessun risultato per "'+q+'"</div>'; return; }
   el.innerHTML = results.map((r,i) => `<button class="search-result" onclick="searchGo(${i}, '${q}')">
-    <div class="sr-title">${r.title}</button>
+    <div class="sr-title">${r.title}</div>
     <div class="sr-section">${r.sec}</div>
   </div>`).join('');
   window._searchResults = results;
@@ -1442,18 +1442,20 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-// Fix dinamico: ogni volta che il DOM cambia (es. renderizzazione protocolli)
-// riapplica il fix agli elementi nuovi
+// Fix dinamico: riapplica il touch fix iOS agli elementi nuovi senza duplicare listener
+const _touchFixed = new WeakSet();
+function _applyTouchFix(el) {
+  if (_touchFixed.has(el)) return;
+  _touchFixed.add(el);
+  el.addEventListener('touchstart', function(){}, {passive: true});
+}
 const _observer = new MutationObserver(function(mutations) {
   mutations.forEach(function(m) {
     m.addedNodes.forEach(function(node) {
-      if(node.nodeType === 1) {
-        node.querySelectorAll && node.querySelectorAll('[onclick], .home-card, .proto-item, .check-item, .block-tab, .search-result').forEach(el => {
-          el.addEventListener('touchstart', function(){}, {passive: true});
-        });
-        if(node.hasAttribute && node.hasAttribute('onclick')) {
-          node.addEventListener('touchstart', function(){}, {passive: true});
-        }
+      if (node.nodeType !== 1) return;
+      if (node.hasAttribute && node.hasAttribute('onclick')) _applyTouchFix(node);
+      if (node.querySelectorAll) {
+        node.querySelectorAll('[onclick], .home-card, .proto-item, .check-item, .block-tab, .search-result').forEach(_applyTouchFix);
       }
     });
   });
