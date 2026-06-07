@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="118 PRO">
+<meta name="theme-color" content="#0a1628">
+<title>118 PRO – Assistente Clinico</title>
+<link rel="manifest" href="manifest.json">
+<style>
+:root {
+  --bg: #0a1628;
+  --bg2: #0f1f3d;
+  --bg3: #162444;
+  --card: #1a2d50;
+  --card2: #1f3560;
+  --border: rgba(255,255,255,0.08);
+  --accent: #2d8ef5;
+  --accent2: #1a6fd8;
+  --red: #e53e3e;
+  --red-bg: rgba(229,62,62,0.12);
+  --orange: #f6893a;
+  --orange-bg: rgba(246,137,58,0.12);
+  --green: #38c974;
+  --green-bg: rgba(56,201,116,0.12);
+  --yellow: #f5c842;
+  --yellow-bg: rgba(245,200,66,0.12);
+  --purple: #a78bfa;
+  --purple-bg: rgba(167,139,250,0.12);
+  --teal: #2dd4bf;
+  --teal-bg: rgba(45,212,191,0.12);
+  --text: #e8edf5;
+  --text2: #8fa3c0;
+  --text3: #5a7a9a;
+  --r: 10px;
+  --r2: 14px;
+  --safe-top: env(safe-area-inset-top);
+  --safe-bot: env(safe-area-inset-bottom);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, 'SF Pro Text', sans-serif; overflow: hidden; }
+
+/* LAYOUT */
+#app { display: flex; flex-direction: column; height: 100%; height: 100dvh; }
+#header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: calc(var(--safe-top) + 10px) 16px 10px; flex-shrink: 0; }
+#header-row { display: flex; align-items: center; gap: 10px; }
+#header h1 { font-size: 18px; font-weight: 700; color: var(--accent); letter-spacing: -0.3px; flex: 1; }
+#header-sub { font-size: 11px; color: var(--text3); margin-top: 1px; }
+.header-badge { background: var(--red); color: #fff; font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.5px; }
+#search-bar { margin-top: 8px; position: relative; }
+#search-input { width: 100%; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px 8px 34px; font-size: 14px; color: var(--text); outline: none; -webkit-appearance: none; }
+#search-input::placeholder { color: var(--text3); }
+.search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 15px; pointer-events: none; }
+#content { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 12px 12px; }
+#bottom-nav { background: var(--bg2); border-top: 1px solid var(--border); display: flex; padding-bottom: var(--safe-bot); flex-shrink: 0; }
+.nav-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 4px; border: none; background: none; color: var(--text3); font-size: 9px; cursor: pointer; transition: color 0.15s; }
+.nav-btn.active { color: var(--accent); }
+.nav-icon { font-size: 20px; }
+
+/* PANELS */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* SECTION TITLE */
+.sec-title { font-size: 11px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; padding: 14px 0 6px; }
+
+/* HOME CARDS */
+.home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding-top: 12px; }
+.home-card { background: var(--card); border-radius: var(--r2); padding: 14px 12px; border: 1px solid var(--border); cursor: pointer; transition: background 0.1s; active:background var(--card2); }
+.home-card:active { background: var(--card2); }
+.hc-icon { font-size: 26px; margin-bottom: 6px; }
+.hc-title { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.3; }
+.hc-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.hc-badge { display: inline-block; font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 4px; margin-top: 4px; }
+
+/* DETAIL VIEWS */
+.back-btn { display: flex; align-items: center; gap: 6px; color: var(--accent); font-size: 14px; padding: 12px 0 6px; cursor: pointer; border: none; background: none; }
+.detail-title { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.detail-sub { font-size: 13px; color: var(--text2); margin-bottom: 12px; }
+
+/* CARDS */
+.card { background: var(--card); border-radius: var(--r2); padding: 14px; margin-bottom: 10px; border: 1px solid var(--border); }
+.card-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.card-body { font-size: 13px; color: var(--text2); line-height: 1.6; }
+.card.red-border { border-left: 3px solid var(--red); }
+.card.orange-border { border-left: 3px solid var(--orange); }
+.card.green-border { border-left: 3px solid var(--green); }
+.card.blue-border { border-left: 3px solid var(--accent); }
+.card.purple-border { border-left: 3px solid var(--purple); }
+.card.yellow-border { border-left: 3px solid var(--yellow); }
+
+/* ALERT */
+.alert { border-radius: var(--r); padding: 10px 12px; margin-bottom: 10px; font-size: 13px; line-height: 1.5; }
+.alert.red { background: var(--red-bg); color: #fc8181; border: 1px solid rgba(229,62,62,0.3); }
+.alert.orange { background: var(--orange-bg); color: #fbd38d; border: 1px solid rgba(246,137,58,0.3); }
+.alert.green { background: var(--green-bg); color: #68d391; border: 1px solid rgba(56,201,116,0.3); }
+.alert.yellow { background: var(--yellow-bg); color: #f6e05e; border: 1px solid rgba(245,200,66,0.3); }
+
+/* STEPS */
+.steps { list-style: none; }
+.step { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--border); }
+.step:last-child { border-bottom: none; }
+.step-n { width: 24px; height: 24px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; color: #fff; }
+.step-n.red { background: var(--red); }
+.step-n.green { background: var(--green); color: #000; }
+.step-n.orange { background: var(--orange); color: #000; }
+.step-text { font-size: 13px; color: var(--text2); line-height: 1.5; flex: 1; }
+.step-text strong { color: var(--text); font-weight: 600; }
+
+/* DRUG PILLS */
+.drug { display: inline-flex; align-items: center; gap: 4px; background: var(--bg3); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; margin: 3px; font-size: 12px; color: var(--text); }
+.drug.urgent { border-color: rgba(229,62,62,0.4); background: var(--red-bg); color: #fc8181; }
+.drug.safe { border-color: rgba(56,201,116,0.4); background: var(--green-bg); color: #68d391; }
+.drug-dose { font-size: 11px; color: var(--text3); }
+
+/* PILLS GROUP */
+.pill-group { display: flex; flex-wrap: wrap; margin: 6px 0; }
+
+/* SCALE */
+.scale-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.scale-row:last-child { border-bottom: none; }
+.scale-val { font-weight: 700; color: var(--accent); min-width: 30px; }
+.scale-label { color: var(--text); flex: 1; padding: 0 8px; }
+.scale-score { font-size: 11px; color: var(--text3); }
+
+/* CALC */
+.calc-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.calc-label { font-size: 13px; color: var(--text2); min-width: 80px; }
+.calc-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 15px; color: var(--text); outline: none; -webkit-appearance: none; }
+.calc-result { background: var(--bg3); border-radius: var(--r); padding: 12px 14px; margin-top: 10px; }
+.calc-result-label { font-size: 11px; color: var(--text3); margin-bottom: 4px; }
+.calc-result-val { font-size: 22px; font-weight: 700; color: var(--accent); }
+.calc-result-unit { font-size: 13px; color: var(--text2); }
+.calc-btn { background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 10px 20px; font-size: 14px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 8px; }
+.calc-btn:active { background: var(--accent2); }
+
+/* TABS */
+.tabs { display: flex; background: var(--bg3); border-radius: 8px; padding: 2px; margin-bottom: 12px; margin-top: 6px; }
+.tab { flex: 1; text-align: center; padding: 7px 4px; font-size: 12px; color: var(--text3); border-radius: 6px; cursor: pointer; transition: all 0.15s; }
+.tab.active { background: var(--card2); color: var(--text); font-weight: 600; }
+
+/* CHECKLIST */
+.check-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.check-item:last-child { border-bottom: none; }
+.check-box { width: 22px; height: 22px; border: 2px solid var(--text3); border-radius: 5px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 1px; transition: all 0.15s; }
+.check-box.checked { background: var(--green); border-color: var(--green); }
+.check-box.checked::after { content: '✓'; color: #000; font-size: 13px; font-weight: 700; }
+.check-text { font-size: 13px; color: var(--text); line-height: 1.4; flex: 1; }
+.check-text.checked { color: var(--text3); text-decoration: line-through; }
+.reset-btn { background: transparent; border: 1px solid var(--border); color: var(--text3); border-radius: 8px; padding: 8px 14px; font-size: 12px; cursor: pointer; margin-top: 10px; }
+
+/* PROTOCOL LIST */
+.proto-item { background: var(--card); border-radius: var(--r2); padding: 12px 14px; margin-bottom: 8px; border: 1px solid var(--border); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+.proto-item:active { background: var(--card2); }
+.proto-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.proto-name { font-size: 14px; font-weight: 500; color: var(--text); flex: 1; }
+.proto-arrow { color: var(--text3); font-size: 16px; }
+.proto-tag { font-size: 10px; color: var(--text3); margin-top: 1px; }
+
+/* PACING */
+.block-tab { background: var(--bg3); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; cursor: pointer; border: 1px solid var(--border); }
+.block-tab.active { border-color: var(--accent); background: rgba(45,142,245,0.1); }
+.block-tab-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.block-tab-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* SEVERITY BADGE */
+.sev { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: 6px; }
+.sev.red { background: var(--red-bg); color: var(--red); }
+.sev.orange { background: var(--orange-bg); color: var(--orange); }
+.sev.green { background: var(--green-bg); color: var(--green); }
+
+/* SEARCH RESULTS */
+.search-result { background: var(--card); border-radius: var(--r); padding: 11px 13px; margin-bottom: 7px; cursor: pointer; border: 1px solid var(--border); }
+.search-result:active { background: var(--card2); }
+.sr-title { font-size: 13px; font-weight: 600; color: var(--text); }
+.sr-section { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+/* DIVIDER */
+.divider { height: 1px; background: var(--border); margin: 6px 0; }
+
+/* SCROLL HELPER */
+#content::-webkit-scrollbar { display: none; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="header">
+    <div id="header-row">
+      <div>
+        <h1>⚕ 118 PRO</h1>
+        <div id="header-sub">Assistente Clinico Infermiere</div>
+      </div>
+      <span class="header-badge">OFFLINE</span>
+    </div>
+    <div id="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="search" id="search-input" placeholder="Cerca protocollo, farmaco, scala..." autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>
+  </div>
+
+  <div id="content">
+    <!-- HOME -->
+    <div id="panel-home" class="panel active">
+      <div class="home-grid">
+        <div class="home-card" onclick="openSection('protocolli')">
+          <div class="hc-icon">🫁</div>
+          <div class="hc-title">Protocolli Patologia</div>
+          <div class="hc-sub">12 protocolli</div>
+          <div class="hc-badge" style="background:var(--red-bg);color:var(--red)">EMERGENZA</div>
+        </div>
+        <div class="home-card" onclick="openSection('farmaci')">
+          <div class="hc-icon">💊</div>
+          <div class="hc-title">Dosaggi Farmaci</div>
+          <div class="hc-sub">Per peso/età</div>
+          <div class="hc-badge" style="background:var(--orange-bg);color:var(--orange)">RAPIDO</div>
+        </div>
+        <div class="home-card" onclick="openSection('scale')">
+          <div class="hc-icon">📊</div>
+          <div class="hc-title">Scale di Valut.</div>
+          <div class="hc-sub">GCS · NEWS · REMS</div>
+          <div class="hc-badge" style="background:var(--teal-bg);color:var(--teal)">SCORING</div>
+        </div>
+        <div class="home-card" onclick="openSection('checklist')">
+          <div class="hc-icon">✅</div>
+          <div class="hc-title">Checklist Procedure</div>
+          <div class="hc-sub">Intubazione · CVC · DAE</div>
+          <div class="hc-badge" style="background:var(--green-bg);color:var(--green)">PROCEDURE</div>
+        </div>
+        <div class="home-card" onclick="openSection('calcolatori')">
+          <div class="hc-icon">🧮</div>
+          <div class="hc-title">Calcolatori Clinici</div>
+          <div class="hc-sub">Dose · Drip · GFR</div>
+          <div class="hc-badge" style="background:var(--purple-bg);color:var(--purple)">CALC</div>
+        </div>
+        <div class="home-card" onclick="openSection('pacing')">
+          <div class="hc-icon">⚡</div>
+          <div class="hc-title">Pacing & Blocchi AV</div>
+          <div class="hc-sub">1° · 2° · 3° grado</div>
+          <div class="hc-badge" style="background:var(--yellow-bg);color:var(--yellow)">CARDIOLOGIA</div>
+        </div>
+      </div>
+
+      <div class="sec-title">Accesso rapido emergenza</div>
+      <div class="card red-border" onclick="openProto('arresto')">
+        <div class="card-title">🛑 ARRESTO CARDIACO – RCP adulto</div>
+        <div class="card-body">30:2 · 100-120/min · Adrenalina 1mg ogni 3-5' · DAE appena disponibile</div>
+      </div>
+      <div class="card orange-border" onclick="openProto('anafilassi')">
+        <div class="card-title">⚠️ ANAFILASSI GRAVE</div>
+        <div class="card-body">Adrenalina 0.5mg IM coscia · Posizione · O₂ · Accesso venoso</div>
+      </div>
+      <div class="card yellow-border" onclick="openSection('pacing')">
+        <div class="card-title">⚡ BLOCCO AV COMPLETO – Pacing</div>
+        <div class="card-body">FC &lt;40 · instabilità emodinamica · Atropina → TCP → automedica</div>
+      </div>
+    </div>
+
+    <!-- PROTOCOLLI -->
+    <div id="panel-protocolli" class="panel">
+      <button class="back-btn" onclick="goBack()">← Indietro</button>
+      <div class="detail-title">Protocolli Clinici</div>
+      <div class="detail-sub">Tap per aprire il protocollo completo</div>
+      <div class="sec-title">Respiratorio</div>
+      <div class="proto-item" onclick="openProto('dispnea')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Dispnea acuta</div><div class="proto-tag">Asma · BPCO · Edema polm.</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" onclick="openProto('bpco')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">BPCO riacutizzata</div><div class="proto-tag">Broncodilatatori · NIV · O₂ controllato</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" onclick="openProto('asma')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Asma bronchiale acuta</div><div class="proto-tag">Salbutamolo · Magnesio · Cortisonici</div></div><div class="proto-arrow">›</div></div>
+      <div class="sec-title">Cardiologico</div>
+      <div class="proto-item" onclick="openProto('dolore-toracico')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Dolore toracico / IMA</div><div class="proto-tag">STEMI · NSTEMI · Aspirin · Nitrati</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" onclick="openProto('arresto')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Arresto cardiaco – RCP</div><div class="proto-tag">30:2 · Adrenalina · DAE · ROSC</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" onclick="openProto('aritmie')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Aritmie – Tachiaritmie</div><div class="proto-tag">FA · TV · FV · Cardioversione</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" onclick="openSection('pacing')"><div class="proto-dot" style="background:var(--yellow)"></div><div><div class="proto-name">Blocchi AV – Pacing</div><div class="proto-tag">1° · 2° · 3° grado · TCP</div></div><div class="proto-arrow">›</div></div>
+      <div class="sec-title">Neurologico</div>
+      <div class="proto-item" onclick="openProto('ictus')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Ictus / TIA – Stroke</div><div class="proto-tag">FAST · Finestra terapeutica · tPA</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" onclick="openProto('crisi-epilettica')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Crisi epilettica / Stato epilettico</div><div class="proto-tag">Diazepam · Lorazepam · Midazolam</div></div><div class="proto-arrow">›</div></div>
+      <div class="sec-title">Altro</div>
+      <div class="proto-item" onclick="openProto('anafilassi')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Anafilassi / Shock allergico</div><div class="proto-tag">Adrenalina IM · Antistaminici · Cortisonici</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" onclick="openProto('trauma')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Trauma grave / Politrauma</div><div class="proto-tag">ABCDE · C-spine · Emorragia</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" onclick="openProto('ipoglicemia')"><div class="proto-dot" style="background:var(--green)"></div><div><div class="proto-name">Ipoglicemia grave</div><div class="proto-tag">Glucosio · Glucagone · GCS</div></div><div class="proto-arrow">›</div></div>
+    </div>
+
+    <!-- PROTO DETAIL -->
+    <div id="panel-proto-detail" class="panel">
+      <button class="back-btn" onclick="goProtoBack()">← Protocolli</button>
+      <div id="proto-content"></div>
+    </div>
+
+    <!-- FARMACI -->
+    <div id="panel-farmaci" class="panel">
+      <button class="back-btn" onclick="goBack()">← Indietro</button>
+      <div class="detail-title">Dosaggi Farmaci</div>
+      <div class="detail-sub">Dosi standard adulto – verificare sempre peso e controindicazioni</div>
+      <div class="tabs">
+        <div class="tab active" onclick="farmTab(0,'Emergenza')">Emergenza</div>
+        <div class="tab" onclick="farmTab(1,'Cardiologici')">Cardio</div>
+        <div class="tab" onclick="farmTab(2,'Respiratori')">Respir.</div>
+        <div class="tab" onclick="farmTab(3,'Neurologici')">Neuro</div>
+      </div>
+      <div id="farmaci-content"></div>
+    </div>
+
+    <!-- SCALE -->
+    <div id="panel-scale" class="panel">
+      <button class="back-btn" onclick="goBack()">← Indietro</button>
+      <div class="detail-title">Scale di Valutazione</div>
+      <div class="tabs">
+        <div class="tab active" onclick="scaleTab(0)">GCS</div>
+        <div class="tab" onclick="scaleTab(1)">NEWS2</div>
+        <div class="tab" onclick="scaleTab(2)">REMS</div>
+        <div class="tab" onclick="scaleTab(3)">Cincinnati</div>
+      </div>
+      <div id="scale-content"></div>
+    </div>
+
+    <!-- CHECKLIST -->
+    <div id="panel-checklist" class="panel">
+      <button class="back-btn" onclick="goBack()">← Indietro</button>
+      <div class="detail-title">Checklist Procedure</div>
+      <div class="tabs">
+        <div class="tab active" onclick="checkTab(0)">Intubazione</div>
+        <div class="tab" onclick="checkTab(1)">Accesso EV</div>
+        <div class="tab" onclick="checkTab(2)">DAE</div>
+        <div class="tab" onclick="checkTab(3)">Drenaggio</div>
+      </div>
+      <div id="checklist-content"></div>
+    </div>
+
+    <!-- CALCOLATORI -->
+    <div id="panel-calcolatori" class="panel">
+      <button class="back-btn" onclick="goBack()">← Indietro</button>
+      <div class="detail-title">Calcolatori Clinici</div>
+      <div class="tabs">
+        <div class="tab active" onclick="calcTab(0)">Dose/kg</div>
+        <div class="tab" onclick="calcTab(1)">Drip Rate</div>
+        <div class="tab" onclick="calcTab(2)">Adrenalina</div>
+        <div class="tab" onclick="calcTab(3)">GFR</div>
+      </div>
+      <div id="calc-content"></div>
+    </div>
+
+    <!-- PACING -->
+    <div id="panel-pacing" class="panel">
+      <button class="back-btn" onclick="goBack()">← Indietro</button>
+      <div class="detail-title">Blocchi AV & Pacing</div>
+      <div class="detail-sub">Protocollo infermieristico – Richiedi automedica se TCP necessario</div>
+      <div id="pacing-content"></div>
+    </div>
+
+    <!-- SEARCH RESULTS -->
+    <div id="panel-search" class="panel">
+      <div class="sec-title">Risultati ricerca</div>
+      <div id="search-results"></div>
+    </div>
+  </div>
+
+  <div id="bottom-nav">
+    <button class="nav-btn active" onclick="navTo('home')" id="nav-home"><span class="nav-icon">🏠</span>Home</button>
+    <button class="nav-btn" onclick="navTo('protocolli')" id="nav-protocolli"><span class="nav-icon">📋</span>Protocolli</button>
+    <button class="nav-btn" onclick="navTo('farmaci')" id="nav-farmaci"><span class="nav-icon">💊</span>Farmaci</button>
+    <button class="nav-btn" onclick="navTo('scale')" id="nav-scale"><span class="nav-icon">📊</span>Scale</button>
+    <button class="nav-btn" onclick="navTo('calcolatori')" id="nav-calcolatori"><span class="nav-icon">🧮</span>Calcola</button>
+  </div>
+</div>
+
+<script>
+// ========== DATA ==========
+
+const FARMACI = {
+  'Emergenza': [
+    { name:'Adrenalina', dose:'1 mg IV', interval:'ogni 3-5\'', note:'RCP: diluire in 10ml SF. Anafilassi: 0.5mg IM coscia (fiala 1:1000)', urgent:true },
+    { name:'Atropina', dose:'0.5–1 mg IV', interval:'ogni 3-5\' (max 3mg)', note:'Bradicardia sintomatica, blocchi AV. NO in trapianti. Min 0.5mg!', urgent:false },
+    { name:'Amiodarone', dose:'300 mg IV rapido', interval:'poi 150mg se FV/TV persiste', note:'RCP: dopo 3° shock. Non diluire in glucosio 5%', urgent:true },
+    { name:'Adenosina', dose:'6 mg IV BOLO rapido', interval:'poi 12mg → 12mg', note:'TSV: bolo periferico + flush 20ml SF. Avvisa paziente (flush, oppressione)', urgent:true },
+    { name:'Naloxone', dose:'0.4 mg IV/IM', interval:'ogni 2-3\' (max 2mg)', note:'Overdose oppioidi. IM coscia se no accesso. Durata breve: sorveglia!', urgent:true },
+    { name:'Glucosio 33%', dose:'33–66 ml IV (=10–20g)', interval:'bolo lento, ripeti se GCS basso', note:'Ipoglicemia. Se no accesso: Glucagone 1mg IM', urgent:false },
+    { name:'Flumazenil', dose:'0.2 mg IV in 15"', interval:'ogni 60" max 1mg', note:'Sovradosaggio BDZ. Attenzione: epilettici, mix con triciclici', urgent:false },
+    { name:'Midazolam', dose:'0.1 mg/kg IV lento', interval:'max 10mg', note:'Crisi epilettica: 10mg IM/nasale se no accesso', urgent:false },
+  ],
+  'Cardiologici': [
+    { name:'Nitroglicerina SL', dose:'0.4–0.8 mg SL', interval:'ogni 5\' max 3 volte', note:'Dolore toracico, OAP. STOP se PAS <90. NO se Sildenafil 48h', urgent:false },
+    { name:'Furosemide', dose:'40–80 mg IV lento', interval:'può ripetere dopo 60\'', note:'OAP, scompenso. EV lento (>2min). Monitorare PA e diuresi', urgent:false },
+    { name:'Morfina', dose:'2–4 mg IV lento', interval:'ogni 5-10\' (max 10mg)', note:'OAP/dolore severo. Avere Naloxone pronto. Nausea: Metoclopramide', urgent:false },
+    { name:'Metoprololo', dose:'5 mg IV in 2\'', interval:'ogni 5\' max 15mg', note:'FA rapida, TV stabile. CI: blocco AV, broncoasma, FC<60, PA bassa', urgent:false },
+    { name:'ASA', dose:'300 mg PO (masticare)', interval:'dose unica', note:'IMA: al primo contatto. CI: allergia, emorragia attiva', urgent:false },
+    { name:'Ticagrelor', dose:'180 mg PO dose carico', interval:'poi 90mg x2/die', note:'STEMI/NSTEMI: su indicazione medico centrale', urgent:false },
+    { name:'Sodio bicarbonato', dose:'1 mEq/kg IV', interval:'ogni 10\' RCP prolungata', note:'Acidosi metabolica severa. Non mescolare con Ca2+', urgent:false },
+    { name:'Calcio gluconato', dose:'1g IV in 10\'', interval:'ripetibile', note:'Iperkaliemia, ipocalcemia, OD Ca-antagonisti', urgent:false },
+  ],
+  'Respiratori': [
+    { name:'Salbutamolo nebulizzato', dose:'2.5–5 mg neb', interval:'ogni 20\' x3 poi ogni 4h', note:'Asma/BPCO. Soluz 0.5%: 1ml in 3ml SF. Monit FC', urgent:false },
+    { name:'Ipratropio (Atrovent)', dose:'0.5 mg neb', interval:'ogni 6-8h', note:'Associa a salbutamolo in asma/BPCO grave', urgent:false },
+    { name:'Metilprednisolone', dose:'80–125 mg IV', interval:'dose unica, poi orale', note:'Asma grave, BPCO esacerbata, shock anafilattico', urgent:false },
+    { name:'Solfato di magnesio', dose:'2g IV in 20\'', interval:'dose unica', note:'Asma grave refrattaria. Monitorare PA (ipotensione)', urgent:false },
+    { name:'Ketamina', dose:'1–2 mg/kg IV (anestesia)', interval:'0.25–0.5 mg/kg broncodilatazione', note:'Broncospasmo severo su indicaz medico. Preserve airway reflexes', urgent:false },
+    { name:'Aminofillina', dose:'250 mg IV in 20\'', interval:'poi infusione', note:'BPCO/asma refrattaria. CI: aritmie, monitor ECG continuo', urgent:false },
+  ],
+  'Neurologici': [
+    { name:'Diazepam (Valium)', dose:'10 mg IV lento (2mg/min)', interval:'ogni 5-10\' max 30mg', note:'Stato epilettico. Rettale 10mg se no accesso. Monit respiro', urgent:false },
+    { name:'Lorazepam (Tavor)', dose:'4 mg IV (2mg/min)', interval:'dopo 5-10\' ripeti x1', note:'Prima scelta stato epilettico se disponibile', urgent:false },
+    { name:'Midazolam (Ipnovel)', dose:'10 mg IM/nasale', interval:'', note:'Crisi senza accesso venoso. 0.2mg/kg IV se accesso', urgent:false },
+    { name:'Fenitoina', dose:'15–20 mg/kg IV max 50mg/min', interval:'', note:'Seconda linea SE. Monitor ECG e PA. Non in glucosio!', urgent:false },
+    { name:'Mannitolo 18%', dose:'0.5–1 g/kg IV in 15-20\'', interval:'ogni 4-6h', note:'Ipertensione endocranica. Su indicaz medico. 500ml flacone pronto', urgent:false },
+    { name:'Desametasone', dose:'8–16 mg IV', interval:'poi 4-8mg x2/die', note:'Edema cerebrale, meningite. Non in ipertensione endocranica traumatica', urgent:false },
+  ]
+};
+
+const PROTOCOLS = {
+  'dispnea': {
+    title: '🫁 Dispnea Acuta',
+    color: 'blue',
+    sub: 'Valutazione e trattamento immediato',
+    content: `
+    <div class="alert red">⚠️ SpO₂ &lt;88% o FR &gt;35 o &lt;8 → Emergenza – attiva automedica</div>
+    <div class="card blue-border">
+      <div class="card-title">1. Valutazione immediata (30 sec)</div>
+      <div class="card-body">
+        <ul class="steps">
+          <li class="step"><div class="step-n">A</div><div class="step-text"><strong>Airway:</strong> vie aeree pervie? corpo estraneo? stridore?</div></li>
+          <li class="step"><div class="step-n">B</div><div class="step-text"><strong>Breathing:</strong> FR, SpO₂, simmetria MV, uso muscoli accessori, cianosi</div></li>
+          <li class="step"><div class="step-n">C</div><div class="step-text"><strong>Circulation:</strong> PA, FC, diuresi, edemi, TVC elevata?</div></li>
+          <li class="step"><div class="step-n">D</div><div class="step-text"><strong>Disability:</strong> GCS, agitazione (segno ipossia!)</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">2. Posizionamento</div>
+      <div class="card-body">Semiseduto 45° (prima scelta) · BPCO: seduto con busto eretto e tripode · MAI supino in dispnea acuta</div>
+    </div>
+    <div class="card green-border">
+      <div class="card-title">3. O₂ terapia</div>
+      <div class="card-body">
+        <ul class="steps">
+          <li class="step"><div class="step-n green">1</div><div class="step-text"><strong>Generale:</strong> maschera Venturi FiO₂ 28-35% → target SpO₂ 94-98%</div></li>
+          <li class="step"><div class="step-n orange">!</div><div class="step-text"><strong>BPCO nota:</strong> O₂ 1-2 L/min occhialini → target SpO₂ 88-92%. MAI alto flusso!</div></li>
+          <li class="step"><div class="step-n">3</div><div class="step-text"><strong>OAP / ARDS grave:</strong> maschera non rebreathing 15L/min · considera CPAP</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">4. Diagnosi differenziale rapida</div>
+      <div class="card-body">
+        <ul class="steps">
+          <li class="step"><div class="step-n" style="background:var(--accent)">B</div><div class="step-text"><strong>Broncospasmo</strong> (fischio esp.) → Salbutamolo 2.5mg neb + Ipratropio 0.5mg</div></li>
+          <li class="step"><div class="step-n" style="background:var(--red)">O</div><div class="step-text"><strong>OAP</strong> (rantoli bilat, ortopnea, TVC alta) → Furosemide 40mg IV + Nitroglicerina SL</div></li>
+          <li class="step"><div class="step-n" style="background:var(--purple)">P</div><div class="step-text"><strong>Pneumotorace</strong> (MV assente unilat, iperdisteso) → posizione, O₂ alto, decompressione urgente</div></li>
+          <li class="step"><div class="step-n" style="background:var(--orange)">E</div><div class="step-text"><strong>Embolia polm.</strong> (tachipnea, ipossemia, TV profonda) → O₂, accesso, anticoagulazione se stabile</div></li>
+        </ul>
+      </div>
+    </div>`
+  },
+  'arresto': {
+    title: '🛑 Arresto Cardiaco – RCP Adulto',
+    color: 'red',
+    sub: 'Protocollo ACLS – BLS avanzato',
+    content: `
+    <div class="alert red">🚨 Attiva automedica SUBITO – Registra ora: ${new Date().toLocaleTimeString('it-IT')}</div>
+    <div class="card red-border">
+      <div class="card-title">Sequenza RCP</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n red">1</div><div class="step-text"><strong>Sicurezza scena</strong> + riconosci arresto (no respiro normale/no polso &lt;10")</div></li>
+        <li class="step"><div class="step-n red">2</div><div class="step-text"><strong>Chiama rinforzi</strong> – attiva automedica se non ancora presente</div></li>
+        <li class="step"><div class="step-n red">3</div><div class="step-text"><strong>RCP 30:2</strong> – compressioni 5-6cm, 100-120/min, decompressione completa</div></li>
+        <li class="step"><div class="step-n red">4</div><div class="step-text"><strong>DAE appena disponibile</strong> – carica/analizza SENZA interrompere oltre 5"</div></li>
+        <li class="step"><div class="step-n red">5</div><div class="step-text"><strong>Accesso venoso</strong> – EV o IO (tibiale prossimale)</div></li>
+        <li class="step"><div class="step-n red">6</div><div class="step-text"><strong>Adrenalina 1mg IV</strong> – appena accesso. Se FV/TV: dopo 3° shock. Se PEA/Asistolia: subito</div></li>
+        <li class="step"><div class="step-n red">7</div><div class="step-text"><strong>Ogni 3-5'</strong> → Adrenalina 1mg IV</div></li>
+        <li class="step"><div class="step-n red">8</div><div class="step-text"><strong>Amiodarone 300mg IV</strong> – FV/TV refrattaria dopo 3° shock. Poi 150mg dopo 5° shock</div></li>
+      </ul>
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">Cause reversibili – 4H 4T</div>
+      <div class="card-body" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:6px">
+        <div><div style="color:var(--accent);font-size:11px;font-weight:700;margin-bottom:4px">4H</div><div style="font-size:12px;color:var(--text2)">Ipossia<br>Ipovolemia<br>Ipo/iperkaliemia<br>Ipotermia</div></div>
+        <div><div style="color:var(--accent);font-size:11px;font-weight:700;margin-bottom:4px">4T</div><div style="font-size:12px;color:var(--text2)">Tamponamento<br>Trombosi (EP/IMA)<br>Tensione PNX<br>Tossici/OD</div></div>
+      </div>
+    </div>
+    <div class="card green-border">
+      <div class="card-title">Post-ROSC</div>
+      <div class="card-body">
+        <ul class="steps">
+          <li class="step"><div class="step-n green">✓</div><div class="step-text">SpO₂ target <strong>94-98%</strong> – riduci FiO₂ se necessario</div></li>
+          <li class="step"><div class="step-n green">✓</div><div class="step-text">PAS target <strong>&gt;100 mmHg</strong> – SF 250ml se ipoteso, poi vasopressori</div></li>
+          <li class="step"><div class="step-n green">✓</div><div class="step-text">ECG 12 derivazioni – cerca STEMI → catlab</div></li>
+          <li class="step"><div class="step-n green">✓</div><div class="step-text">Temperatura target <strong>32-36°C</strong> – evita ipertermia</div></li>
+          <li class="step"><div class="step-n green">✓</div><div class="step-text">Glicemia target <strong>6-10 mmol/L</strong></div></li>
+        </ul>
+      </div>
+    </div>`
+  },
+  'anafilassi': {
+    title: '⚠️ Anafilassi / Shock Anafilattico',
+    color: 'orange',
+    sub: 'Reazione allergica sistemica grave',
+    content: `
+    <div class="alert red">🚨 ADRENALINA PRIMA DI TUTTO – non ritardare per accesso venoso!</div>
+    <div class="card red-border">
+      <div class="card-title">Criteri diagnostici (almeno 1)</div>
+      <div class="card-body">Esordio acuto con coinvolgimento cute/mucose + respiro/CV compromessi · O · Ipotensione acuta dopo esposizione allergene · O · 2 o più sistemi coinvolti dopo esposizione</div>
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">Trattamento immediato</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n red">1</div><div class="step-text"><strong>Adrenalina 0.5 mg IM</strong> (1:1000) – coscia anterolaterale. Bimbi: 0.15mg (&lt;25kg)</div></li>
+        <li class="step"><div class="step-n">2</div><div class="step-text"><strong>Posizione:</strong> supino + gambe elevate (se ipoteso) · semiseduto (se dispnea dominante)</div></li>
+        <li class="step"><div class="step-n">3</div><div class="step-text"><strong>O₂ alto flusso:</strong> 10-15 L/min maschera non rebreathing</div></li>
+        <li class="step"><div class="step-n">4</div><div class="step-text"><strong>Accesso venoso:</strong> SF 500-1000ml rapido se ipoteso</div></li>
+        <li class="step"><div class="step-n">5</div><div class="step-text"><strong>Ripeti Adrenalina IM ogni 5-15'</strong> se no risposta. Max 3 dosi IM poi valuta EV</div></li>
+        <li class="step"><div class="step-n">6</div><div class="step-text"><strong>Salbutamolo 5mg neb</strong> se broncospasmo persistente</div></li>
+        <li class="step"><div class="step-n">7</div><div class="step-text"><strong>Metilprednisolone 125mg IV</strong> + <strong>Difenidramina 50mg IV</strong> (seconda linea)</div></li>
+      </ul>
+    </div>
+    <div class="card yellow-border">
+      <div class="card-title">⚠️ Adrenalina EV – solo con medico presente</div>
+      <div class="card-body">Shock refrattario: Adrenalina 0.1 mg EV diluita (1ml di 1:1000 in 9ml SF) → bolo lento. Infusione: 0.1-0.5 mcg/kg/min</div>
+    </div>`
+  },
+  'dolore-toracico': {
+    title: '❤️ Dolore Toracico / IMA',
+    color: 'red',
+    sub: 'STEMI · NSTEMI · Angina instabile',
+    content: `
+    <div class="alert orange">⏱ Ogni minuto conta – "Time is muscle". Target: PPCI entro 90' dal primo contatto</div>
+    <div class="card red-border">
+      <div class="card-title">Valutazione iniziale</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n">1</div><div class="step-text"><strong>ECG 12 derivazioni entro 10'</strong> – cerca ST sopra ≥1mm in ≥2 derivazioni contigue</div></li>
+        <li class="step"><div class="step-n">2</div><div class="step-text">V3R-V4R se inferiore (IMA dx) · V7-V9 se posteriore</div></li>
+        <li class="step"><div class="step-n">3</div><div class="step-text">PA bilaterale, SpO₂, FC, FR · Accesso venoso · Monitor continuo</div></li>
+      </ul>
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">Terapia STEMI confermato</div>
+      <div class="pill-group">
+        <span class="drug safe">ASA 300mg PO (masticare)</span>
+        <span class="drug safe">Ticagrelor 180mg PO (su ordine medico)</span>
+        <span class="drug">Morfina 2-4mg IV (se dolore EVA≥7)</span>
+        <span class="drug">Nitrati SL (se PAS &gt;90)</span>
+        <span class="drug urgent">NO O₂ se SpO₂ ≥94%</span>
+      </div>
+    </div>
+    <div class="card blue-border">
+      <div class="card-title">Contatta centrale per:</div>
+      <div class="card-body">Attivazione catlab · Anticoagulante (Eparina 60-70 UI/kg IV max 5000 UI) · Destination hospital · Pre-allerta emodinamica</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Complicanze acute</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n red">!</div><div class="step-text"><strong>Shock cardiogeno:</strong> SF 250ml cauto, dopamina/noradrenalina su ordine, no diuretici</div></li>
+        <li class="step"><div class="step-n red">!</div><div class="step-text"><strong>Edema polmonare:</strong> semiseduto, Furosemide 40mg IV, Nitrati se PAS&gt;100</div></li>
+        <li class="step"><div class="step-n red">!</div><div class="step-text"><strong>FV/TV senza polso:</strong> defibrillazione immediata → RCP</div></li>
+      </ul>
+    </div>`
+  },
+  'bpco': {
+    title: '💨 BPCO Riacutizzata',
+    color: 'blue',
+    sub: 'Gestione pre-ospedaliera',
+    content: `
+    <div class="alert yellow">⚠️ MAI O₂ ad alto flusso! Target SpO₂ 88-92% – rischio ipercapnia e depressione respiratoria</div>
+    <div class="card blue-border">
+      <div class="card-title">Gravità riacutizzazione</div>
+      <div class="card-body">
+        <ul class="steps">
+          <li class="step"><div class="step-n green">L</div><div class="step-text"><strong>Lieve:</strong> dispnea lieve, SpO₂ &gt;90%, FR &lt;20, parla frasi complete → broncodilatatori inalatori</div></li>
+          <li class="step"><div class="step-n orange">M</div><div class="step-text"><strong>Moderata:</strong> SpO₂ 88-90%, FR 20-25, usa muscoli accessori → O₂ controllato + cortisonici</div></li>
+          <li class="step"><div class="step-n red">G</div><div class="step-text"><strong>Grave:</strong> SpO₂ &lt;88%, FR &gt;25, cianosi, confusione → NIV, considera intubazione, automedica</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">Terapia</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n">1</div><div class="step-text"><strong>O₂ 1-2L/min</strong> occhialini · Venturi 28% · target 88-92%</div></li>
+        <li class="step"><div class="step-n">2</div><div class="step-text"><strong>Salbutamolo 2.5mg + Ipratropio 0.5mg</strong> nebulizzati insieme ogni 20' x3</div></li>
+        <li class="step"><div class="step-n">3</div><div class="step-text"><strong>Metilprednisolone 80-125mg IV</strong></div></li>
+        <li class="step"><div class="step-n">4</div><div class="step-text"><strong>Antibiotico</strong> (se purulento: Amoxicillina 1g os o Azitromicina 500mg) – su ordine medico</div></li>
+        <li class="step"><div class="step-n">5</div><div class="step-text"><strong>Segni di ipercapnia</strong> (sonnolenza, asterixis, cefalea, rossore): attiva automedica per NIV/BiPAP</div></li>
+      </ul>
+    </div>`
+  },
+  'asma': {
+    title: '🌬️ Asma Bronchiale Acuta',
+    color: 'blue',
+    sub: 'Crisi lieve → moderata → grave → stato di male',
+    content: `
+    <div class="alert red">🚨 Stato di male asmatico: PEF &lt;33%, SpO₂ &lt;92%, "silent chest", cianosi, GCS↓ → automedica SUBITO</div>
+    <div class="card blue-border">
+      <div class="card-title">Classificazione crisi</div>
+      <div class="card-body">
+        <ul class="steps">
+          <li class="step"><div class="step-n green">L</div><div class="step-text">Lieve: parla, SpO₂&gt;95%, FR&lt;20, PEF&gt;75% – Salbutamolo MDI 2-4 puffs</div></li>
+          <li class="step"><div class="step-n orange">M</div><div class="step-text">Moderata: frasi corte, SpO₂ 92-95%, FR 20-25, PEF 50-75%</div></li>
+          <li class="step"><div class="step-n red">G</div><div class="step-text">Grave: parole, SpO₂ &lt;92%, FR&gt;25, PEF&lt;50% → trattamento aggressivo</div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">Terapia crisi moderata-grave</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n">1</div><div class="step-text"><strong>O₂</strong> per mantenere SpO₂ ≥95% (maschera Venturi 35%)</div></li>
+        <li class="step"><div class="step-n">2</div><div class="step-text"><strong>Salbutamolo 5mg neb</strong> ogni 20' x3 (o MDI 4-8 puffs con distanziatore)</div></li>
+        <li class="step"><div class="step-n">3</div><div class="step-text"><strong>Ipratropio 0.5mg neb</strong> con salbutamolo x3</div></li>
+        <li class="step"><div class="step-n">4</div><div class="step-text"><strong>Metilprednisolone 125mg IV</strong> (o Prednisolone 40mg os se tollerato)</div></li>
+        <li class="step"><div class="step-n">5</div><div class="step-text"><strong>Solfato di magnesio 2g IV in 20'</strong> – grave refrattaria (su ordine medico)</div></li>
+      </ul>
+    </div>`
+  },
+  'aritmie': {
+    title: '⚡ Tachiaritmie',
+    color: 'red',
+    sub: 'FA · TV · FV · TSV – Algoritmo decisionale',
+    content: `
+    <div class="card red-border">
+      <div class="card-title">Step 1 – Il paziente è stabile?</div>
+      <div class="card-body">
+        <strong style="color:var(--red)">INSTABILE</strong> (ipoteso, sincope, dolore toracico, OAP, GCS↓) → cardioversione elettrica immediata (su ordine medico / automedica)<br><br>
+        <strong style="color:var(--green)">STABILE</strong> → vai a trattamento farmacologico in base al ritmo
+      </div>
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">Fibrillazione/Flutter atriale (FA/FlA)</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n">F</div><div class="step-text">FC &gt;150: <strong>Metoprololo 5mg IV lento</strong> ogni 5' (max 15mg) · CI: WPW, blocco AV, broncospasmo</div></li>
+        <li class="step"><div class="step-n">F</div><div class="step-text">Se insufficienza cardiaca: <strong>Amiodarone 300mg IV in 1h</strong></div></li>
+        <li class="step"><div class="step-n">F</div><div class="step-text">Anticoagulazione: su indicaz medico centrale (Eparina se &gt;48h o sconosciuta)</div></li>
+      </ul>
+    </div>
+    <div class="card blue-border">
+      <div class="card-title">TSV (Tachicardia Sopraventricolare)</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n">T</div><div class="step-text"><strong>Manovre vagali</strong> prima: Valsalva modificato (gambe alzate) – successo 40%</div></li>
+        <li class="step"><div class="step-n">T</div><div class="step-text"><strong>Adenosina 6mg IV bolo rapido</strong> + flush 20ml SF · poi 12mg → 12mg</div></li>
+      </ul>
+    </div>
+    <div class="card red-border">
+      <div class="card-title">TV con polso stabile</div>
+      <div class="card-body"><strong>Amiodarone 150mg IV in 10'</strong> poi infusione 1mg/min. Se QRS largo con incertezza: trattare come TV (mai adenosina!)</div>
+    </div>`
+  },
+  'ictus': {
+    title: '🧠 Ictus / TIA – Stroke',
+    color: 'purple',
+    sub: 'Time is brain – 1.9 milioni neuroni/min',
+    content: `
+    <div class="alert red">⏱ Registra ora ora di esordio sintomi (o ultima volta visto bene): <strong>${new Date().toLocaleTimeString('it-IT')}</strong></div>
+    <div class="card purple-border">
+      <div class="card-title">Scala Cincinnati (FAST)</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n" style="background:var(--purple)">F</div><div class="step-text"><strong>Face:</strong> asimmetria facciale → mostra i denti</div></li>
+        <li class="step"><div class="step-n" style="background:var(--purple)">A</div><div class="step-text"><strong>Arm:</strong> deficit motorio → alza entrambe le braccia 10"</div></li>
+        <li class="step"><div class="step-n" style="background:var(--purple)">S</div><div class="step-text"><strong>Speech:</strong> disartria/afasia → ripeti frase semplice</div></li>
+        <li class="step"><div class="step-n" style="background:var(--purple)">T</div><div class="step-text"><strong>Time:</strong> tempo di esordio → finestra tPA: &lt;4.5h dall'esordio</div></li>
+      </ul>
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">Gestione pre-ospedaliera</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n">1</div><div class="step-text"><strong>NO interventi ipertensivi</strong> salvo PAS &gt;220 (ischemico) o &gt;180 (emorragico, sus.) – su ordine medico</div></li>
+        <li class="step"><div class="step-n">2</div><div class="step-text"><strong>O₂</strong> solo se SpO₂ &lt;94%</div></li>
+        <li class="step"><div class="step-n">3</div><div class="step-text"><strong>Glicemia:</strong> tratta se &lt;60 mg/dl (Glucosio 33% 33ml IV). Evita soluzioni glucosate se stroke confermato</div></li>
+        <li class="step"><div class="step-n">4</div><div class="step-text">Posizione: <strong>testa 0-30°</strong> (ipossia) · 30° se GCS &lt;8 o vomito</div></li>
+        <li class="step"><div class="step-n">5</div><div class="step-text"><strong>Pre-allerta stroke team</strong> e direttamente al PS con CT</div></li>
+      </ul>
+    </div>`
+  },
+  'crisi-epilettica': {
+    title: '⚡ Crisi Epilettica / Stato Epilettico',
+    color: 'purple',
+    sub: 'Stato epilettico = crisi &gt;5 min o 2 senza recupero',
+    content: `
+    <div class="card purple-border">
+      <div class="card-title">Durante la crisi</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n">1</div><div class="step-text">Metti in sicurezza, rimuovi oggetti pericolosi, non contenere movimenti</div></li>
+        <li class="step"><div class="step-n">2</div><div class="step-text">Decubito laterale di sicurezza, O₂ maschera, aspirazione se necessario</div></li>
+        <li class="step"><div class="step-n">3</div><div class="step-text">Registra <strong>ora inizio</strong> e durata. Cronometra!</div></li>
+        <li class="step"><div class="step-n">4</div><div class="step-text">Glicemia – ipoglicemia come causa!</div></li>
+      </ul>
+    </div>
+    <div class="card red-border">
+      <div class="card-title">Trattamento farmacologico (stato epilettico)</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n red">A</div><div class="step-text"><strong>Accesso EV:</strong> Lorazepam 4mg IV (2mg/min) · se no: Diazepam 10mg rettale/IV</div></li>
+        <li class="step"><div class="step-n red">B</div><div class="step-text"><strong>No accesso EV:</strong> Midazolam 10mg IM coscia o nasale (0.2mg/kg max 10mg)</div></li>
+        <li class="step"><div class="step-n red">C</div><div class="step-text">Dopo 5-10': ripeti BDZ una volta sola</div></li>
+        <li class="step"><div class="step-n red">D</div><div class="step-text">Refrattario: Fenitoina 15-20mg/kg IV (max 50mg/min) – su ordine medico + ECG</div></li>
+      </ul>
+    </div>`
+  },
+  'trauma': {
+    title: '🚑 Trauma Grave / Politrauma',
+    color: 'orange',
+    sub: 'ABCDE sistematico – Golden Hour',
+    content: `
+    <div class="card red-border">
+      <div class="card-title">ABCDE sistematico</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n red">A</div><div class="step-text"><strong>Airway + C-spine:</strong> collare rigido, aspirazione, cannula Mayo se GCS≤8</div></li>
+        <li class="step"><div class="step-n red">B</div><div class="step-text"><strong>Breathing:</strong> SpO₂, MV bilat, FR. Cerca: PNX, emotorace, volet costale</div></li>
+        <li class="step"><div class="step-n red">C</div><div class="step-text"><strong>Circulation:</strong> emorragie esterne → pressione diretta/tourniquet. 2 accessi grossi calibri. SF cauto (PAM 50mmHg penetrante, 80 chiuso)</div></li>
+        <li class="step"><div class="step-n red">D</div><div class="step-text"><strong>Disability:</strong> GCS, pupils, lateralizzazione, glicemia</div></li>
+        <li class="step"><div class="step-n red">E</div><div class="step-text"><strong>Exposure:</strong> disvestire, temperatura, LOG roll per spine</div></li>
+      </ul>
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">Triad of Death – prevenire</div>
+      <div class="card-body">Ipotermia (coperte termiche) + Acidosi (fluidi cauti, non NaCl eccessivo) + Coagulopatia (plasma su ordine medico se disponibile)</div>
+    </div>
+    <div class="card blue-border">
+      <div class="card-title">Pneumotorace iperteso</div>
+      <div class="card-body">MV assente, deviazione tracheale, distensione giugulare, SpO₂ in calo → <strong>decompressione ago 2° spazio intercostale</strong> linea emiclaveare (su ordine medico)</div>
+    </div>`
+  },
+  'ipoglicemia': {
+    title: '🍬 Ipoglicemia Grave',
+    color: 'green',
+    sub: 'Glicemia &lt;50 mg/dl con sintomi',
+    content: `
+    <div class="card green-border">
+      <div class="card-title">Trattamento</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n green">1</div><div class="step-text"><strong>Cosciente e collaborante:</strong> zucchero/succo 15-20g os → rivaluta dopo 15'</div></li>
+        <li class="step"><div class="step-n green">2</div><div class="step-text"><strong>Accesso EV disponibile:</strong> Glucosio 33% 33-66ml IV bolo lento (=10-20g)</div></li>
+        <li class="step"><div class="step-n green">3</div><div class="step-text"><strong>No accesso EV:</strong> Glucagone 1mg IM/SC (coscia). Funziona in 10-15', poi glucosio os</div></li>
+        <li class="step"><div class="step-n green">4</div><div class="step-text">Rivaluta GCS e glicemia ogni 15'. Target &gt;70 mg/dl prima di lasciare il paziente</div></li>
+      </ul>
+    </div>
+    <div class="alert yellow">⚠️ Alcolismo: somministra Tiamina 100mg IV PRIMA del glucosio (prevenzione encefalopatia di Wernicke)</div>`
+  }
+};
+
+const SCALE_GCS = {
+  E: [
+    {v:4,l:'Apertura spontanea',s:''},
+    {v:3,l:'Apertura alla voce',s:''},
+    {v:2,l:'Apertura al dolore',s:''},
+    {v:1,l:'Nessuna risposta',s:''},
+  ],
+  V: [
+    {v:5,l:'Orientato',s:''},
+    {v:4,l:'Confuso',s:''},
+    {v:3,l:'Parole inappropriate',s:''},
+    {v:2,l:'Suoni incomprensibili',s:''},
+    {v:1,l:'Nessuna risposta',s:''},
+  ],
+  M: [
+    {v:6,l:'Obbedisce ai comandi',s:''},
+    {v:5,l:'Localizza il dolore',s:''},
+    {v:4,l:'Retira al dolore',s:''},
+    {v:3,l:'Risposta in flessione (decorticazione)',s:''},
+    {v:2,l:'Risposta in estensione (decerebrazione)',s:''},
+    {v:1,l:'Nessuna risposta',s:''},
+  ]
+};
+
+const CHECKLISTS = {
+  0: {
+    name: 'Intubazione orotracheale RSI',
+    items: [
+      'Pre-ossigenazione 3-5 min (maschera non rebreathing 15L)',
+      'Materiale verificato: laringoscopio (luce!), TET corretta misura, pallone Ambu',
+      'Aspiratore acceso e funzionante al capezzale',
+      'Accesso venoso pervio, farmaci preparati',
+      'Monitor attivo: SpO₂, ECG, PA, ETCO₂ se disponibile',
+      'Posizionare: testa estesa, "sniffing position" (no trauma C-spine!)',
+      'Pre-ossigenazione: SpO₂ target >95% prima di procedere',
+      'Premedicazione: Fentanyl 1-2mcg/kg IV (su ordine medico)',
+      'Induzione: Ketamina 1-2mg/kg o Etomidato 0.3mg/kg IV (su ordine)',
+      'Succinilcolina 1.5mg/kg IV – pressione cricoidea (Sellick)',
+      'Laringoscopia dopo 60" → TET tra le corde vocali',
+      'Gonfia cuffia 5-8 ml · ausculta bilateralmente + epigastrio',
+      'Conferma: capnografia, SpO₂ in risalita, MV bilat simmetrico',
+      'Fissaggio TET e annotazione profondità (es: 22cm agli incisivi)',
+      'Rx torace a destinazione · ETCO₂ continua'
+    ]
+  },
+  1: {
+    name: 'Accesso venoso periferico',
+    items: [
+      'DPI: guanti sterili',
+      'Laccio emostatico applicato 10-15cm sopra il sito',
+      'Disinfettare cute con clorexidina o alcool 70% – attendere asciugatura',
+      'Vena scelta: cefalica, basilica, mediana cubiti (evita antecubite se possibile)',
+      'Cateterino giusto: 18G (adulto standard), 14-16G (emergenza/trauma)',
+      'Inserzione con angolo 15-30°, bevel in su',
+      'Sangue in camera di ritorno → avanza cateterino, retrai mandrino',
+      'Rimuovi laccio → collega deflussore/rubinetto',
+      'Verifica: fluisce bene? gonfiore? dolore?',
+      'Fissaggio con cerotto · annotare data e calibro',
+      'Se IO necessario (vena non reperibile): tibiale prossimale, omerale, sternale'
+    ]
+  },
+  2: {
+    name: 'Defibrillazione / DAE',
+    items: [
+      'Conferma assenza di polso e respiro (&lt;10 secondi)',
+      'RCP in corso – interrompi SOLO per analisi ritmo',
+      'Accendi DAE → segui istruzioni vocali',
+      'Applica pads: destra sottoclavicolare · sinistra ascellare anteriore',
+      'Alternativa AP: sternale + scapola sinistra',
+      'Allontana tutti durante analisi ("tutti liberi!")',
+      'Se shock consigliato: ALLONTANA TUTTI ("libero!" x3)',
+      'Eroga shock · IMMEDIATAMENTE riprendi RCP senza verificare polso',
+      'RCP 2 minuti → rivaluta ritmo',
+      'Dopo ROSC: monitor continuo · ecg 12d · accesso EV · protocollo post-ROSC'
+    ]
+  },
+  3: {
+    name: 'Drenaggio toracico / Decompressione ago',
+    items: [
+      'Indica: PNX iperteso (decompressione urgente) o emopneumotorace (drenaggio)',
+      'DECOMPRESSIONE AGO: 2° spazio intercostale, linea medioclavicolare, bordo superiore 3a costa',
+      'Ago 14-16G largo o cateterino EV: inserisci finché sfogo d\'aria',
+      'Lascia in sede (posiziona valvola di Heimlich se disponibile)',
+      'Drenaggio toracico (su ordine medico): 5° spazio, linea ascellare media',
+      'Disinfetti campo, anestesia locale, incisione 2cm',
+      'Tunneling blunt con Kelly, inserisci drenaggio 28-32 Fr',
+      'Fissa con punto a U, collega a sistema drenaggio',
+      'Rx torace a destinazione per verifica posizione'
+    ]
+  }
+};
+
+// ========== STATE ==========
+let currentPanel = 'home';
+let prevPanel = 'home';
+let currentFarmTab = 0;
+let currentScaleTab = 0;
+let currentCheckTab = 0;
+let currentCalcTab = 0;
+let checkStates = {0:{},1:{},2:{},3:{}};
+let gcsSel = {E:0,V:0,M:0};
+let newsVals = {rr:0,spo2:0,o2sup:false,sys:0,hr:0,temp:0,avpu:0};
+
+// ========== NAV ==========
+function navTo(panel) {
+  hideSearch();
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + panel).classList.add('active');
+  const nb = document.getElementById('nav-' + panel);
+  if (nb) nb.classList.add('active');
+  currentPanel = panel;
+  prevPanel = panel;
+  document.getElementById('content').scrollTop = 0;
+  initPanel(panel);
+}
+
+function openSection(panel) {
+  navTo(panel);
+}
+
+function goBack() {
+  navTo('home');
+}
+
+function initPanel(p) {
+  if (p === 'farmaci') renderFarmaci(0);
+  if (p === 'scale') renderScale(0);
+  if (p === 'checklist') renderCheck(0);
+  if (p === 'calcolatori') renderCalc(0);
+  if (p === 'pacing') renderPacing();
+}
+
+function openProto(id) {
+  prevPanel = currentPanel;
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-proto-detail').classList.add('active');
+  currentPanel = 'proto-detail';
+  document.getElementById('content').scrollTop = 0;
+  renderProto(id);
+}
+
+function goProtoBack() {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + prevPanel).classList.add('active');
+  currentPanel = prevPanel;
+  document.getElementById('content').scrollTop = 0;
+}
+
+// ========== FARMACI ==========
+function farmTab(i, cat) {
+  currentFarmTab = i;
+  document.querySelectorAll('#panel-farmaci .tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  renderFarmaci(i, cat);
+}
+
+function renderFarmaci(i) {
+  const cats = Object.keys(FARMACI);
+  const cat = cats[i] || cats[0];
+  const drugs = FARMACI[cat];
+  let html = '';
+  drugs.forEach(d => {
+    html += `<div class="card ${d.urgent?'red-border':'blue-border'}">
+      <div class="card-title">${d.urgent?'🚨 ':''}${d.name} <span class="sev ${d.urgent?'red':'green'}">${d.urgent?'URGENTE':'STD'}</span></div>
+      <div style="margin:4px 0"><span class="drug ${d.urgent?'urgent':'safe'}">${d.dose}</span>${d.interval?`<span class="drug-dose">${d.interval}</span>`:''}</div>
+      <div class="card-body" style="margin-top:6px">${d.note}</div>
+    </div>`;
+  });
+  document.getElementById('farmaci-content').innerHTML = html;
+}
+
+// ========== SCALE ==========
+function scaleTab(i) {
+  currentScaleTab = i;
+  document.querySelectorAll('#panel-scale .tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  renderScale(i);
+}
+
+function renderScale(i) {
+  let html = '';
+  if (i === 0) {
+    // GCS interactive
+    html = `<div class="card blue-border">
+      <div class="card-title">Scala di Glasgow – GCS</div>
+      <div class="sec-title">Apertura Occhi (E)</div>`;
+    SCALE_GCS.E.forEach(r => {
+      html += `<div class="scale-row" onclick="selGCS('E',${r.v},this)">
+        <div class="scale-val" id="gE${r.v}">${r.v}</div>
+        <div class="scale-label">${r.l}</div>
+        <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cE${r.v}"></div></div>`;
+    });
+    html += `<div class="sec-title">Risposta Verbale (V)</div>`;
+    SCALE_GCS.V.forEach(r => {
+      html += `<div class="scale-row" onclick="selGCS('V',${r.v},this)">
+        <div class="scale-val">${r.v}</div>
+        <div class="scale-label">${r.l}</div>
+        <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cV${r.v}"></div></div>`;
+    });
+    html += `<div class="sec-title">Risposta Motoria (M)</div>`;
+    SCALE_GCS.M.forEach(r => {
+      html += `<div class="scale-row" onclick="selGCS('M',${r.v},this)">
+        <div class="scale-val">${r.v}</div>
+        <div class="scale-label">${r.l}</div>
+        <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cM${r.v}"></div></div>`;
+    });
+    html += `</div>
+    <div class="calc-result" id="gcs-result">
+      <div class="calc-result-label">Punteggio GCS</div>
+      <div class="calc-result-val" id="gcs-val">–</div>
+      <div class="calc-result-unit" id="gcs-interp">Seleziona tutti e 3 i parametri</div>
+    </div>`;
+  } else if (i === 1) {
+    // NEWS2
+    html = `<div class="card blue-border">
+      <div class="card-title">NEWS2 – National Early Warning Score</div>
+      <div class="card-body" style="margin-bottom:10px">Inserisci i valori per calcolare il punteggio di rischio</div>
+      <div class="calc-row"><label class="calc-label">FR (atti/min)</label><input type="number" class="calc-input" id="nrr" placeholder="es. 18" oninput="calcNEWS()"></div>
+      <div class="calc-row"><label class="calc-label">SpO₂ (%)</label><input type="number" class="calc-input" id="nspo2" placeholder="es. 96" oninput="calcNEWS()"></div>
+      <div class="calc-row"><label class="calc-label">O₂ sup.</label>
+        <select class="calc-input" id="no2" onchange="calcNEWS()"><option value="0">No</option><option value="1">Sì (qualsiasi)</option></select></div>
+      <div class="calc-row"><label class="calc-label">PAS (mmHg)</label><input type="number" class="calc-input" id="nsys" placeholder="es. 120" oninput="calcNEWS()"></div>
+      <div class="calc-row"><label class="calc-label">FC (bpm)</label><input type="number" class="calc-input" id="nhr" placeholder="es. 80" oninput="calcNEWS()"></div>
+      <div class="calc-row"><label class="calc-label">Temp (°C)</label><input type="number" step="0.1" class="calc-input" id="ntemp" placeholder="es. 36.5" oninput="calcNEWS()"></div>
+      <div class="calc-row"><label class="calc-label">AVPU</label>
+        <select class="calc-input" id="navpu" onchange="calcNEWS()">
+          <option value="0">A – Alert</option>
+          <option value="3">V – Voice</option>
+          <option value="3">P – Pain</option>
+          <option value="3">U – Unresponsive</option>
+        </select></div>
+    </div>
+    <div class="calc-result">
+      <div class="calc-result-label">NEWS2 Score</div>
+      <div class="calc-result-val" id="news-val">–</div>
+      <div class="calc-result-unit" id="news-interp">Inserisci i valori sopra</div>
+    </div>`;
+  } else if (i === 2) {
+    html = `<div class="card blue-border">
+      <div class="card-title">REMS – Rapid Emergency Medicine Score</div>
+      <div class="card-body">Predice la mortalità intraospedaliera</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Parametri e punteggi</div>
+      ${rems_table()}
+    </div>
+    <div class="card orange-border">
+      <div class="card-title">Interpretazione</div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--green)">0-5</div><div class="scale-label">Basso rischio</div><div class="scale-score">&lt;1% mortalità</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--orange)">6-9</div><div class="scale-label">Rischio moderato</div><div class="scale-score">~10% mortalità</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--red)">≥10</div><div class="scale-label">Alto rischio</div><div class="scale-score">&gt;30% mortalità</div></div>
+    </div>`;
+  } else if (i === 3) {
+    html = `<div class="card purple-border">
+      <div class="card-title">Cincinnati Stroke Scale</div>
+      <div class="card-body" style="margin-bottom:8px">1 positivo = 72% probabilità ictus · 3 positivi = 85%</div>
+      <div class="scale-row"><div class="scale-val">F</div><div class="scale-label"><strong>Face:</strong> mostra i denti → asimmetria?</div></div>
+      <div class="scale-row"><div class="scale-val">A</div><div class="scale-label"><strong>Arm:</strong> alza entrambe 10" → uno cade?</div></div>
+      <div class="scale-row"><div class="scale-val">S</div><div class="scale-label"><strong>Speech:</strong> "il cielo è blu" → disartria/afasia?</div></div>
+    </div>
+    <div class="card blue-border">
+      <div class="card-title">NIHSS rapido (prehospital)</div>
+      <div class="card-body">
+        <ul class="steps">
+          <li class="step"><div class="step-n">1</div><div class="step-text">Coscienza: risponde a domande semplici (mese, età)?</div></li>
+          <li class="step"><div class="step-n">2</div><div class="step-text">Sguardo: deviazione coniugata degli occhi?</div></li>
+          <li class="step"><div class="step-n">3</div><div class="step-text">Forza arti: emiplegia/emiparesi?</div></li>
+          <li class="step"><div class="step-n">4</div><div class="step-text">Atassia: dismetria (dito-naso)?</div></li>
+          <li class="step"><div class="step-n">5</div><div class="step-text">Linguaggio: afasia/disartria?</div></li>
+        </ul>
+      </div>
+    </div>`;
+  }
+  document.getElementById('scale-content').innerHTML = html;
+}
+
+function rems_table() {
+  return `<div style="font-size:12px;color:var(--text2)">
+  <div class="scale-row"><div class="scale-val">FR</div><div class="scale-label">6: +0 · 9-11: +1 · 12-24: +0 · 25-34: +1 · ≥35: +2 · &lt;6: +2</div></div>
+  <div class="scale-row"><div class="scale-val">SpO₂</div><div class="scale-label">≥90%: +0 · 89%: +1 · 86-88%: +2 · &lt;86%: +3</div></div>
+  <div class="scale-row"><div class="scale-val">FC</div><div class="scale-label">70-109: +0 · 55-69 o 110-139: +2 · 40-54 o ≥140: +3 · &lt;40: +4</div></div>
+  <div class="scale-row"><div class="scale-val">PAS</div><div class="scale-label">120-179: +0 · 180-199: +2 · ≥200: +3 · 100-119: +2 · 70-99: +4 · &lt;70: +5</div></div>
+  <div class="scale-row"><div class="scale-val">GCS</div><div class="scale-label">14-15: +0 · 11-13: +1 · 8-10: +2 · 5-7: +3 · &lt;5: +4</div></div>
+  <div class="scale-row"><div class="scale-val">Età</div><div class="scale-label">&lt;45: +0 · 45-54: +2 · 55-64: +3 · 65-74: +5 · ≥75: +6</div></div>
+  </div>`;
+}
+
+function selGCS(cat, val, el) {
+  gcsSel[cat] = val;
+  ['E','V','M'].forEach(c => {
+    const max = c==='E'?4:c==='V'?5:6;
+    for(let v=1;v<=max;v++) {
+      const circle = document.getElementById('c'+c+v);
+      if(circle) circle.style.background = (c===cat && v===val) ? 'var(--accent)' : '';
+      if(circle) circle.style.borderColor = (c===cat && v===val) ? 'var(--accent)' : 'var(--text3)';
+    }
+  });
+  const total = (gcsSel.E||0)+(gcsSel.V||0)+(gcsSel.M||0);
+  if(gcsSel.E && gcsSel.V && gcsSel.M) {
+    const interp = total<=8 ? '🔴 Coma grave – proteggi vie aeree' : total<=12 ? '🟠 Coma moderato – sorveglianza stretta' : total<=14 ? '🟡 Confusione – monitorare' : '🟢 Normale';
+    document.getElementById('gcs-val').textContent = total+'/15';
+    document.getElementById('gcs-interp').textContent = interp;
+  }
+}
+
+function calcNEWS() {
+  const rr = parseFloat(document.getElementById('nrr')?.value)||0;
+  const spo2 = parseFloat(document.getElementById('nspo2')?.value)||0;
+  const o2 = parseInt(document.getElementById('no2')?.value)||0;
+  const sys = parseFloat(document.getElementById('nsys')?.value)||0;
+  const hr = parseFloat(document.getElementById('nhr')?.value)||0;
+  const temp = parseFloat(document.getElementById('ntemp')?.value)||0;
+  const avpu = parseInt(document.getElementById('navpu')?.value)||0;
+  
+  let score = 0;
+  // FR
+  if(rr<=8||rr>=25) score+=3; else if(rr<=11) score+=1; else if(rr>=21) score+=2;
+  // SpO2
+  if(spo2<=91) score+=3; else if(spo2<=93) score+=2; else if(spo2<=95) score+=1;
+  // O2 sup
+  if(o2) score+=2;
+  // PAS
+  if(sys<=90||sys>=220) score+=3; else if(sys<=100) score+=2; else if(sys<=110) score+=1; else if(sys>=200) score+=3;
+  // HR
+  if(hr<=40||hr>=131) score+=3; else if(hr<=50) score+=1; else if(hr>=111) score+=2; else if(hr<=110&&hr>=91) score+=1;
+  // Temp
+  if(temp<=35) score+=3; else if(temp<=36) score+=1; else if(temp>=38.1&&temp<=39) score+=1; else if(temp>=39.1) score+=2;
+  // AVPU
+  score+=avpu;
+  
+  const el = document.getElementById('news-val');
+  const elI = document.getElementById('news-interp');
+  if(el&&elI&&(rr||spo2||sys||hr||temp)) {
+    el.textContent = score;
+    el.style.color = score<=4?'var(--green)':score<=6?'var(--orange)':'var(--red)';
+    elI.textContent = score<=4?'🟢 Basso rischio':score<=6?'🟠 Rischio moderato – rivaluta ogni ora':'🔴 Alto rischio – attiva risposta rapida';
+  }
+}
+
+// ========== CHECKLIST ==========
+function checkTab(i) {
+  currentCheckTab = i;
+  document.querySelectorAll('#panel-checklist .tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  renderCheck(i);
+}
+
+function renderCheck(i) {
+  const cl = CHECKLISTS[i];
+  let html = `<div class="card blue-border"><div class="card-title">📋 ${cl.name}</div>`;
+  cl.items.forEach((item, j) => {
+    const checked = checkStates[i][j] || false;
+    html += `<div class="check-item" onclick="toggleCheck(${i},${j})">
+      <div class="check-box ${checked?'checked'}" id="cb${i}_${j}"></div>
+      <div class="check-text ${checked?'checked'}" id="ct${i}_${j}">${item}</div>
+    </div>`;
+  });
+  html += `</div><button class="reset-btn" onclick="resetCheck(${i})">↺ Reset checklist</button>`;
+  document.getElementById('checklist-content').innerHTML = html;
+}
+
+function toggleCheck(i, j) {
+  checkStates[i][j] = !checkStates[i][j];
+  document.getElementById('cb'+i+'_'+j).classList.toggle('checked', checkStates[i][j]);
+  document.getElementById('ct'+i+'_'+j).classList.toggle('checked', checkStates[i][j]);
+}
+
+function resetCheck(i) {
+  checkStates[i] = {};
+  renderCheck(i);
+}
+
+// ========== CALCOLATORI ==========
+function calcTab(i) {
+  currentCalcTab = i;
+  document.querySelectorAll('#panel-calcolatori .tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  renderCalc(i);
+}
+
+function renderCalc(i) {
+  let html = '';
+  if(i===0) {
+    html = `<div class="card blue-border">
+      <div class="card-title">Calcolatore Dose per Peso</div>
+      <div class="calc-row"><label class="calc-label">Peso (kg)</label><input type="number" class="calc-input" id="ck_peso" placeholder="70"></div>
+      <div class="calc-row"><label class="calc-label">Dose (mg/kg)</label><input type="number" step="0.01" class="calc-input" id="ck_dose" placeholder="es. 0.1"></div>
+      <button class="calc-btn" onclick="calcDose()">Calcola ↗</button>
+      <div class="calc-result" style="margin-top:12px">
+        <div class="calc-result-label">Dose totale</div>
+        <div class="calc-result-val" id="dose-val">–</div>
+        <div class="calc-result-unit">mg</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Dosi rapide pediatriche (kg × dose)</div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--orange)">Adr</div><div class="scale-label">0.01 mg/kg IV (RCP)</div><div class="scale-score">max 1mg</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--accent)">Atrop</div><div class="scale-label">0.02 mg/kg IV</div><div class="scale-score">min 0.1mg</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--purple)">Midaz</div><div class="scale-label">0.1-0.2 mg/kg IV</div><div class="scale-score">max 10mg</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--green)">Glucosio</div><div class="scale-label">0.5 g/kg IV (= 2ml/kg G25%)</div><div class="scale-score"></div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--red)">Succi</div><div class="scale-label">1.5-2 mg/kg IV (RSI)</div><div class="scale-score"></div></div>
+    </div>`;
+  } else if(i===1) {
+    html = `<div class="card blue-border">
+      <div class="card-title">Calcolo Velocità Infusione (drip rate)</div>
+      <div class="calc-row"><label class="calc-label">Dose (mcg/kg/min)</label><input type="number" step="0.01" class="calc-input" id="dr_dose" placeholder="es. 0.1"></div>
+      <div class="calc-row"><label class="calc-label">Peso (kg)</label><input type="number" class="calc-input" id="dr_peso" placeholder="70"></div>
+      <div class="calc-row"><label class="calc-label">Conc. (mcg/ml)</label><input type="number" class="calc-input" id="dr_conc" placeholder="es. 16"></div>
+      <button class="calc-btn" onclick="calcDrip()">Calcola ml/h ↗</button>
+      <div class="calc-result" style="margin-top:12px">
+        <div class="calc-result-label">Velocità infusione</div>
+        <div class="calc-result-val" id="drip-val">–</div>
+        <div class="calc-result-unit">ml/h</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Diluizioni standard</div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--red)">Adr</div><div class="scale-label">4mg in 250ml SF = 16 mcg/ml</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--accent)">Dopa</div><div class="scale-label">200mg in 250ml SF = 800 mcg/ml</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--orange)">Nora</div><div class="scale-label">4mg in 250ml SF = 16 mcg/ml</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--purple)">Midaz</div><div class="scale-label">50mg in 50ml SF = 1 mg/ml</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--teal)">Amio</div><div class="scale-label">600mg in 250ml G5% = 2.4 mg/ml</div></div>
+    </div>`;
+  } else if(i===2) {
+    html = `<div class="card red-border">
+      <div class="card-title">🚨 Calcolo Adrenalina in infusione</div>
+      <div class="calc-row"><label class="calc-label">Peso (kg)</label><input type="number" class="calc-input" id="ad_peso" placeholder="70"></div>
+      <div class="calc-row"><label class="calc-label">Dose (mcg/kg/min)</label><input type="number" step="0.01" class="calc-input" id="ad_dose" placeholder="es. 0.1"></div>
+      <button class="calc-btn" onclick="calcAdre()">Calcola ↗</button>
+      <div class="calc-result" style="margin-top:12px">
+        <div class="calc-result-label">Velocità (con 4mg in 250ml SF = 16mcg/ml)</div>
+        <div class="calc-result-val" id="adre-val">–</div>
+        <div class="calc-result-unit">ml/h</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Range dose adrenalina</div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--green)">Bassa</div><div class="scale-label">0.01-0.05 mcg/kg/min</div><div class="scale-score">effetto β</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--orange)">Media</div><div class="scale-label">0.05-0.2 mcg/kg/min</div><div class="scale-score">β+α</div></div>
+      <div class="scale-row"><div class="scale-val" style="color:var(--red)">Alta</div><div class="scale-label">&gt;0.2 mcg/kg/min</div><div class="scale-score">effetto α dominante</div></div>
+    </div>`;
+  } else if(i===3) {
+    html = `<div class="card blue-border">
+      <div class="card-title">Stima GFR (CKD-EPI semplificato)</div>
+      <div class="calc-row"><label class="calc-label">Creatinina (mg/dl)</label><input type="number" step="0.01" class="calc-input" id="gfr_cr" placeholder="es. 1.0"></div>
+      <div class="calc-row"><label class="calc-label">Età (anni)</label><input type="number" class="calc-input" id="gfr_age" placeholder="es. 65"></div>
+      <div class="calc-row"><label class="calc-label">Sesso</label>
+        <select class="calc-input" id="gfr_sex"><option value="M">Maschile</option><option value="F">Femminile</option></select></div>
+      <button class="calc-btn" onclick="calcGFR()">Calcola GFR ↗</button>
+      <div class="calc-result" style="margin-top:12px">
+        <div class="calc-result-label">eGFR stimato</div>
+        <div class="calc-result-val" id="gfr-val">–</div>
+        <div class="calc-result-unit" id="gfr-class">ml/min/1.73m²</div>
+      </div>
+    </div>`;
+  }
+  document.getElementById('calc-content').innerHTML = html;
+}
+
+function calcDose() {
+  const p = parseFloat(document.getElementById('ck_peso').value)||0;
+  const d = parseFloat(document.getElementById('ck_dose').value)||0;
+  const r = p*d;
+  document.getElementById('dose-val').textContent = r ? r.toFixed(2)+' mg' : '–';
+}
+function calcDrip() {
+  const dose = parseFloat(document.getElementById('dr_dose').value)||0;
+  const peso = parseFloat(document.getElementById('dr_peso').value)||0;
+  const conc = parseFloat(document.getElementById('dr_conc').value)||0;
+  const r = conc ? (dose*peso*60)/conc : 0;
+  document.getElementById('drip-val').textContent = r ? r.toFixed(1) : '–';
+}
+function calcAdre() {
+  const peso = parseFloat(document.getElementById('ad_peso').value)||0;
+  const dose = parseFloat(document.getElementById('ad_dose').value)||0;
+  const r = (dose*peso*60)/16;
+  document.getElementById('adre-val').textContent = r ? r.toFixed(1) : '–';
+}
+function calcGFR() {
+  const cr = parseFloat(document.getElementById('gfr_cr').value)||0;
+  const age = parseFloat(document.getElementById('gfr_age').value)||0;
+  const sex = document.getElementById('gfr_sex').value;
+  if(!cr||!age){document.getElementById('gfr-val').textContent='–';return;}
+  const k = sex==='F'?0.7:0.9;
+  const a = sex==='F'?-0.241:-0.302;
+  const mult = sex==='F'?1.012:1;
+  const ratio = cr/k;
+  const gfr = 142 * Math.pow(Math.min(ratio,1),a) * Math.pow(Math.max(ratio,1),-1.200) * Math.pow(0.9938,age) * mult;
+  const g = Math.round(gfr);
+  document.getElementById('gfr-val').textContent = g;
+  const interp = g>=90?'G1 – Normale':g>=60?'G2 – Lievemente ridotto':g>=45?'G3a – Lieve-moderata':g>=30?'G3b – Moderata-grave':g>=15?'G4 – Grave':'G5 – Insufficienza renale terminale';
+  document.getElementById('gfr-class').textContent = 'ml/min/1.73m² · '+interp;
+}
+
+// ========== PACING ==========
+function renderPacing() {
+  const html = `
+    <div class="alert yellow">⚡ Blocco AV sintomatico: FC &lt;40 · ipotensione · sincope · dolore toracico → scala terapeutica → attiva automedica se TCP</div>
+    
+    <div class="block-tab active" onclick="showBlock(0)" id="bt0">
+      <div class="block-tab-title">Blocco AV 1° Grado</div>
+      <div class="block-tab-sub">PR &gt;200ms · asintomatico</div>
+    </div>
+    <div class="block-tab" onclick="showBlock(1)" id="bt1">
+      <div class="block-tab-title">Blocco AV 2° Grado</div>
+      <div class="block-tab-sub">Mobitz I (Wenckebach) · Mobitz II</div>
+    </div>
+    <div class="block-tab" onclick="showBlock(2)" id="bt2">
+      <div class="block-tab-title">Blocco AV 3° Grado (Completo)</div>
+      <div class="block-tab-sub">Dissociazione AV completa · Emergenza</div>
+    </div>
+
+    <div id="block-detail"></div>
+  `;
+  document.getElementById('pacing-content').innerHTML = html;
+  showBlock(0);
+}
+
+function showBlock(i) {
+  document.querySelectorAll('.block-tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  const blocks = [
+    // Blocco 1
+    `<div class="card green-border">
+      <div class="card-title">Blocco AV 1° Grado – Gestione</div>
+      <div class="card-body" style="margin-bottom:8px">Intervallo PR &gt;200ms su ogni battito · Tutti gli impulsi atriali conducono · Di solito asintomatico</div>
+      <div class="alert green">✅ Generalmente benigno – non richiede trattamento urgente pre-ospedaliero</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n green">1</div><div class="step-text">ECG 12 derivazioni · monitoraggio continuo</div></li>
+        <li class="step"><div class="step-n green">2</div><div class="step-text">Rivaluta: frequenza cardiaca, PA, sintomi</div></li>
+        <li class="step"><div class="step-n green">3</div><div class="step-text">Verifica farmaci causali: digossina, betabloccanti, Ca-antagonisti, antiaritmici</div></li>
+        <li class="step"><div class="step-n green">4</div><div class="step-text">Se FC &gt;40 e stabile: trasporto non urgente con monitoraggio continuo</div></li>
+        <li class="step"><div class="step-n orange">!</div><div class="step-text">Se sintomatico (presincope, dispnea): rivaluta come grado superiore</div></li>
+      </ul>
+      <div class="card-title" style="margin-top:12px">Farmaci</div>
+      <div class="pill-group"><span class="drug safe">Generalmente non necessari</span></div>
+    </div>`,
+    // Blocco 2
+    `<div class="card orange-border">
+      <div class="card-title">Blocco AV 2° Grado</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Mobitz I – Wenckebach <span class="sev orange">MODERATO</span></div>
+      <div class="card-body" style="margin-bottom:8px">PR progressivamente più lungo → onda P non condotta → ciclo ricomincia</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n green">1</div><div class="step-text">Monitoraggio ECG continuo · valuta stabilità emodinamica</div></li>
+        <li class="step"><div class="step-n green">2</div><div class="step-text">Se asintomatico: accesso venoso, monitoraggio, trasporto</div></li>
+        <li class="step"><div class="step-n orange">3</div><div class="step-text">Se bradicardia sintomatica (FC &lt;50, ipotensione, sincope):<br><strong>Atropina 0.5mg IV</strong> · ripeti ogni 3-5' max 3mg</div></li>
+        <li class="step"><div class="step-n orange">4</div><div class="step-text">No risposta all'Atropina → <strong>attiva automedica</strong></div></li>
+      </ul>
+      <div class="pill-group">
+        <span class="drug">Atropina 0.5–1 mg IV (max 3mg)</span>
+        <span class="drug urgent">NO Atropina se blocco infrahissiano sospetto</span>
+      </div>
+    </div>
+    <div class="card red-border">
+      <div class="card-title">Mobitz II <span class="sev red">GRAVE</span></div>
+      <div class="card-body" style="margin-bottom:8px">PR fisso → onda P non condotta improvvisamente (senza allungamento progressivo). Rischio alto di progressione a blocco completo!</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n red">1</div><div class="step-text">Accesso venoso immediato · ECG 12 derivazioni · monitor continuo</div></li>
+        <li class="step"><div class="step-n red">2</div><div class="step-text"><strong>Atropina 1mg IV</strong> – ATTENZIONE: può paradossalmente peggiorare il Mobitz II (blocco infrahissiano)</div></li>
+        <li class="step"><div class="step-n red">3</div><div class="step-text"><strong>Attiva automedica</strong> per TCP (pacing transcutaneo)</div></li>
+        <li class="step"><div class="step-n red">4</div><div class="step-text">Nel frattempo: <strong>Dopamina 5-10 mcg/kg/min</strong> su ordine medico se ipoteso</div></li>
+        <li class="step"><div class="step-n red">5</div><div class="step-text"><strong>Adrenalina 2-10 mcg/min infusione</strong> come bridge al TCP su ordine medico</div></li>
+      </ul>
+      <div class="pill-group">
+        <span class="drug">Atropina 1mg IV (cautela)</span>
+        <span class="drug urgent">Dopamina 5-10 mcg/kg/min</span>
+        <span class="drug urgent">Adrenalina 2-10 mcg/min</span>
+      </div>
+    </div>`,
+    // Blocco 3
+    `<div class="card red-border">
+      <div class="card-title">🚨 Blocco AV 3° Grado – Completo</div>
+      <div class="alert red">🆘 Emergenza – Attiva automedica SUBITO per TCP. Ritmo di scappamento ventricolare FC 20-40, instabilità emodinamica</div>
+      <div class="card-body" style="margin-bottom:8px">Dissociazione AV completa: onde P e QRS indipendenti. Nessun impulso atriale conduce ai ventricoli.</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n red">1</div><div class="step-text"><strong>ATTIVA AUTOMEDICA</strong> – TCP richiede medico presente</div></li>
+        <li class="step"><div class="step-n red">2</div><div class="step-text">Accesso venoso grande calibro · O₂ alto flusso · monitor continuo ECG+PA</div></li>
+        <li class="step"><div class="step-n red">3</div><div class="step-text"><strong>Atropina 1mg IV</strong> ogni 3-5' (max 3mg) – spesso inefficace ma tentare come bridge</div></li>
+        <li class="step"><div class="step-n red">4</div><div class="step-text"><strong>Se no risposta → Adrenalina 2-10 mcg/min IV</strong> (diluisci 1mg in 100ml SF: 10 mcg/ml → 12-60ml/h)</div></li>
+        <li class="step"><div class="step-n red">5</div><div class="step-text"><strong>Dopamina 5-20 mcg/kg/min</strong> alternativa o in associazione su ordine medico</div></li>
+        <li class="step"><div class="step-n red">6</div><div class="step-text">Se arresto: RCP standard · Adrenalina 1mg IV ogni 3-5'</div></li>
+      </ul>
+    </div>
+    <div class="card yellow-border">
+      <div class="card-title">⚡ TCP – Pacing Transcutaneo (con automedica)</div>
+      <ul class="steps">
+        <li class="step"><div class="step-n" style="background:var(--yellow);color:#000">1</div><div class="step-text">Pads: anteriore (punta V2-V3) + posteriore (scapola sinistra) o apex-sterno</div></li>
+        <li class="step"><div class="step-n" style="background:var(--yellow);color:#000">2</div><div class="step-text">Sedazione analgesia PRIMA se paziente cosciente (Midazolam + Fentanyl su ordine)</div></li>
+        <li class="step"><div class="step-n" style="background:var(--yellow);color:#000">3</div><div class="step-text">Frequenza iniziale: <strong>60-80 bpm</strong></div></li>
+        <li class="step"><div class="step-n" style="background:var(--yellow);color:#000">4</div><div class="step-text">Corrente: parti da 0mA → aumenta di 10mA ogni 10-15" fino a cattura (di solito 40-80mA)</div></li>
+        <li class="step"><div class="step-n" style="background:var(--yellow);color:#000">5</div><div class="step-text">Verifica cattura: spike ECG + QRS largo dopo ogni spike + polso palpabile (femorale!)</div></li>
+        <li class="step"><div class="step-n" style="background:var(--yellow);color:#000">6</div><div class="step-text">Dopo cattura: aumenta corrente di 10% (safety margin) · rivaluta PA</div></li>
+      </ul>
+      <div class="pill-group">
+        <span class="drug">Midazolam 1-2mg IV (sedazione)</span>
+        <span class="drug">Fentanyl 25-50mcg IV (analgesia)</span>
+        <span class="drug urgent">Atropina 1mg IV (bridge)</span>
+        <span class="drug urgent">Adrenalina 2-10 mcg/min</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Cause reversibili – cerca e correggi</div>
+      <div class="card-body">Farmaci (digossina, betabloccanti, Ca-antagonisti) · Iperkaliemia · Ischemia miocardica (IMA inferiore!) · Ipotiroidismo · Endocardite · Malattia di Lyme</div>
+    </div>`
+  ];
+  document.getElementById('block-detail').innerHTML = blocks[i];
+}
+
+// ========== PROTO RENDER ==========
+function renderProto(id) {
+  const p = PROTOCOLS[id];
+  if(!p) { document.getElementById('proto-content').innerHTML='<div class="alert orange">Protocollo non trovato</div>'; return; }
+  document.getElementById('proto-content').innerHTML = `
+    <div class="detail-title">${p.title}</div>
+    <div class="detail-sub">${p.sub}</div>
+    ${p.content}
+  `;
+}
+
+// ========== SEARCH ==========
+const SEARCH_INDEX = [
+  {q:'adrenalina epinefrina rcp arresto cardiaco',action:()=>openProto('arresto'),title:'Adrenalina – RCP',sec:'Protocolli'},
+  {q:'atropina bradicardia blocco av pacing',action:()=>openSection('pacing'),title:'Atropina – Blocchi AV',sec:'Pacing'},
+  {q:'salbutamolo asma broncospasmo bpco nebulizzatore',action:()=>openProto('asma'),title:'Salbutamolo – Asma',sec:'Protocolli'},
+  {q:'arresto cardiaco rcp bls defibrillatore dae',action:()=>openProto('arresto'),title:'Arresto Cardiaco – RCP',sec:'Protocolli'},
+  {q:'anafilassi shock allergico adrenalina',action:()=>openProto('anafilassi'),title:'Anafilassi',sec:'Protocolli'},
+  {q:'dispnea fiato respiro ossigeno bpco asma',action:()=>openProto('dispnea'),title:'Dispnea acuta',sec:'Protocolli'},
+  {q:'ictus stroke tia fast cerebrale',action:()=>openProto('ictus'),title:'Ictus / Stroke',sec:'Protocolli'},
+  {q:'epilessia crisi convulsioni stato epilettico diazepam',action:()=>openProto('crisi-epilettica'),title:'Crisi epilettica',sec:'Protocolli'},
+  {q:'infarto ima dolore toracico stemi nstemi',action:()=>openProto('dolore-toracico'),title:'IMA – Dolore toracico',sec:'Protocolli'},
+  {q:'trauma politrauma incidente abcde',action:()=>openProto('trauma'),title:'Trauma grave',sec:'Protocolli'},
+  {q:'ipoglicemia glucosio glucagone zucchero diabete',action:()=>openProto('ipoglicemia'),title:'Ipoglicemia',sec:'Protocolli'},
+  {q:'aritmia fibrillazione atriale tachicardia tv fv',action:()=>openProto('aritmie'),title:'Tachiaritmie',sec:'Protocolli'},
+  {q:'blocco av pacing transcutaneo tcp bradicardia',action:()=>openSection('pacing'),title:'Blocchi AV & Pacing',sec:'Pacing'},
+  {q:'gcs glasgow coscienza score',action:()=>{openSection('scale');},title:'Scala GCS',sec:'Scale'},
+  {q:'news2 news early warning score',action:()=>{openSection('scale');setTimeout(()=>scaleTab(1),100);},title:'NEWS2 Score',sec:'Scale'},
+  {q:'farmaci dosi dosaggi',action:()=>openSection('farmaci'),title:'Farmaci – Dosaggi',sec:'Farmaci'},
+  {q:'intubazione rsi sequenza rapida iot',action:()=>{openSection('checklist');},title:'Checklist Intubazione',sec:'Checklist'},
+  {q:'dae defibrillatore shock fibrillazione',action:()=>{openSection('checklist');setTimeout(()=>checkTab(2),100);},title:'Checklist DAE',sec:'Checklist'},
+  {q:'drip rate infusione calcolatore velocità',action:()=>{openSection('calcolatori');setTimeout(()=>calcTab(1),100);},title:'Calcolo Drip Rate',sec:'Calcolatori'},
+  {q:'dose farmaco peso kg calcolatore',action:()=>openSection('calcolatori'),title:'Calcolatore Dose/kg',sec:'Calcolatori'},
+  {q:'morfina dolore analgesico oppiodi naloxone',action:()=>openSection('farmaci'),title:'Morfina / Oppioidi',sec:'Farmaci'},
+  {q:'furosemide lasix edema polmonare diuretico',action:()=>openProto('dispnea'),title:'Furosemide – OAP',sec:'Farmaci'},
+  {q:'bpco broncopneumopatia nebulizzatore ipratropio',action:()=>openProto('bpco'),title:'BPCO riacutizzata',sec:'Protocolli'},
+];
+
+document.getElementById('search-input').addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  if(!q) { hideSearch(); return; }
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-search').classList.add('active');
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  const results = SEARCH_INDEX.filter(r => r.q.includes(q) || r.title.toLowerCase().includes(q));
+  const el = document.getElementById('search-results');
+  if(!results.length) { el.innerHTML='<div class="alert orange">Nessun risultato per "'+q+'"</div>'; return; }
+  el.innerHTML = results.map((r,i) => `<div class="search-result" onclick="searchGo(${i}, '${q}')">
+    <div class="sr-title">${r.title}</div>
+    <div class="sr-section">${r.sec}</div>
+  </div>`).join('');
+  window._searchResults = results;
+});
+
+function searchGo(i, q) {
+  const results = SEARCH_INDEX.filter(r => r.q.includes(q) || r.title.toLowerCase().includes(q));
+  document.getElementById('search-input').value = '';
+  hideSearch();
+  results[i].action();
+}
+
+function hideSearch() {
+  if(document.getElementById('panel-search').classList.contains('active')) {
+    document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('panel-'+currentPanel).classList.add('active');
+    const nb = document.getElementById('nav-'+currentPanel);
+    if(nb) { document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active')); nb.classList.add('active'); }
+  }
+}
+
+// Service Worker registration
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
