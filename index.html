@@ -186,11 +186,23 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
 /* Card containers are <div role="button"> — UA button resets not needed.
    cursor:pointer and touch-action come from the global [onclick] rule. */
 
+/* iOS POINTER-EVENTS FIX
+   Child divs/spans inside clickable containers pass pointer events up to the
+   parent onclick handler. Without this, WebKit absorbs taps on child text nodes
+   and never fires the parent click. */
+.home-card > *, .card > *, .proto-item > *, .block-tab > *,
+.search-result > *, .check-item > *, .scale-row > * { pointer-events: none; }
+
+/* Re-enable pointer events on every independently interactive descendant.
+   Must come AFTER the rule above (equal specificity → last-wins). */
+.tts-btn, .metro-btn, .calc-btn, .reset-btn, .calc-input,
+input, select, textarea, label { pointer-events: auto; }
+
 /* SCROLL HELPER */
 #content::-webkit-scrollbar { display: none; }
 
 /* TTS BUTTON */
-.tts-btn { background: var(--bg3); border: 1px solid var(--border); color: var(--text3); border-radius: 6px; padding: 4px 10px; font-size: 11px; cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none; white-space: nowrap; flex-shrink: 0; }
+.tts-btn { background: var(--bg3); border: 1px solid var(--border); color: var(--text3); border-radius: 6px; padding: 4px 10px; font-size: 11px; cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none; white-space: nowrap; flex-shrink: 0; pointer-events: auto; position: relative; z-index: 10; }
 .tts-btn.speaking { color: var(--green); border-color: var(--green); -webkit-animation: tts-pulse 1s ease-in-out infinite; animation: tts-pulse 1s ease-in-out infinite; }
 @-webkit-keyframes tts-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(56,201,116,0.4); } 50% { box-shadow: 0 0 0 5px rgba(56,201,116,0); } }
 @keyframes tts-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(56,201,116,0.4); } 50% { box-shadow: 0 0 0 5px rgba(56,201,116,0); } }
@@ -208,7 +220,7 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
 #toast.toast-green { background: var(--green-bg); color: #68d391; border: 1px solid rgba(56,201,116,0.4); }
 
 /* METRO BUTTON */
-.metro-btn { background: var(--yellow-bg); border: 2px solid var(--yellow); color: var(--yellow); border-radius: 8px; padding: 12px; font-size: 14px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 8px; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-transition: all 0.15s; transition: all 0.15s; }
+.metro-btn { background: var(--yellow-bg); border: 2px solid var(--yellow); color: var(--yellow); border-radius: 8px; padding: 12px; font-size: 14px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 8px; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-transition: all 0.15s; transition: all 0.15s; pointer-events: auto; position: relative; z-index: 10; }
 .metro-btn.metro-active { background: var(--red-bg); border-color: var(--red); color: var(--red); -webkit-animation: metro-pulse 0.545s ease-in-out infinite; animation: metro-pulse 0.545s ease-in-out infinite; }
 @-webkit-keyframes metro-pulse { 0%,100% { -webkit-transform: scale(1); } 50% { -webkit-transform: scale(1.02); } }
 @keyframes metro-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
