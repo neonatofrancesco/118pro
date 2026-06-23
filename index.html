@@ -183,25 +183,8 @@ a, button, [onclick] { cursor: pointer; touch-action: manipulation; }
 .divider { height: 1px; background: var(--border); margin: 6px 0; }
 
 
-/* Button reset for iOS touch compatibility */
-button.home-card, button.card, button.proto-item, button.block-tab {
-  width: 100%;
-  text-align: left;
-  font-family: inherit;
-  font-size: inherit;
-  border: none;
-  appearance: none;
-  -webkit-appearance: none;
-}
-button.home-card { border: 1px solid var(--border); }
-button.card { border: 0.5px solid var(--border); }
-button.card.red-border { border-left: 3px solid var(--red); }
-button.card.orange-border { border-left: 3px solid var(--orange); }
-button.card.green-border { border-left: 3px solid var(--green); }
-button.card.blue-border { border-left: 3px solid var(--accent); }
-button.card.yellow-border { border-left: 3px solid var(--yellow); }
-button.proto-item { border: 1px solid var(--border); }
-button.block-tab { border: 1px solid var(--border); }
+/* Card containers are <div role="button"> — UA button resets not needed.
+   cursor:pointer and touch-action come from the global [onclick] rule. */
 
 /* SCROLL HELPER */
 #content::-webkit-scrollbar { display: none; }
@@ -260,57 +243,57 @@ button.block-tab { border: 1px solid var(--border); }
     <!-- HOME -->
     <div id="panel-home" class="panel active">
       <div class="home-grid">
-        <button class="home-card" onclick="openSection('protocolli')">
+        <div class="home-card" role="button" onclick="openSection('protocolli')">
           <div class="hc-icon">🫁</div>
           <div class="hc-title">Protocolli Patologia</div>
           <div class="hc-sub">12 protocolli</div>
           <div class="hc-badge" style="background:var(--red-bg);color:var(--red)">EMERGENZA</div>
-        </button>
-        <button class="home-card" onclick="openSection('farmaci')">
+        </div>
+        <div class="home-card" role="button" onclick="openSection('farmaci')">
           <div class="hc-icon">💊</div>
           <div class="hc-title">Dosaggi Farmaci</div>
           <div class="hc-sub">Per peso/età</div>
           <div class="hc-badge" style="background:var(--orange-bg);color:var(--orange)">RAPIDO</div>
-        </button>
-        <button class="home-card" onclick="openSection('scale')">
+        </div>
+        <div class="home-card" role="button" onclick="openSection('scale')">
           <div class="hc-icon">📊</div>
           <div class="hc-title">Scale di Valut.</div>
           <div class="hc-sub">GCS · NEWS · REMS</div>
           <div class="hc-badge" style="background:var(--teal-bg);color:var(--teal)">SCORING</div>
-        </button>
-        <button class="home-card" onclick="openSection('checklist')">
+        </div>
+        <div class="home-card" role="button" onclick="openSection('checklist')">
           <div class="hc-icon">✅</div>
           <div class="hc-title">Checklist Procedure</div>
           <div class="hc-sub">Intubazione · CVC · DAE</div>
           <div class="hc-badge" style="background:var(--green-bg);color:var(--green)">PROCEDURE</div>
-        </button>
-        <button class="home-card" onclick="openSection('calcolatori')">
+        </div>
+        <div class="home-card" role="button" onclick="openSection('calcolatori')">
           <div class="hc-icon">🧮</div>
           <div class="hc-title">Calcolatori Clinici</div>
           <div class="hc-sub">Dose · Drip · GFR</div>
           <div class="hc-badge" style="background:var(--purple-bg);color:var(--purple)">CALC</div>
-        </button>
-        <button class="home-card" onclick="openSection('pacing')">
+        </div>
+        <div class="home-card" role="button" onclick="openSection('pacing')">
           <div class="hc-icon">⚡</div>
           <div class="hc-title">Pacing & Blocchi AV</div>
           <div class="hc-sub">1° · 2° · 3° grado</div>
           <div class="hc-badge" style="background:var(--yellow-bg);color:var(--yellow)">CARDIOLOGIA</div>
-        </button>
+        </div>
       </div>
 
       <div class="sec-title">Accesso rapido emergenza</div>
-      <button class="card red-border" onclick="openProto('arresto')">
+      <div class="card red-border" role="button" onclick="openProto('arresto')">
         <div class="card-title">🛑 ARRESTO CARDIACO – RCP adulto</div>
         <div class="card-body">30:2 · 100-120/min · Adrenalina 1mg ogni 3-5' · DAE appena disponibile</div>
-      </button>
-      <button class="card orange-border" onclick="openProto('anafilassi')">
+      </div>
+      <div class="card orange-border" role="button" onclick="openProto('anafilassi')">
         <div class="card-title">⚠️ ANAFILASSI GRAVE</div>
         <div class="card-body">Adrenalina 0.5mg IM coscia · Posizione · O₂ · Accesso venoso</div>
-      </button>
-      <button class="card yellow-border" onclick="openSection('pacing')">
+      </div>
+      <div class="card yellow-border" role="button" onclick="openSection('pacing')">
         <div class="card-title">⚡ BLOCCO AV COMPLETO – Pacing</div>
         <div class="card-body">FC &lt;40 · instabilità emodinamica · Atropina → TCP → automedica</div>
-      </button>
+      </div>
     </div>
 
     <!-- PROTOCOLLI -->
@@ -319,21 +302,21 @@ button.block-tab { border: 1px solid var(--border); }
       <div class="detail-title">Protocolli Clinici</div>
       <div class="detail-sub">Tap per aprire il protocollo completo</div>
       <div class="sec-title">Respiratorio</div>
-      <button class="proto-item" onclick="openProto('dispnea')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Dispnea acuta</div><div class="proto-tag">Asma · BPCO · Edema polm.</div></div><div class="proto-arrow">›</div></button>
-      <button class="proto-item" onclick="openProto('bpco')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">BPCO riacutizzata</div><div class="proto-tag">Broncodilatatori · NIV · O₂ controllato</div></div><div class="proto-arrow">›</div></button>
-      <button class="proto-item" onclick="openProto('asma')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Asma bronchiale acuta</div><div class="proto-tag">Salbutamolo · Magnesio · Cortisonici</div></div><div class="proto-arrow">›</div></button>
+      <div class="proto-item" role="button" onclick="openProto('dispnea')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Dispnea acuta</div><div class="proto-tag">Asma · BPCO · Edema polm.</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" role="button" onclick="openProto('bpco')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">BPCO riacutizzata</div><div class="proto-tag">Broncodilatatori · NIV · O₂ controllato</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" role="button" onclick="openProto('asma')"><div class="proto-dot" style="background:var(--accent)"></div><div><div class="proto-name">Asma bronchiale acuta</div><div class="proto-tag">Salbutamolo · Magnesio · Cortisonici</div></div><div class="proto-arrow">›</div></div>
       <div class="sec-title">Cardiologico</div>
-      <button class="proto-item" onclick="openProto('dolore-toracico')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Dolore toracico / IMA</div><div class="proto-tag">STEMI · NSTEMI · Aspirin · Nitrati</div></div><div class="proto-arrow">›</div></button>
-      <button class="proto-item" onclick="openProto('arresto')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Arresto cardiaco – RCP</div><div class="proto-tag">30:2 · Adrenalina · DAE · ROSC</div></div><div class="proto-arrow">›</div></button>
-      <button class="proto-item" onclick="openProto('aritmie')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Aritmie – Tachiaritmie</div><div class="proto-tag">FA · TV · FV · Cardioversione</div></div><div class="proto-arrow">›</div></button>
-      <button class="proto-item" onclick="openSection('pacing')"><div class="proto-dot" style="background:var(--yellow)"></div><div><div class="proto-name">Blocchi AV – Pacing</div><div class="proto-tag">1° · 2° · 3° grado · TCP</div></div><div class="proto-arrow">›</div></button>
+      <div class="proto-item" role="button" onclick="openProto('dolore-toracico')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Dolore toracico / IMA</div><div class="proto-tag">STEMI · NSTEMI · Aspirin · Nitrati</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" role="button" onclick="openProto('arresto')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Arresto cardiaco – RCP</div><div class="proto-tag">30:2 · Adrenalina · DAE · ROSC</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" role="button" onclick="openProto('aritmie')"><div class="proto-dot" style="background:var(--red)"></div><div><div class="proto-name">Aritmie – Tachiaritmie</div><div class="proto-tag">FA · TV · FV · Cardioversione</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" role="button" onclick="openSection('pacing')"><div class="proto-dot" style="background:var(--yellow)"></div><div><div class="proto-name">Blocchi AV – Pacing</div><div class="proto-tag">1° · 2° · 3° grado · TCP</div></div><div class="proto-arrow">›</div></div>
       <div class="sec-title">Neurologico</div>
-      <button class="proto-item" onclick="openProto('ictus')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Ictus / TIA – Stroke</div><div class="proto-tag">FAST · Finestra terapeutica · tPA</div></div><div class="proto-arrow">›</div></button>
-      <button class="proto-item" onclick="openProto('crisi-epilettica')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Crisi epilettica / Stato epilettico</div><div class="proto-tag">Diazepam · Lorazepam · Midazolam</div></div><div class="proto-arrow">›</div></button>
+      <div class="proto-item" role="button" onclick="openProto('ictus')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Ictus / TIA – Stroke</div><div class="proto-tag">FAST · Finestra terapeutica · tPA</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" role="button" onclick="openProto('crisi-epilettica')"><div class="proto-dot" style="background:var(--purple)"></div><div><div class="proto-name">Crisi epilettica / Stato epilettico</div><div class="proto-tag">Diazepam · Lorazepam · Midazolam</div></div><div class="proto-arrow">›</div></div>
       <div class="sec-title">Altro</div>
-      <button class="proto-item" onclick="openProto('anafilassi')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Anafilassi / Shock allergico</div><div class="proto-tag">Adrenalina IM · Antistaminici · Cortisonici</div></div><div class="proto-arrow">›</div></button>
-      <button class="proto-item" onclick="openProto('trauma')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Trauma grave / Politrauma</div><div class="proto-tag">ABCDE · C-spine · Emorragia</div></div><div class="proto-arrow">›</div></button>
-      <button class="proto-item" onclick="openProto('ipoglicemia')"><div class="proto-dot" style="background:var(--green)"></div><div><div class="proto-name">Ipoglicemia grave</div><div class="proto-tag">Glucosio · Glucagone · GCS</div></div><div class="proto-arrow">›</div></button>
+      <div class="proto-item" role="button" onclick="openProto('anafilassi')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Anafilassi / Shock allergico</div><div class="proto-tag">Adrenalina IM · Antistaminici · Cortisonici</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" role="button" onclick="openProto('trauma')"><div class="proto-dot" style="background:var(--orange)"></div><div><div class="proto-name">Trauma grave / Politrauma</div><div class="proto-tag">ABCDE · C-spine · Emorragia</div></div><div class="proto-arrow">›</div></div>
+      <div class="proto-item" role="button" onclick="openProto('ipoglicemia')"><div class="proto-dot" style="background:var(--green)"></div><div><div class="proto-name">Ipoglicemia grave</div><div class="proto-tag">Glucosio · Glucagone · GCS</div></div><div class="proto-arrow">›</div></div>
     </div>
 
     <!-- PROTO DETAIL -->
@@ -1007,21 +990,21 @@ function renderScale(i) {
       <div class="card-title">Scala di Glasgow – GCS</div>
       <div class="sec-title">Apertura Occhi (E)</div>`;
     SCALE_GCS.E.forEach(r => {
-      html += `<button class="scale-row" onclick="selGCS('E',${r.v},this)">
+      html += `<div class="scale-row" role="button" onclick="selGCS('E',${r.v},this)">
         <div class="scale-val" id="gE${r.v}">${r.v}</div>
         <div class="scale-label">${r.l}</div>
         <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cE${r.v}"></div></div>`;
     });
     html += `<div class="sec-title">Risposta Verbale (V)</div>`;
     SCALE_GCS.V.forEach(r => {
-      html += `<button class="scale-row" onclick="selGCS('V',${r.v},this)">
+      html += `<div class="scale-row" role="button" onclick="selGCS('V',${r.v},this)">
         <div class="scale-val">${r.v}</div>
         <div class="scale-label">${r.l}</div>
         <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cV${r.v}"></div></div>`;
     });
     html += `<div class="sec-title">Risposta Motoria (M)</div>`;
     SCALE_GCS.M.forEach(r => {
-      html += `<button class="scale-row" onclick="selGCS('M',${r.v},this)">
+      html += `<div class="scale-row" role="button" onclick="selGCS('M',${r.v},this)">
         <div class="scale-val">${r.v}</div>
         <div class="scale-label">${r.l}</div>
         <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--text3)" id="cM${r.v}"></div></div>`;
@@ -1172,10 +1155,10 @@ function renderCheck(i) {
   cl.items.forEach(function(item, j) {
     var checked = checkStates[i][j] || false;
     var ck = checked ? 'checked' : '';
-    html += '<button class="check-item" onclick="toggleCheck(' + i + ',' + j + ')">' +
+    html += '<div class="check-item" role="button" onclick="toggleCheck(' + i + ',' + j + ')">' +
       '<div class="check-box ' + ck + '" id="cb' + i + '_' + j + '"></div>' +
       '<div class="check-text ' + ck + '" id="ct' + i + '_' + j + '">' + item + '</div>' +
-      '</button>';
+      '</div>';
   });
   html += '</div>';
   if (i === 0) {
@@ -1322,18 +1305,18 @@ function renderPacing() {
   const html = `
     <div class="alert yellow">⚡ Blocco AV sintomatico: FC &lt;40 · ipotensione · sincope · dolore toracico → scala terapeutica → attiva automedica se TCP</div>
     
-    <button class="block-tab active" onclick="showBlock(0)" id="bt0">
+    <div class="block-tab active" role="button" onclick="showBlock(0)" id="bt0">
       <div class="block-tab-title">Blocco AV 1° Grado</div>
       <div class="block-tab-sub">PR &gt;200ms · asintomatico</div>
-    </button>
-    <button class="block-tab" onclick="showBlock(1)" id="bt1">
+    </div>
+    <div class="block-tab" role="button" onclick="showBlock(1)" id="bt1">
       <div class="block-tab-title">Blocco AV 2° Grado</div>
       <div class="block-tab-sub">Mobitz I (Wenckebach) · Mobitz II</div>
-    </button>
-    <button class="block-tab" onclick="showBlock(2)" id="bt2">
+    </div>
+    <div class="block-tab" role="button" onclick="showBlock(2)" id="bt2">
       <div class="block-tab-title">Blocco AV 3° Grado (Completo)</div>
       <div class="block-tab-sub">Dissociazione AV completa · Emergenza</div>
-    </button>
+    </div>
 
     <div id="block-detail"></div>
   `;
