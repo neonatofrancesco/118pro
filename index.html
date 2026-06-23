@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#0a1628">
 <title>118 PRO – Assistente Clinico</title>
 <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%23ffffff'/><text x='50%' y='55%' font-size='110' text-anchor='middle' dominant-baseline='middle' fill='%230a1628'>⚕</text></svg>">  
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='40' fill='%23ffffff'/><text x='50%' y='55%' font-size='110' text-anchor='middle' dominant-baseline='middle' fill='%230a1628'>⚕</text></svg>">
 <style>
 :root {
   --bg: #0a1628;
@@ -205,6 +205,39 @@ button.block-tab { border: 1px solid var(--border); }
 
 /* SCROLL HELPER */
 #content::-webkit-scrollbar { display: none; }
+
+/* TTS BUTTON */
+.tts-btn { background: var(--bg3); border: 1px solid var(--border); color: var(--text3); border-radius: 6px; padding: 4px 10px; font-size: 11px; cursor: pointer; touch-action: manipulation; -webkit-user-select: none; user-select: none; white-space: nowrap; flex-shrink: 0; }
+.tts-btn.speaking { color: var(--green); border-color: var(--green); -webkit-animation: tts-pulse 1s ease-in-out infinite; animation: tts-pulse 1s ease-in-out infinite; }
+@-webkit-keyframes tts-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(56,201,116,0.4); } 50% { box-shadow: 0 0 0 5px rgba(56,201,116,0); } }
+@keyframes tts-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(56,201,116,0.4); } 50% { box-shadow: 0 0 0 5px rgba(56,201,116,0); } }
+
+/* VOICE FAB */
+#voice-fab { position: fixed; right: 16px; bottom: calc(var(--safe-bot) + 70px); width: 50px; height: 50px; border-radius: 50%; background: var(--card2); border: 1.5px solid var(--border); color: var(--text); font-size: 22px; display: -webkit-box; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; cursor: pointer; z-index: 100; box-shadow: 0 4px 14px rgba(0,0,0,0.45); touch-action: manipulation; -webkit-user-select: none; user-select: none; transition: background 0.15s; }
+#voice-fab.listening { background: var(--red); border-color: var(--red); -webkit-animation: fab-pulse 0.8s ease-in-out infinite; animation: fab-pulse 0.8s ease-in-out infinite; }
+@-webkit-keyframes fab-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(229,62,62,0.5); } 50% { box-shadow: 0 0 0 10px rgba(229,62,62,0); } }
+@keyframes fab-pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(229,62,62,0.5); } 50% { box-shadow: 0 0 0 10px rgba(229,62,62,0); } }
+
+/* TOAST */
+#toast { position: fixed; bottom: calc(var(--safe-bot) + 134px); left: 50%; -webkit-transform: translateX(-50%); transform: translateX(-50%); padding: 10px 16px; border-radius: 8px; font-size: 13px; font-weight: 500; z-index: 200; display: none; max-width: 90vw; text-align: center; pointer-events: none; transition: opacity 0.3s; }
+#toast.toast-show { display: block; }
+#toast.toast-orange { background: var(--orange-bg); color: #fbd38d; border: 1px solid rgba(246,137,58,0.4); }
+#toast.toast-green { background: var(--green-bg); color: #68d391; border: 1px solid rgba(56,201,116,0.4); }
+
+/* METRO BUTTON */
+.metro-btn { background: var(--yellow-bg); border: 2px solid var(--yellow); color: var(--yellow); border-radius: 8px; padding: 12px; font-size: 14px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 8px; touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-transition: all 0.15s; transition: all 0.15s; }
+.metro-btn.metro-active { background: var(--red-bg); border-color: var(--red); color: var(--red); -webkit-animation: metro-pulse 0.545s ease-in-out infinite; animation: metro-pulse 0.545s ease-in-out infinite; }
+@-webkit-keyframes metro-pulse { 0%,100% { -webkit-transform: scale(1); } 50% { -webkit-transform: scale(1.02); } }
+@keyframes metro-pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+
+/* VIDEO MODAL */
+#video-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.78); z-index: 300; -webkit-box-align: center; align-items: center; -webkit-box-pack: center; justify-content: center; padding: 20px; -webkit-box-sizing: border-box; box-sizing: border-box; }
+#video-modal.open { display: -webkit-box; display: flex; }
+#video-modal-inner { background: var(--card); border-radius: var(--r2); padding: 16px; width: 100%; max-width: 480px; }
+#video-modal-hdr { display: -webkit-box; display: flex; -webkit-box-align: center; align-items: center; -webkit-box-pack: justify; justify-content: space-between; margin-bottom: 12px; }
+#video-modal-hdr-title { font-size: 14px; font-weight: 700; color: var(--text); }
+#video-modal-close { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); border-radius: 6px; padding: 6px 12px; font-size: 13px; cursor: pointer; touch-action: manipulation; }
+
 </style>
 </head>
 <body>
@@ -377,6 +410,23 @@ button.block-tab { border: 1px solid var(--border); }
     </div>
   </div>
 
+
+  <!-- VOICE COMMAND FAB -->
+  <button id="voice-fab" onclick="startVoiceCommand()">🎙️</button>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast"></div>
+
+  <!-- VIDEO MODAL -->
+  <div id="video-modal">
+    <div id="video-modal-inner">
+      <div id="video-modal-hdr">
+        <div id="video-modal-hdr-title">Video Procedurale</div>
+        <button id="video-modal-close" onclick="closeVideoModal()">✕ Chiudi</button>
+      </div>
+      <div id="video-modal-body"></div>
+    </div>
+  </div>
   <div id="bottom-nav">
     <button class="nav-btn active" onclick="navTo('home')" id="nav-home"><span class="nav-icon">🏠</span>Home</button>
     <button class="nav-btn" onclick="navTo('protocolli')" id="nav-protocolli"><span class="nav-icon">📋</span>Protocolli</button>
@@ -509,6 +559,11 @@ const PROTOCOLS = {
           <li class="step"><div class="step-n green">✓</div><div class="step-text">Glicemia target <strong>6-10 mmol/L</strong></div></li>
         </ul>
       </div>
+    </div>
+    <div class="card yellow-border">
+      <div class="card-title">⏱ Metronomo RCP – Guida al ritmo</div>
+      <div class="card-body" style="margin-bottom:8px">Ritmo sonoro e visivo per le compressioni: <strong>110 BPM</strong> (ogni 545ms). Frecuenza target AHA/ERC: 100-120/min.</div>
+      <button class="metro-btn" onclick="toggleMetronome(this)">▶️ AVVIA METRONOMO RCP (110 BPM)</button>
     </div>`
   },
   'anafilassi': {
@@ -858,6 +913,8 @@ let newsVals = {rr:0,spo2:0,o2sup:false,sys:0,hr:0,temp:0,avpu:0};
 
 // ========== NAV ==========
 function navTo(panel) {
+  stopSpeech();
+  if (_metroActive) { _stopMetronome(null); }
   hideSearch();
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -896,6 +953,8 @@ function openProto(id) {
 }
 
 function goProtoBack() {
+  stopSpeech();
+  if (_metroActive) { _stopMetronome(null); }
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-' + prevPanel).classList.add('active');
   currentPanel = prevPanel;
@@ -910,16 +969,25 @@ function farmTab(i, cat) {
 }
 
 function renderFarmaci(i) {
-  const cats = Object.keys(FARMACI);
-  const cat = cats[i] || cats[0];
-  const drugs = FARMACI[cat];
-  let html = '';
-  drugs.forEach(d => {
-    html += `<div class="card ${d.urgent?'red-border':'blue-border'}">
-      <div class="card-title">${d.urgent?'🚨 ':''}${d.name} <span class="sev ${d.urgent?'red':'green'}">${d.urgent?'URGENTE':'STD'}</span></div>
-      <div style="margin:4px 0"><span class="drug ${d.urgent?'urgent':'safe'}">${d.dose}</span>${d.interval?`<span class="drug-dose">${d.interval}</span>`:''}</div>
-      <div class="card-body" style="margin-top:6px">${d.note}</div>
-    </div>`;
+  var cats = Object.keys(FARMACI);
+  var cat = cats[i] || cats[0];
+  var drugs = FARMACI[cat];
+  var html = '';
+  drugs.forEach(function(d, idx) {
+    var border = d.urgent ? 'red-border' : 'blue-border';
+    var drugCls = d.urgent ? 'urgent' : 'safe';
+    var sev = d.urgent ? 'red' : 'green';
+    var sevLabel = d.urgent ? 'URGENTE' : 'STD';
+    html += '<div class="card ' + border + '">';
+    html += '<div class="card-title" style="justify-content:space-between">';
+    html += '<span>' + (d.urgent ? '🚨 ' : '') + d.name + ' <span class="sev ' + sev + '">' + sevLabel + '</span></span>';
+    html += '<button class="tts-btn" onclick="speakDrug(' + i + ',' + idx + ',this)">🔊 Leggi</button>';
+    html += '</div>';
+    html += '<div style="margin:4px 0"><span class="drug ' + drugCls + '">' + d.dose + '</span>';
+    html += d.interval ? '<span class="drug-dose">' + d.interval + '</span>' : '';
+    html += '</div>';
+    html += '<div class="card-body" style="margin-top:6px">' + d.note + '</div>';
+    html += '</div>';
   });
   document.getElementById('farmaci-content').innerHTML = html;
 }
@@ -1099,17 +1167,21 @@ function checkTab(i) {
 }
 
 function renderCheck(i) {
-  const cl = CHECKLISTS[i];
-  let html = `<div class="card blue-border"><div class="card-title">📋 ${cl.name}</div>`;
-  cl.items.forEach((item, j) => {
-    const checked = checkStates[i][j] || false;
-    const ck = checked ? 'checked' : '';
-    html += `<button class="check-item" onclick="toggleCheck(${i},${j})">
-      <div class="check-box ${ck}" id="cb${i}_${j}"></div>
-      <div class="check-text ${ck}" id="ct${i}_${j}">${item}</div>
-    </button>`;
+  var cl = CHECKLISTS[i];
+  var html = '<div class="card blue-border"><div class="card-title">📋 ' + cl.name + '</div>';
+  cl.items.forEach(function(item, j) {
+    var checked = checkStates[i][j] || false;
+    var ck = checked ? 'checked' : '';
+    html += '<button class="check-item" onclick="toggleCheck(' + i + ',' + j + ')">' +
+      '<div class="check-box ' + ck + '" id="cb' + i + '_' + j + '"></div>' +
+      '<div class="check-text ' + ck + '" id="ct' + i + '_' + j + '">' + item + '</div>' +
+      '</button>';
   });
-  html += `</div><button class="reset-btn" onclick="resetCheck(${i})">↺ Reset checklist</button>`;
+  html += '</div>';
+  if (i === 0) {
+    html += '<button class="calc-btn" style="background:var(--bg3);color:var(--teal);border:1px solid rgba(45,212,191,0.4);margin-top:8px" onclick="openProceduralVideo('Rd6O_AHxUdI','RSI – Intubazione a Sequenza Rapida')">🎥 Video RSI – Intubazione a Sequenza Rapida</button>';
+  }
+  html += '<button class="reset-btn" onclick="resetCheck(' + i + ')">↺ Reset checklist</button>';
   document.getElementById('checklist-content').innerHTML = html;
 }
 
@@ -1362,13 +1434,15 @@ function showBlock(i) {
 
 // ========== PROTO RENDER ==========
 function renderProto(id) {
-  const p = PROTOCOLS[id];
-  if(!p) { document.getElementById('proto-content').innerHTML='<div class="alert orange">Protocollo non trovato</div>'; return; }
-  document.getElementById('proto-content').innerHTML = `
-    <div class="detail-title">${p.title}</div>
-    <div class="detail-sub">${p.sub}</div>
-    ${p.content}
-  `;
+  var p = PROTOCOLS[id];
+  if (!p) { document.getElementById('proto-content').innerHTML = '<div class="alert orange">Protocollo non trovato</div>'; return; }
+  document.getElementById('proto-content').innerHTML =
+    '<div style="display:-webkit-box;display:flex;-webkit-box-align:flex-start;align-items:flex-start;-webkit-box-pack:justify;justify-content:space-between;gap:10px;margin-bottom:4px">' +
+    '<div class="detail-title" style="margin-bottom:0;flex:1">' + p.title + '</div>' +
+    '<button class="tts-btn" style="margin-top:4px" onclick="speakProto(\'' + id + '\',this)">🔊 Leggi</button>' +
+    '</div>' +
+    '<div class="detail-sub">' + p.sub + '</div>' +
+    p.content;
 }
 
 // ========== SEARCH ==========
@@ -1428,6 +1502,229 @@ function hideSearch() {
     const nb = document.getElementById('nav-'+currentPanel);
     if(nb) { document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active')); nb.classList.add('active'); }
   }
+}
+
+// ========== TTS ENGINE (Feature 1) ==========
+var _ttsCurrentBtn = null;
+
+function speakText(text, btn) {
+  if (!window.speechSynthesis) { showToast('⚠️ Text-to-Speech non supportato su questo dispositivo', 'orange'); return; }
+  if (_ttsCurrentBtn === btn && window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+    _ttsClearState();
+    return;
+  }
+  window.speechSynthesis.cancel();
+  _ttsClearState();
+  var utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'it-IT';
+  utter.rate = 0.9;
+  utter.pitch = 1.0;
+  utter.onstart = function() {
+    _ttsCurrentBtn = btn;
+    if (btn) { btn.classList.add('speaking'); btn.textContent = '⏹ Stop'; }
+  };
+  utter.onend = function() { _ttsClearState(); };
+  utter.onerror = function() { _ttsClearState(); };
+  window.speechSynthesis.speak(utter);
+}
+
+function _ttsClearState() {
+  if (_ttsCurrentBtn) {
+    _ttsCurrentBtn.classList.remove('speaking');
+    _ttsCurrentBtn.textContent = '🔊 Leggi';
+  }
+  _ttsCurrentBtn = null;
+}
+
+function stopSpeech() {
+  if (window.speechSynthesis && window.speechSynthesis.speaking) {
+    window.speechSynthesis.cancel();
+  }
+  _ttsClearState();
+}
+
+function speakDrug(catIdx, drugIdx, btn) {
+  var cats = Object.keys(FARMACI);
+  var cat = cats[catIdx];
+  var d = FARMACI[cat] && FARMACI[cat][drugIdx];
+  if (!d) return;
+  var text = d.name + '. ' + (d.urgent ? 'Farmaco urgente. ' : '') +
+    'Dose: ' + d.dose + '. ' +
+    (d.interval ? 'Ogni: ' + d.interval + '. ' : '') +
+    'Note: ' + d.note;
+  speakText(text, btn);
+}
+
+function speakProto(id, btn) {
+  var p = PROTOCOLS[id];
+  if (!p) return;
+  var tmp = document.createElement('div');
+  tmp.innerHTML = p.content;
+  var plain = (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+  var text = p.title.replace(/[^\w\s\.,:àèìòùÀÈÌÒÙ]/g, '') + '. ' + p.sub + '. ' + plain;
+  speakText(text, btn);
+}
+
+// ========== VOICE COMMANDS – STT (Feature 2) ==========
+var _sttActive = false;
+var _sttRec = null;
+
+function startVoiceCommand() {
+  var fab = document.getElementById('voice-fab');
+  if (_sttActive) {
+    if (_sttRec) { try { _sttRec.abort(); } catch(e) {} }
+    _sttActive = false;
+    if (fab) { fab.classList.remove('listening'); fab.textContent = '🎙️'; }
+    return;
+  }
+  if (!navigator.onLine) {
+    showToast('⚠️ Comandi vocali non disponibili in modalità offline', 'orange');
+    return;
+  }
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) {
+    showToast('⚠️ Riconoscimento vocale non supportato su questo dispositivo', 'orange');
+    return;
+  }
+  var rec = new SR();
+  _sttRec = rec;
+  rec.lang = 'it-IT';
+  rec.interimResults = false;
+  rec.maxAlternatives = 1;
+  rec.onstart = function() {
+    _sttActive = true;
+    if (fab) { fab.classList.add('listening'); fab.textContent = '🛑'; }
+  };
+  rec.onresult = function(e) {
+    var t = e.results[0][0].transcript.toLowerCase();
+    _processSpeechCommand(t);
+  };
+  rec.onend = function() {
+    _sttActive = false;
+    if (fab) { fab.classList.remove('listening'); fab.textContent = '🎙️'; }
+    _sttRec = null;
+  };
+  rec.onerror = function(e) {
+    _sttActive = false;
+    if (fab) { fab.classList.remove('listening'); fab.textContent = '🎙️'; }
+    _sttRec = null;
+    if (e.error !== 'aborted') { showToast('⚠️ Errore: ' + e.error, 'orange'); }
+  };
+  try { rec.start(); } catch(e) { _sttActive = false; }
+}
+
+function _processSpeechCommand(t) {
+  if (t.indexOf('arresto') !== -1 || t.indexOf('rcp') !== -1 || t.indexOf('rianimazione') !== -1) {
+    openProto('arresto'); showToast('🛑 Protocollo Arresto Cardiaco', 'green');
+  } else if (t.indexOf('anafilassi') !== -1 || t.indexOf('allergico') !== -1) {
+    openProto('anafilassi'); showToast('⚠️ Protocollo Anafilassi', 'green');
+  } else if (t.indexOf('dispnea') !== -1 || t.indexOf('respiro') !== -1) {
+    openProto('dispnea'); showToast('🫁 Protocollo Dispnea', 'green');
+  } else if (t.indexOf('ictus') !== -1 || t.indexOf('stroke') !== -1) {
+    openProto('ictus'); showToast('🧠 Protocollo Ictus', 'green');
+  } else if (t.indexOf('epilessia') !== -1 || t.indexOf('crisi') !== -1 || t.indexOf('convulsioni') !== -1) {
+    openProto('crisi-epilettica'); showToast('⚡ Crisi Epilettica', 'green');
+  } else if (t.indexOf('trauma') !== -1 || t.indexOf('politrauma') !== -1) {
+    openProto('trauma'); showToast('🚑 Trauma Grave', 'green');
+  } else if (t.indexOf('infarto') !== -1 || t.indexOf('dolore toracico') !== -1 || t.indexOf('ima') !== -1) {
+    openProto('dolore-toracico'); showToast('❤️ IMA – Dolore Toracico', 'green');
+  } else if (t.indexOf('adrenalina') !== -1 || t.indexOf('farmaci') !== -1 || t.indexOf('farmaco') !== -1) {
+    openSection('farmaci'); showToast('💊 Farmaci', 'green');
+  } else if (t.indexOf('glasgow') !== -1 || t.indexOf('gcs') !== -1) {
+    openSection('scale'); showToast('📊 Scala GCS', 'green');
+  } else if (t.indexOf('news') !== -1) {
+    openSection('scale'); setTimeout(function() { scaleTab(1); }, 120); showToast('📊 NEWS2 Score', 'green');
+  } else if (t.indexOf('intubazione') !== -1 || t.indexOf('rsi') !== -1) {
+    openSection('checklist'); showToast('📋 Checklist Intubazione', 'green');
+  } else if (t.indexOf('pacing') !== -1 || t.indexOf('blocco') !== -1 || t.indexOf('bradicardia') !== -1) {
+    openSection('pacing'); showToast('⚡ Blocchi AV & Pacing', 'green');
+  } else if (t.indexOf('calcolator') !== -1 || t.indexOf('dose') !== -1) {
+    openSection('calcolatori'); showToast('🧮 Calcolatori', 'green');
+  } else {
+    showToast('❓ Comando non riconosciuto: "' + t + '"', 'orange');
+  }
+}
+
+function showToast(msg, type) {
+  var toast = document.getElementById('toast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.className = 'toast-show toast-' + (type || 'orange');
+  clearTimeout(toast._t);
+  toast._t = setTimeout(function() { toast.className = ''; }, 3500);
+}
+
+// ========== CPR METRONOME via AudioContext (Feature 3) ==========
+var _metroActive = false;
+var _metroTimer = null;
+var _metroCtx = null;
+var _METRO_BPM = 60000 / 110; // ≈ 545.45ms
+
+function toggleMetronome(btn) {
+  if (_metroActive) { _stopMetronome(btn); } else { _startMetronome(btn); }
+}
+
+function _startMetronome(btn) {
+  var AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) { showToast('⚠️ AudioContext non supportato', 'orange'); return; }
+  if (!_metroCtx) { _metroCtx = new AC(); }
+  if (_metroCtx.state === 'suspended') { _metroCtx.resume(); }
+  _metroActive = true;
+  if (btn) { btn.textContent = '⏹ FERMA METRONOMO RCP'; btn.classList.add('metro-active'); }
+  (function beat() {
+    if (!_metroActive) return;
+    var osc = _metroCtx.createOscillator();
+    var gain = _metroCtx.createGain();
+    osc.connect(gain);
+    gain.connect(_metroCtx.destination);
+    osc.type = 'sine';
+    osc.frequency.value = 800;
+    var t0 = _metroCtx.currentTime;
+    gain.gain.setValueAtTime(0.65, t0);
+    gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.05);
+    osc.start(t0);
+    osc.stop(t0 + 0.05);
+    var hdr = document.getElementById('header');
+    if (hdr) {
+      hdr.style.background = '#5a1010';
+      setTimeout(function() { if (_metroActive) hdr.style.background = ''; }, 110);
+    }
+    _metroTimer = setTimeout(beat, _METRO_BPM);
+  }());
+}
+
+function _stopMetronome(btn) {
+  _metroActive = false;
+  clearTimeout(_metroTimer);
+  var b = btn || document.querySelector('.metro-btn.metro-active');
+  if (b) { b.textContent = '▶️ AVVIA METRONOMO RCP (110 BPM)'; b.classList.remove('metro-active'); }
+  var hdr = document.getElementById('header');
+  if (hdr) hdr.style.background = '';
+  if (_metroCtx) { try { _metroCtx.close(); } catch(e) {} _metroCtx = null; }
+}
+
+// ========== VIDEO MODAL (Feature 4) ==========
+function openProceduralVideo(ytId, title) {
+  var modal = document.getElementById('video-modal');
+  var body = document.getElementById('video-modal-body');
+  var hdrTitle = document.getElementById('video-modal-hdr-title');
+  if (!modal || !body) return;
+  if (hdrTitle) hdrTitle.textContent = title;
+  if (navigator.onLine) {
+    body.innerHTML = '<iframe width="100%" height="210" src="https://www.youtube-nocookie.com/embed/' + ytId + '?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope" allowfullscreen style="border-radius:8px;display:block;margin-top:4px"></iframe>';
+  } else {
+    body.innerHTML = '<div class="alert orange" style="margin:8px 0 0">🎥 Il video "<strong>' + title + '</strong>" richiede una connessione dati attiva.</div>';
+  }
+  modal.classList.add('open');
+}
+
+function closeVideoModal() {
+  var modal = document.getElementById('video-modal');
+  if (!modal) return;
+  modal.classList.remove('open');
+  var body = document.getElementById('video-modal-body');
+  if (body) body.innerHTML = '';
 }
 
 // Service Worker registration
