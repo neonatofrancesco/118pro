@@ -896,15 +896,15 @@ const CHECKLISTS = {
 };
 
 // ========== STATE ==========
-let currentPanel = 'home';
-let prevPanel = 'home';
-let currentFarmTab = 0;
-let currentScaleTab = 0;
-let currentCheckTab = 0;
-let currentCalcTab = 0;
-let checkStates = {0:{},1:{},2:{},3:{}};
-let gcsSel = {E:0,V:0,M:0};
-let newsVals = {rr:0,spo2:0,o2sup:false,sys:0,hr:0,temp:0,avpu:0};
+var currentPanel = 'home';
+var prevPanel = 'home';
+var currentFarmTab = 0;
+var currentScaleTab = 0;
+var currentCheckTab = 0;
+var currentCalcTab = 0;
+var checkStates = {0:{},1:{},2:{},3:{}};
+var gcsSel = {E:0,V:0,M:0};
+var newsVals = {rr:0,spo2:0,o2sup:false,sys:0,hr:0,temp:0,avpu:0};
 
 // ========== NAV ==========
 function navTo(panel) {
@@ -1174,7 +1174,7 @@ function renderCheck(i) {
   });
   html += '</div>';
   if (i === 0) {
-    html += '<button class="calc-btn" style="background:var(--bg3);color:var(--teal);border:1px solid rgba(45,212,191,0.4);margin-top:8px" onclick="openProceduralVideo('Rd6O_AHxUdI','RSI – Intubazione a Sequenza Rapida')">🎥 Video RSI – Intubazione a Sequenza Rapida</button>';
+    html += '<button class="calc-btn" style="background:var(--bg3);color:var(--teal);border:1px solid rgba(45,212,191,0.4);margin-top:8px" onclick="openProceduralVideo(\'Rd6O_AHxUdI\',\'RSI – Intubazione a Sequenza Rapida\')">🎥 Video RSI – Intubazione a Sequenza Rapida</button>';
   }
   html += '<button class="reset-btn" onclick="resetCheck(' + i + ')">↺ Reset checklist</button>';
   document.getElementById('checklist-content').innerHTML = html;
@@ -1503,25 +1503,31 @@ function hideSearch() {
 var _ttsCurrentBtn = null;
 
 function speakText(text, btn) {
-  if (!window.speechSynthesis) { showToast('⚠️ Text-to-Speech non supportato su questo dispositivo', 'orange'); return; }
-  if (_ttsCurrentBtn === btn && window.speechSynthesis.speaking) {
+  try {
+    if (!window.speechSynthesis) { showToast('⚠️ Text-to-Speech non supportato su questo dispositivo', 'orange'); return; }
+    if (_ttsCurrentBtn === btn && window.speechSynthesis.speaking) {
+      window.speechSynthesis.cancel();
+      _ttsClearState();
+      return;
+    }
     window.speechSynthesis.cancel();
     _ttsClearState();
-    return;
+    var utter = new SpeechSynthesisUtterance(text);
+    utter.lang = 'it-IT';
+    utter.rate = 0.9;
+    utter.pitch = 1.0;
+    utter.onstart = function() {
+      _ttsCurrentBtn = btn;
+      if (btn) { btn.classList.add('speaking'); btn.textContent = '⏹ Stop'; }
+    };
+    utter.onend = function() { _ttsClearState(); };
+    utter.onerror = function() { _ttsClearState(); };
+    window.speechSynthesis.speak(utter);
+  } catch(e) {
+    console.warn('TTS error:', e);
+    _ttsClearState();
+    showToast('⚠️ Errore TTS', 'orange');
   }
-  window.speechSynthesis.cancel();
-  _ttsClearState();
-  var utter = new SpeechSynthesisUtterance(text);
-  utter.lang = 'it-IT';
-  utter.rate = 0.9;
-  utter.pitch = 1.0;
-  utter.onstart = function() {
-    _ttsCurrentBtn = btn;
-    if (btn) { btn.classList.add('speaking'); btn.textContent = '⏹ Stop'; }
-  };
-  utter.onend = function() { _ttsClearState(); };
-  utter.onerror = function() { _ttsClearState(); };
-  window.speechSynthesis.speak(utter);
 }
 
 function _ttsClearState() {
@@ -1566,47 +1572,56 @@ var _sttActive = false;
 var _sttRec = null;
 
 function startVoiceCommand() {
-  var fab = document.getElementById('voice-fab');
-  if (_sttActive) {
-    if (_sttRec) { try { _sttRec.abort(); } catch(e) {} }
-    _sttActive = false;
-    if (fab) { fab.classList.remove('listening'); fab.textContent = '🎙️'; }
-    return;
+  try {
+    var fab = document.getElementById('voice-fab');
+    if (_sttActive) {
+      if (_sttRec) { try { _sttRec.abort(); } catch(e) {} }
+      _sttActive = false;
+      if (fab) { fab.classList.remove('listening'); fab.textContent = '🎙️'; }
+      return;
+    }
+    if (!navigator.onLine) {
+      showToast('⚠️ Comandi vocali non disponibili in modalità offline', 'orange');
+      return;
+    }
+    var SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRec) {
+      alert('Comandi vocali non supportati o bloccati da iOS in questa modalità.');
+      return;
+    }
+    var rec;
+    try { rec = new SpeechRec(); } catch(e) {
+      alert('Comandi vocali non supportati o bloccati da iOS in questa modalità.');
+      return;
+    }
+    _sttRec = rec;
+    rec.lang = 'it-IT';
+    rec.interimResults = false;
+    rec.maxAlternatives = 1;
+    rec.onstart = function() {
+      _sttActive = true;
+      if (fab) { fab.classList.add('listening'); fab.textContent = '🛑'; }
+    };
+    rec.onresult = function(e) {
+      var t = e.results[0][0].transcript.toLowerCase();
+      _processSpeechCommand(t);
+    };
+    rec.onend = function() {
+      _sttActive = false;
+      if (fab) { fab.classList.remove('listening'); fab.textContent = '🎙️'; }
+      _sttRec = null;
+    };
+    rec.onerror = function(e) {
+      _sttActive = false;
+      if (fab) { fab.classList.remove('listening'); fab.textContent = '🎙️'; }
+      _sttRec = null;
+      if (e.error !== 'aborted') { showToast('⚠️ Errore: ' + e.error, 'orange'); }
+    };
+    try { rec.start(); } catch(e) { _sttActive = false; console.warn('STT start error:', e); }
+  } catch(e) {
+    console.warn('Voice command error:', e);
+    showToast('⚠️ Errore comandi vocali', 'orange');
   }
-  if (!navigator.onLine) {
-    showToast('⚠️ Comandi vocali non disponibili in modalità offline', 'orange');
-    return;
-  }
-  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) {
-    showToast('⚠️ Riconoscimento vocale non supportato su questo dispositivo', 'orange');
-    return;
-  }
-  var rec = new SR();
-  _sttRec = rec;
-  rec.lang = 'it-IT';
-  rec.interimResults = false;
-  rec.maxAlternatives = 1;
-  rec.onstart = function() {
-    _sttActive = true;
-    if (fab) { fab.classList.add('listening'); fab.textContent = '🛑'; }
-  };
-  rec.onresult = function(e) {
-    var t = e.results[0][0].transcript.toLowerCase();
-    _processSpeechCommand(t);
-  };
-  rec.onend = function() {
-    _sttActive = false;
-    if (fab) { fab.classList.remove('listening'); fab.textContent = '🎙️'; }
-    _sttRec = null;
-  };
-  rec.onerror = function(e) {
-    _sttActive = false;
-    if (fab) { fab.classList.remove('listening'); fab.textContent = '🎙️'; }
-    _sttRec = null;
-    if (e.error !== 'aborted') { showToast('⚠️ Errore: ' + e.error, 'orange'); }
-  };
-  try { rec.start(); } catch(e) { _sttActive = false; }
 }
 
 function _processSpeechCommand(t) {
@@ -1661,32 +1676,42 @@ function toggleMetronome(btn) {
 }
 
 function _startMetronome(btn) {
-  var AC = window.AudioContext || window.webkitAudioContext;
-  if (!AC) { showToast('⚠️ AudioContext non supportato', 'orange'); return; }
-  if (!_metroCtx) { _metroCtx = new AC(); }
-  if (_metroCtx.state === 'suspended') { _metroCtx.resume(); }
-  _metroActive = true;
-  if (btn) { btn.textContent = '⏹ FERMA METRONOMO RCP'; btn.classList.add('metro-active'); }
-  (function beat() {
-    if (!_metroActive) return;
-    var osc = _metroCtx.createOscillator();
-    var gain = _metroCtx.createGain();
-    osc.connect(gain);
-    gain.connect(_metroCtx.destination);
-    osc.type = 'sine';
-    osc.frequency.value = 800;
-    var t0 = _metroCtx.currentTime;
-    gain.gain.setValueAtTime(0.65, t0);
-    gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.05);
-    osc.start(t0);
-    osc.stop(t0 + 0.05);
-    var hdr = document.getElementById('header');
-    if (hdr) {
-      hdr.style.background = '#5a1010';
-      setTimeout(function() { if (_metroActive) hdr.style.background = ''; }, 110);
+  try {
+    var AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) { showToast('⚠️ AudioContext non supportato', 'orange'); return; }
+    if (!_metroCtx) {
+      try { _metroCtx = new AC(); } catch(e) { showToast('⚠️ AudioContext non disponibile', 'orange'); return; }
     }
-    _metroTimer = setTimeout(beat, _METRO_BPM);
-  }());
+    if (_metroCtx.state === 'suspended') { _metroCtx.resume(); }
+    _metroActive = true;
+    if (btn) { btn.textContent = '⏹ FERMA METRONOMO RCP'; btn.classList.add('metro-active'); }
+    (function beat() {
+      if (!_metroActive) return;
+      try {
+        var osc = _metroCtx.createOscillator();
+        var gain = _metroCtx.createGain();
+        osc.connect(gain);
+        gain.connect(_metroCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.value = 800;
+        var t0 = _metroCtx.currentTime;
+        gain.gain.setValueAtTime(0.65, t0);
+        gain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.05);
+        osc.start(t0);
+        osc.stop(t0 + 0.05);
+      } catch(e) { /* oscillator errors must not stop the metronome timing */ }
+      var hdr = document.getElementById('header');
+      if (hdr) {
+        hdr.style.background = '#5a1010';
+        setTimeout(function() { if (_metroActive) hdr.style.background = ''; }, 110);
+      }
+      _metroTimer = setTimeout(beat, _METRO_BPM);
+    }());
+  } catch(e) {
+    console.warn('Metronome start error:', e);
+    _metroActive = false;
+    showToast('⚠️ Metronomo non disponibile', 'orange');
+  }
 }
 
 function _stopMetronome(btn) {
@@ -1736,13 +1761,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Fix dinamico: riapplica il touch fix iOS agli elementi nuovi senza duplicare listener
-const _touchFixed = new WeakSet();
+var _touchFixed = new WeakSet();
 function _applyTouchFix(el) {
   if (_touchFixed.has(el)) return;
   _touchFixed.add(el);
   el.addEventListener('touchstart', function(){}, {passive: true});
 }
-const _observer = new MutationObserver(function(mutations) {
+var _observer = new MutationObserver(function(mutations) {
   mutations.forEach(function(m) {
     m.addedNodes.forEach(function(node) {
       if (node.nodeType !== 1) return;
