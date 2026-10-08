@@ -281,6 +281,54 @@ input, select, textarea, label { pointer-events: auto; }
 .pr-foot { font-size: 11px; color: var(--text3); line-height: 1.5; padding: 10px 2px 70px; }
 .drug-link { background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; -webkit-text-decoration-color: var(--accent); text-decoration-color: var(--accent); pointer-events: auto; cursor: pointer; touch-action: manipulation; display: inline; line-height: inherit; }
 
+/* ECG */
+.ecg-home { grid-column: 1 / -1; }
+.ecg-mon { background: #03140b; border-radius: 8px; overflow: hidden; border: 1px solid rgba(57,255,122,0.18); }
+.ecg-svg { display: block; width: 100%; height: auto; }
+.ecg-g1 { stroke: rgba(57,255,122,0.08); stroke-width: 0.5; fill: none; }
+.ecg-g2 { stroke: rgba(57,255,122,0.22); stroke-width: 0.8; fill: none; }
+.ecg-tr { stroke: #39ff7a; stroke-width: 1.8; fill: none; stroke-linejoin: round; stroke-linecap: round; }
+.ecg-lead { fill: #39ff7a; font: 600 13px -apple-system, sans-serif; }
+.ecg-strips { display: grid; grid-template-columns: 1fr; gap: 6px; margin: 10px 0 6px; }
+.ecg-strips.ecg-leads { grid-template-columns: 1fr 1fr; }
+.ecg-cap-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 11px; color: var(--text3); margin-bottom: 10px; }
+.ecg-params { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+.ecg-param { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 8px 10px; }
+.ecg-param:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.ecg-param-l { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; }
+.ecg-param-v { font-size: 13px; color: var(--text); margin-top: 2px; line-height: 1.35; }
+.ecg-el { border-radius: var(--r); padding: 10px 12px; font-size: 13px; font-weight: 600; line-height: 1.45; margin-bottom: 10px; border: 1px solid; }
+.ecg-el-shock { background: var(--red-bg); color: #fc8181; border-color: rgba(229,62,62,0.4); }
+.ecg-el-cve { background: var(--orange-bg); color: #fbd38d; border-color: rgba(246,137,58,0.4); }
+.ecg-el-pace { background: var(--yellow-bg); color: #f6e05e; border-color: rgba(245,200,66,0.4); }
+.ecg-el-no { background: var(--bg3); color: var(--text2); border-color: var(--border); }
+.ecg-ul { margin: 0; padding-left: 18px; }
+.ecg-ul li { margin-bottom: 4px; }
+.ecg-wiz { background: var(--card); border: 1px solid rgba(45,142,245,0.35); border-radius: var(--r2); padding: 12px; margin-bottom: 4px; }
+.ecg-wiz-h { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.ecg-wiz-path { font-size: 12px; color: var(--text3); margin-bottom: 6px; }
+.ecg-wiz-q { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+.ecg-wiz-opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.ecg-opt { flex: 1 1 28%; min-height: 48px; background: var(--accent); color: #fff; border: none; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 600; padding: 10px 8px; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+.ecg-opt:active { background: var(--accent2); }
+.ecg-wiz-res { display: flex; flex-direction: column; gap: 6px; }
+.ecg-res-btn { display: flex; justify-content: space-between; align-items: center; text-align: left; background: var(--bg3); border: 1px solid var(--border); color: var(--text); border-radius: 8px; padding: 11px 12px; font-family: inherit; font-size: 14px; font-weight: 500; touch-action: manipulation; }
+.ecg-res-btn > * { pointer-events: none; }
+.ecg-item { width: 100%; text-align: left; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--r); padding: 10px; margin-bottom: 8px; display: block; color: var(--text); font-family: inherit; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+.ecg-item:active { background: var(--card2); }
+.ecg-item > * { pointer-events: none; }
+.ecg-item-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+.ecg-item-n { font-size: 14px; font-weight: 600; }
+.ecg-item-s { font-size: 11px; color: var(--text3); margin-top: 6px; }
+#ecg-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: #02080a; z-index: 300; padding: calc(var(--safe-top) + 14px) 0 calc(var(--safe-bot) + 14px); -webkit-box-orient: vertical; flex-direction: column; }
+#ecg-modal.open { display: -webkit-box; display: flex; }
+#ecg-modal-hdr { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 0 14px 10px; color: var(--text); font-weight: 700; font-size: 14px; }
+#ecg-modal-hdr button { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); border-radius: 6px; padding: 6px 12px; font-size: 13px; font-family: inherit; touch-action: manipulation; flex-shrink: 0; }
+#ecg-modal-body { overflow: auto; -webkit-overflow-scrolling: touch; padding: 0 14px; flex: 1; }
+#ecg-modal-body .ecg-mon { display: inline-block; margin-bottom: 8px; }
+#ecg-modal-body .ecg-svg { max-width: none; }
+.ecg-zoom-cap { font-size: 11px; color: var(--text3); padding: 8px 14px 0; }
+
 </style>
 </head>
 <body>
@@ -338,6 +386,12 @@ input, select, textarea, label { pointer-events: auto; }
           <div class="hc-title">Pacing & Blocchi AV</div>
           <div class="hc-sub">1° · 2° · 3° grado</div>
           <div class="hc-badge" style="background:var(--yellow-bg);color:var(--yellow)">CARDIOLOGIA</div>
+        </div>
+        <div class="home-card ecg-home" role="button" onclick="openSection('ecg')">
+          <div class="hc-icon">📈</div>
+          <div class="hc-title">ECG &amp; Ritmi</div>
+          <div class="hc-sub">21 tracciati stile monitor · riconoscimento e terapia</div>
+          <div class="hc-badge" style="background:var(--green-bg);color:var(--green)">MONITOR</div>
         </div>
       </div>
 
@@ -404,6 +458,21 @@ input, select, textarea, label { pointer-events: auto; }
     <div id="panel-farmaco-detail" class="panel">
       <button class="back-btn" onclick="prBack()">← Indietro</button>
       <div id="farmaco-detail"></div>
+    </div>
+
+    <!-- ECG -->
+    <div id="panel-ecg" class="panel">
+      <button class="back-btn" onclick="goBack()">← Indietro</button>
+      <div class="detail-title">ECG &amp; Ritmi</div>
+      <div class="detail-sub">21 tracciati stile monitor (25 mm/s) da confrontare con quello a video</div>
+      <div class="ecg-wiz" id="ecg-wiz"></div>
+      <div id="ecg-list"></div>
+    </div>
+
+    <!-- SCHEDA RITMO -->
+    <div id="panel-ecg-detail" class="panel">
+      <button class="back-btn" onclick="ecgBack()">← Indietro</button>
+      <div id="ecg-detail"></div>
     </div>
 
     <!-- SCALE -->
@@ -477,6 +546,12 @@ input, select, textarea, label { pointer-events: auto; }
       <div id="video-modal-body"></div>
     </div>
   </div>
+  <div id="ecg-modal" onclick="if(event.target===this)ecgZoomClose()">
+    <div id="ecg-modal-hdr"><span id="ecg-modal-t"></span><button onclick="ecgZoomClose()">✕ Chiudi</button></div>
+    <div id="ecg-modal-body"></div>
+    <div class="ecg-zoom-cap">Scorri lateralmente · 1 quadratino = 0,04 s · 1 quadrato grande = 0,20 s · 10 mm = 1 mV</div>
+  </div>
+
   <div id="bottom-nav">
     <button class="nav-btn active" onclick="navTo('home')" id="nav-home"><span class="nav-icon">🏠</span>Home</button>
     <button class="nav-btn" onclick="navTo('protocolli')" id="nav-protocolli"><span class="nav-icon">📋</span>Protocolli</button>
@@ -1200,6 +1275,339 @@ const PRONTUARIO = [
   nt:'Nel bambino preparare atropina.' }
 ];
 
+// ========== ECG – GENERATORE TRACCIATI ==========
+// Tracciati sintetici a scopo didattico: 25 mm/s · 10 mm/mV · 4 px per mm
+var ECG_PXMM = 4;
+
+function ecgRng(seed) {
+  var s = seed >>> 0;
+  return function() {
+    s = (s + 0x6D2B79F5) >>> 0;
+    var t = s;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Onda P centrata in tp
+function ecgP(w, tp, a) { w.push([tp, a == null ? 0.15 : a, 0.022]); }
+
+// Complesso QRS (picco R in t) + ST + T. o: opzioni morfologia
+function ecgQRS(w, t, o) {
+  o = o || {};
+  if (o.vent) {
+    // complesso ventricolare largo, T discordante
+    var a = o.rA == null ? 1.1 : o.rA;
+    w.push([t - 0.03, a * 0.35, 0.035]);
+    w.push([t + 0.03, a, 0.042]);
+    w.push([t + 0.12, o.sA == null ? -0.35 : o.sA, 0.04]);
+    w.push([t + 0.3, o.tA == null ? -0.45 : o.tA, 0.07]);
+    return;
+  }
+  var k = o.wq || 1;
+  if (o.delta) w.push([t - 0.045, o.delta, 0.026]);
+  if (o.qA !== 0) w.push([t - 0.026 * k, o.qA == null ? -0.08 : o.qA, 0.008 * k]);
+  w.push([t, o.rA == null ? 1.15 : o.rA, 0.011 * k]);
+  if (o.sA !== 0) w.push([t + 0.027 * k, o.sA == null ? -0.25 : o.sA, 0.01 * k]);
+  if (o.st) { w.push([t + 0.05, o.st * 0.8, 0.022]); w.push([t + 0.11, o.st, 0.04]); w.push([t + 0.2, o.st * 0.85, 0.055]); }
+  if (o.tA !== 0) w.push([t + (o.tOff || 0.3), o.tA == null ? 0.3 : o.tA, 0.055 * (o.tW || 1)]);
+}
+
+function ecgSample(spec, dur, fs) {
+  fs = fs || 250;
+  var w = [], cont = null, rnd = ecgRng(spec.seed || 7);
+  var r = spec.build(w, dur, rnd) || {};
+  cont = r.cont || null;
+  var n = Math.round(dur * fs), ys = new Array(n);
+  for (var i = 0; i < n; i++) {
+    var t = i / fs, v = 0;
+    for (var j = 0; j < w.length; j++) {
+      var d = t - w[j][0];
+      if (d > -0.25 && d < 0.25) v += w[j][1] * Math.exp(-d * d / (2 * w[j][2] * w[j][2]));
+    }
+    if (cont) v += cont(t);
+    if (!spec.noWander) v += 0.025 * Math.sin(2 * Math.PI * 0.27 * t + 1) + 0.008 * (rnd() - 0.5);
+    ys[i] = v;
+  }
+  return { ys: ys, fs: fs };
+}
+
+// SVG stile monitor con griglia millimetrata
+function ecgSVG(spec, dur, opts) {
+  opts = opts || {};
+  var hmm = opts.hmm || 30, base = opts.base || 0.62;
+  var s = ecgSample(spec, dur, opts.fs);
+  var W = Math.round(dur * 25 * ECG_PXMM), H = hmm * ECG_PXMM, y0 = H * base;
+  var g = '';
+  if (!opts.noGrid) {
+    for (var x = 0; x <= W; x += ECG_PXMM) g += 'M' + x + ' 0V' + H;
+    var gs = '';
+    for (var yy = 0; yy <= H; yy += ECG_PXMM) g += 'M0 ' + yy + 'H' + W;
+    for (var X = 0; X <= W; X += ECG_PXMM * 5) gs += 'M' + X + ' 0V' + H;
+    for (var Y = 0; Y <= H; Y += ECG_PXMM * 5) gs += 'M0 ' + Y + 'H' + W;
+  }
+  var pts = '', step = W / s.ys.length;
+  for (var i = 0; i < s.ys.length; i++) {
+    var y = y0 - s.ys[i] * 10 * ECG_PXMM;
+    if (y < 1) y = 1; if (y > H - 1) y = H - 1;
+    pts += (i ? 'L' : 'M') + (i * step).toFixed(1) + ' ' + y.toFixed(1);
+  }
+  return '<svg class="ecg-svg" viewBox="0 0 ' + W + ' ' + H + '"' +
+    (opts.px ? ' style="width:' + W * opts.px + 'px;height:' + H * opts.px + 'px"' : ' style="aspect-ratio:' + W + '/' + H + '"') + '>' +
+    (opts.noGrid ? '' : '<path d="' + g + '" class="ecg-g1"/><path d="' + gs + '" class="ecg-g2"/>') +
+    '<path d="' + pts + '" class="ecg-tr"/>' +
+    (opts.lead ? '<text x="6" y="14" class="ecg-lead">' + opts.lead + '</text>' : '') + '</svg>';
+}
+
+// ---- costruttori di ritmo riutilizzabili ----
+function ecgSinus(rate, o, po) {
+  return function(w, dur) {
+    var rr = 60 / rate, pr = (po && po.pr) || 0.16;
+    for (var t = 0.35; t < dur + 0.5; t += rr) {
+      if (!(po && po.noP)) ecgP(w, t - pr + 0.01, po && po.pA);
+      ecgQRS(w, t, o);
+    }
+  };
+}
+
+// ========== ECG – SCHEDE RITMO ==========
+const ECG_CAT = {
+  acr:   { l:'Arresto cardiaco', c:'var(--red)' },
+  tachi: { l:'Tachicardie', c:'var(--orange)' },
+  bradi: { l:'Bradicardie e blocchi', c:'var(--yellow)' },
+  altro: { l:'STEMI e altri quadri', c:'var(--purple)' }
+};
+
+function ecgLeadSpec(o, seed) { return { seed: seed, build: ecgSinus(75, o) }; }
+
+const ECG_RITMI = [
+// ---------- ARRESTO ----------
+{ id:'fv', n:'Fibrillazione ventricolare', sub:'FV · ritmo defibrillabile', cat:'acr',
+  strip:{ seed:11, noWander:true, build:function(w){ return { cont:function(t){
+    var a = 0.38 + 0.22 * Math.sin(2 * Math.PI * 0.37 * t) + 0.12 * Math.sin(2 * Math.PI * 1.13 * t + 1);
+    return a * (0.65 * Math.sin(2 * Math.PI * 4.6 * t + 0.9 * Math.sin(2 * Math.PI * 0.8 * t)) + 0.4 * Math.sin(2 * Math.PI * 6.4 * t + 1.4 * Math.sin(2 * Math.PI * 0.45 * t)));
+  } }; } },
+  fc:'Non misurabile', reg:'Caotico', p:'Assenti', pr:'—', qrs:'Assenti, solo onde irregolari',
+  ric:['Onde completamente irregolari per forma, ampiezza e frequenza','Nessun complesso QRS riconoscibile','Paziente incosciente, non respira, senza polso'],
+  conf:['Artefatto da movimento o tremore (paziente cosciente!): guarda sempre il paziente','FV fine ↔ asistolia: aumenta il guadagno e controlla 2 derivazioni'],
+  el:{ t:'shock', txt:'DEFIBRILLABILE · 150-200 J bifasico (o secondo il produttore), poi 150-360 J. Bambino: 4 J/kg.' },
+  tx:['RCP 30:2 subito, piastre il prima possibile','Shock, poi riprendi subito RCP per 2 minuti senza ricontrollare il polso','Dopo il 3° shock: Adrenalina 1 mg IV/IO e Amiodarone 300 mg IV/IO','Adrenalina 1 mg ogni 3-5 minuti (cicli alterni)','Dopo il 5° shock: Amiodarone 150 mg','Cerca e tratta le 4 I e 4 T'],
+  alert:'Allerta subito automedica / MSA e centrale.', link:{ l:'Protocollo Arresto cardiaco', p:'arresto' } },
+
+{ id:'tvnp', n:'TV senza polso', sub:'Tachicardia ventricolare senza polso · defibrillabile', cat:'acr',
+  strip:{ seed:12, build:function(w, dur){ for (var t = 0.05; t < dur + 0.5; t += 0.33) ecgQRS(w, t, { vent:true, rA:1.3, tA:-0.55 }); } },
+  fc:'150-250 bpm', reg:'Regolare', p:'Non visibili', pr:'—', qrs:'Larghi (&gt;0,12 s), tutti uguali',
+  ric:['Complessi larghi, regolari, rapidi e monomorfi','Il tracciato è identico alla TV con polso: la differenza la fa SOLO il polso','Paziente incosciente, senza polso'],
+  conf:['TV con polso: stesso tracciato, terapia completamente diversa','TPSV con blocco di branca: nel dubbio tratta come TV'],
+  el:{ t:'shock', txt:'DEFIBRILLABILE (non sincronizzato) · 150-200 J bifasico. Bambino: 4 J/kg.' },
+  tx:['Stesso algoritmo della FV','RCP 30:2, shock, RCP 2 minuti','Dopo il 3° shock: Adrenalina 1 mg e Amiodarone 300 mg','Adrenalina ogni 3-5 minuti, Amiodarone 150 mg dopo il 5° shock'],
+  alert:'Allerta subito automedica / MSA e centrale.', link:{ l:'Protocollo Arresto cardiaco', p:'arresto' } },
+
+{ id:'asistolia', n:'Asistolia', sub:'Ritmo non defibrillabile', cat:'acr',
+  strip:{ seed:13, build:function(){ return { cont:function(t){ return 0.03 * Math.sin(2 * Math.PI * 0.4 * t); } }; } },
+  fc:'0', reg:'—', p:'Assenti (a volte presenti: “asistolia con onde P”)', pr:'—', qrs:'Assenti',
+  ric:['Linea isoelettrica, eventualmente lievemente ondulata','Nessuna attività ventricolare'],
+  conf:['Elettrodo staccato o cavo scollegato: controlla collegamenti','Guadagno troppo basso: aumentalo','FV fine: guarda in 2 derivazioni','Asistolia con sole onde P: considera pacing'],
+  el:{ t:'no', txt:'NON DEFIBRILLABILE.' },
+  tx:['RCP 30:2 di alta qualità','Adrenalina 1 mg IV/IO il prima possibile, poi ogni 3-5 minuti','Ricontrolla il ritmo ogni 2 minuti','Cerca e tratta le 4 I e 4 T (ipossia, ipovolemia, iper/ipokaliemia, ipotermia, trombosi, tamponamento, tossici, PNX iperteso)'],
+  alert:'Allerta subito automedica / MSA e centrale.', link:{ l:'Protocollo Arresto cardiaco', p:'arresto' } },
+
+{ id:'pea', n:'PEA (attività elettrica senza polso)', sub:'Ritmo organizzato senza polso · non defibrillabile', cat:'acr',
+  strip:{ seed:14, build:ecgSinus(52, { rA:0.55, wq:1.7, tA:0.15 }, { pA:0.08 }) },
+  fc:'Qualsiasi', reg:'Di solito regolare', p:'Presenti o assenti', pr:'Variabile', qrs:'Spesso larghi e di bassa ampiezza',
+  ric:['Il monitor mostra un ritmo organizzato…','…ma il paziente NON ha polso centrale','Il tracciato qui è un esempio: la PEA può avere qualunque aspetto'],
+  conf:['Bradicardia grave con polso debole: palpa il carotideo per max 10 secondi'],
+  el:{ t:'no', txt:'NON DEFIBRILLABILE.' },
+  tx:['RCP 30:2','Adrenalina 1 mg IV/IO subito, poi ogni 3-5 minuti','La PEA ha quasi sempre una causa: cerca le 4 I e 4 T','Pensa a ipovolemia (fluidi), PNX iperteso (decompressione), tamponamento, iperkaliemia (Calcio gluconato)'],
+  alert:'Allerta subito automedica / MSA e centrale.', link:{ l:'Protocollo Arresto cardiaco', p:'arresto' } },
+
+// ---------- TACHICARDIE ----------
+{ id:'tachsin', n:'Tachicardia sinusale', sub:'Risposta fisiologica, non è l’aritmia da trattare', cat:'tachi',
+  strip:{ seed:21, build:ecgSinus(122, { tA:0.25, tOff:0.24 }, { pr:0.14 }) },
+  fc:'100-150 bpm (raramente oltre)', reg:'Regolare', p:'Presenti, positive in DII, una per ogni QRS', pr:'Normale 0,12-0,20 s', qrs:'Stretti',
+  ric:['Ogni QRS è preceduto da un’onda P normale','Esordio e fine graduali','Varia con il respiro, il dolore, l’agitazione'],
+  conf:['Flutter 2:1 (FC fissa intorno a 150)','TPSV (P non visibili, FC spesso &gt;150, esordio improvviso)'],
+  el:{ t:'no', txt:'NON CARDIOVERTIRE: tratta la causa.' },
+  tx:['Cerca la causa: dolore, febbre, ipovolemia/emorragia, ipossia, ansia, sepsi, ipertiroidismo, farmaci/droghe','Ossigeno se SpO₂ bassa, fluidi se ipovolemia, analgesia se dolore','Monitorizza il trend della FC'],
+  alert:'Se associata a ipotensione, alterazione di coscienza o sospetta emorragia: centrale.', link:null },
+
+{ id:'fa', n:'Fibrillazione atriale', sub:'FA ad alta risposta ventricolare', cat:'tachi',
+  strip:{ seed:22, build:function(w, dur, rnd){
+    for (var t = 0.3; t < dur + 0.5; t += 0.42 + rnd() * 0.5) ecgQRS(w, t, { tA:0.22, tOff:0.26 });
+    return { cont:function(t){ return 0.045 * Math.sin(2 * Math.PI * 6.1 * t + 1) + 0.035 * Math.sin(2 * Math.PI * 8.7 * t) + 0.03 * Math.sin(2 * Math.PI * 4.9 * t + 2); } };
+  } },
+  fc:'Variabile, spesso 110-180 bpm', reg:'Irregolarmente irregolare', p:'Assenti, linea di base “fibrillante”', pr:'—', qrs:'Stretti (salvo blocco di branca)',
+  ric:['Intervalli R-R tutti diversi, senza schema','Nessuna onda P, linea di base ondulata irregolare','È il dettaglio da cercare per primo: la totale irregolarità'],
+  conf:['Flutter a conduzione variabile (onde a dente di sega)','Tachicardia sinusale con extrasistoli','FA pre-eccitata (WPW): QRS larghi e diversi tra loro, MAI adenosina/verapamil/digossina'],
+  el:{ t:'cve', txt:'Se INSTABILE (shock, sincope, ischemia, scompenso): cardioversione SINCRONIZZATA 120-150 J bifasico, su indicazione medica.' },
+  tx:['Valuta stabilità: PA, coscienza, dolore toracico, dispnea/OAP','Ossigeno se SpO₂ &lt;94%, accesso venoso, ECG 12 derivazioni','Chiedi l’ora di insorgenza (&lt;48 h o no) e se assume anticoagulanti','Stabile: controllo della frequenza su indicazione medica (Metoprololo; Amiodarone o Digossina se scompenso)'],
+  alert:'Instabile o FC &gt;150 persistente: centrale e automedica.', link:{ l:'Protocollo Tachiaritmie', p:'aritmie' } },
+
+{ id:'flutter', n:'Flutter atriale 2:1', sub:'Onde F a dente di sega', cat:'tachi',
+  strip:{ seed:23, build:function(w, dur){
+    for (var t = 0.33; t < dur + 0.5; t += 0.4) ecgQRS(w, t, { tA:0.08, tOff:0.22 });
+    return { cont:function(t){ var ph = ((t + 0.05) * 5) % 1; return ph < 0.8 ? 0.08 - 0.32 * (ph / 0.8) : -0.24 + 0.32 * ((ph - 0.8) / 0.2); } };
+  } },
+  fc:'Atri ~300/min · ventricoli ~150 bpm (2:1)', reg:'Regolare (2:1 o 4:1), irregolare se conduzione variabile', p:'Onde F a dente di sega, meglio visibili in DII, DIII, aVF', pr:'—', qrs:'Stretti',
+  ric:['FC fissa intorno a 150: pensa sempre al flutter 2:1','Linea di base a “dente di sega” senza tratto isoelettrico','Un’onda F può nascondersi nel QRS o nella T'],
+  conf:['Tachicardia sinusale','TPSV','FA (nel flutter variabile)'],
+  el:{ t:'cve', txt:'Se INSTABILE: cardioversione SINCRONIZZATA 70-120 J bifasico, su indicazione medica.' },
+  tx:['Valuta stabilità','Le manovre vagali o l’Adenosina rallentano la risposta e smascherano le onde F (non convertono il flutter)','Stabile: controllo della frequenza su indicazione medica (Metoprololo, Amiodarone)'],
+  alert:'Instabile: centrale e automedica.', link:{ l:'Protocollo Tachiaritmie', p:'aritmie' } },
+
+{ id:'tpsv', n:'TPSV (tachicardia parossistica sopraventricolare)', sub:'Tachicardia da rientro a QRS stretto', cat:'tachi',
+  strip:{ seed:24, build:ecgSinus(185, { tA:0.2, tOff:0.19 }, { noP:true }) },
+  fc:'150-250 bpm', reg:'Regolarissimo', p:'Non visibili (nascoste nel QRS o subito dopo)', pr:'—', qrs:'Stretti',
+  ric:['QRS stretti, perfettamente regolari, molto rapidi','Esordio e fine improvvisi (“come un interruttore”)','Paziente spesso giovane, cardiopalmo, a volte episodi precedenti'],
+  conf:['Flutter 2:1 (FC ~150)','Tachicardia sinusale (P visibili, esordio graduale)'],
+  el:{ t:'cve', txt:'Se INSTABILE: cardioversione SINCRONIZZATA 70-120 J bifasico, su indicazione medica.' },
+  tx:['Paziente stabile: manovre vagali (Valsalva modificata: soffiare in una siringa da 10 ml per 15 s, poi supino a gambe sollevate)','Se inefficaci: Adenosina 6 mg bolo rapido + flush, poi 12 mg, poi 12-18 mg','Registra l’ECG durante l’adenosina','Alternativa su indicazione medica: Verapamil o Metoprololo'],
+  alert:'Instabile o refrattaria: centrale.', link:{ l:'Protocollo Tachiaritmie', p:'aritmie' } },
+
+{ id:'tv', n:'TV monomorfa con polso', sub:'Tachicardia ventricolare · QRS largo regolare', cat:'tachi',
+  strip:{ seed:25, build:function(w, dur){ for (var t = 0.08; t < dur + 0.5; t += 0.36) ecgQRS(w, t, { vent:true, rA:1.25, tA:-0.5 }); } },
+  fc:'120-250 bpm', reg:'Regolare', p:'Di solito non visibili (dissociazione AV)', pr:'—', qrs:'Larghi &gt;0,12 s, tutti uguali',
+  ric:['Tachicardia a QRS largo e regolare = TV fino a prova contraria','Spesso in pazienti con pregresso infarto o cardiopatia','Può degenerare in TV senza polso o FV in qualsiasi momento'],
+  conf:['TPSV con blocco di branca o aberranza: nel dubbio tratta come TV','TV senza polso: stesso tracciato, controlla SEMPRE il polso'],
+  el:{ t:'cve', txt:'Se INSTABILE: cardioversione SINCRONIZZATA 120-150 J bifasico (fino a 3 tentativi). Se perde il polso: defibrillazione.' },
+  tx:['Controlla il polso! Se assente → protocollo arresto','Piastre posizionate preventivamente, ossigeno, accesso venoso','Stabile: Amiodarone 300 mg IV in 10-20 minuti su indicazione medica','Mai Verapamil in una tachicardia a QRS largo'],
+  alert:'Sempre: centrale e automedica.', link:{ l:'Protocollo Tachiaritmie', p:'aritmie' } },
+
+{ id:'torsione', n:'Torsione di punta', sub:'TV polimorfa con QT lungo', cat:'tachi',
+  strip:{ seed:26, noWander:true, build:function(){ return { cont:function(t){
+    var env = 0.18 + 1.05 * Math.abs(Math.sin(Math.PI * t / 2.4));
+    return env * Math.sin(2 * Math.PI * 4.1 * t) * 0.95;
+  } }; } },
+  fc:'200-250 bpm', reg:'Irregolare', p:'Assenti', pr:'—', qrs:'Larghi, ampiezza che cresce e decresce a “fuso”',
+  ric:['I complessi sembrano ruotare attorno alla linea di base','Ampiezza che aumenta e diminuisce ciclicamente','Spesso preceduta da QT lungo, bradicardia, ipokaliemia/ipomagnesiemia, farmaci'],
+  conf:['FV (totalmente caotica)','Artefatto'],
+  el:{ t:'shock', txt:'Se SENZA POLSO o instabile: DEFIBRILLAZIONE (non sincronizzata, il monitor non riesce a sincronizzarsi).' },
+  tx:['Magnesio solfato 2 g IV in 10 minuti','Sospendi i farmaci che allungano il QT','Correggi ipokaliemia (in ospedale)','Su indicazione medica: pacing overdrive o Isoprenalina'],
+  alert:'Sempre: centrale e automedica.', link:{ l:'Protocollo Tachiaritmie', p:'aritmie' } },
+
+// ---------- BRADICARDIE ----------
+{ id:'bradsin', n:'Bradicardia sinusale', sub:'Ritmo sinusale lento', cat:'bradi',
+  strip:{ seed:31, build:ecgSinus(42) },
+  fc:'&lt;50-60 bpm', reg:'Regolare', p:'Presenti, normali, una per ogni QRS', pr:'Normale', qrs:'Stretti',
+  ric:['Tutto normale, solo lento','Fisiologica in sportivi e nel sonno','Cause: beta-bloccanti, digossina, ipotermia, ipotiroidismo, IMA inferiore, ipertensione endocranica'],
+  conf:['BAV 2° 2:1 (le P bloccate si nascondono nella T)','Ritmo giunzionale (P assenti o retrograde)'],
+  el:{ t:'pace', txt:'Pacing transcutaneo solo se sintomatica e refrattaria ai farmaci.' },
+  tx:['Asintomatica: osserva','Segni avversi (shock, sincope, ischemia, scompenso): Atropina 0,5 mg IV, ripetibile fino a 3 mg','Se inefficace: Adrenalina 2-10 mcg/min o Isoprenalina, poi pacing'],
+  alert:'Sintomatica: centrale.', link:{ l:'Pacing & Blocchi AV', s:'pacing' } },
+
+{ id:'bav1', n:'BAV di 1° grado', sub:'PR lungo, tutte le P condotte', cat:'bradi',
+  strip:{ seed:32, build:ecgSinus(66, {}, { pr:0.32 }) },
+  fc:'Normale', reg:'Regolare', p:'Presenti, una per ogni QRS', pr:'&gt;0,20 s, costante', qrs:'Stretti',
+  ric:['PR lungo (&gt;1 quadrato grande) sempre uguale','Ogni P è seguita dal suo QRS'],
+  conf:['Mobitz I (il PR si allunga fino al battito bloccato)'],
+  el:{ t:'no', txt:'Nessun trattamento elettrico.' },
+  tx:['Di solito nessun trattamento','Controlla i farmaci (beta-bloccanti, calcio-antagonisti, digossina)','In un IMA inferiore: sorveglia, può evolvere'],
+  alert:'Solo se associato a sintomi o IMA.', link:{ l:'Pacing & Blocchi AV', s:'pacing' } },
+
+{ id:'mobitz1', n:'BAV 2° grado Mobitz I (Wenckebach)', sub:'PR che si allunga fino al battito bloccato', cat:'bradi',
+  strip:{ seed:33, build:function(w, dur){
+    var prs = [0.16, 0.26, 0.32, null], i = 0;
+    for (var tp = 0.2; tp < dur + 0.5; tp += 0.8, i++) { ecgP(w, tp); var pr = prs[i % 4]; if (pr) ecgQRS(w, tp + pr - 0.01); }
+  } },
+  fc:'Lievemente ridotta', reg:'Irregolare a gruppi', p:'Regolari, una non condotta per ciclo', pr:'Si allunga progressivamente', qrs:'Stretti',
+  ric:['Il PR si allunga battito dopo battito…','…finché una P non è seguita dal QRS, poi il ciclo riparte','Battiti raggruppati: “lungo, più lungo, salta”'],
+  conf:['Mobitz II (PR costante prima del blocco)','Extrasistoli atriali bloccate'],
+  el:{ t:'no', txt:'Raramente serve il pacing.' },
+  tx:['Di solito benigno, blocco a livello del nodo AV','Se sintomatico: Atropina 0,5 mg IV','Frequente nell’IMA inferiore e con farmaci rallentanti'],
+  alert:'Se sintomatico: centrale.', link:{ l:'Pacing & Blocchi AV', s:'pacing' } },
+
+{ id:'mobitz2', n:'BAV 2° grado Mobitz II', sub:'PR costante con P bloccate improvvise', cat:'bradi',
+  strip:{ seed:34, build:function(w, dur){
+    var i = 0;
+    for (var tp = 0.2; tp < dur + 0.5; tp += 0.75, i++) { ecgP(w, tp); if (i % 3 !== 2) ecgQRS(w, tp + 0.17, { wq:1.7, sA:-0.35 }); }
+  } },
+  fc:'Ridotta', reg:'Irregolare', p:'Regolari, alcune non condotte', pr:'Costante (normale o lungo)', qrs:'Spesso larghi',
+  ric:['PR sempre uguale nei battiti condotti','All’improvviso una P non è seguita dal QRS','Spesso QRS larghi (blocco sotto il nodo)'],
+  conf:['Mobitz I (il PR si allunga)','BAV 2:1: non si distingue I da II, trattalo come pericoloso'],
+  el:{ t:'pace', txt:'PERICOLOSO: può evolvere in BAV 3° o asistolia. Prepara il pacing transcutaneo.' },
+  tx:['Piastre posizionate, monitor continuo','Atropina 0,5 mg (spesso poco efficace)','Adrenalina 2-10 mcg/min o Isoprenalina, poi pacing transcutaneo'],
+  alert:'Sempre: centrale e automedica.', link:{ l:'Pacing & Blocchi AV', s:'pacing' } },
+
+{ id:'bav3', n:'BAV di 3° grado (completo)', sub:'Dissociazione atrio-ventricolare', cat:'bradi',
+  strip:{ seed:35, build:function(w, dur){
+    for (var tp = 0.15; tp < dur + 0.5; tp += 0.72) ecgP(w, tp, 0.16);
+    for (var t = 0.55; t < dur + 0.5; t += 1.55) ecgQRS(w, t, { vent:true, rA:0.95, tA:-0.35 });
+  } },
+  fc:'Ventricoli 20-45 bpm', reg:'P regolari e QRS regolari, ma indipendenti', p:'Presenti, più numerose dei QRS', pr:'Variabile, nessuna relazione', qrs:'Larghi (ritmo di scappamento ventricolare) o stretti (giunzionale)',
+  ric:['Le P “camminano” attraverso i QRS senza rapporto','FC ventricolare molto bassa e fissa','Sincope, ipotensione, confusione'],
+  conf:['BAV 2° 2:1','Bradicardia sinusale'],
+  el:{ t:'pace', txt:'PACING TRANSCUTANEO se instabile: modalità demand, FC 60-70, aumenta i mA fino alla cattura, verifica il polso.' },
+  tx:['Piastre posizionate subito','Atropina 0,5 mg (spesso inefficace se QRS largo)','Adrenalina 2-10 mcg/min o Isoprenalina come ponte','Pacing transcutaneo con analgesia/sedazione (Fentanyl, Midazolam) su indicazione medica'],
+  alert:'Sempre: centrale e automedica.', link:{ l:'Pacing & Blocchi AV', s:'pacing' } },
+
+{ id:'pmk', n:'Ritmo da pacemaker', sub:'Spike + QRS largo', cat:'bradi',
+  strip:{ seed:36, fs:500, build:function(w, dur){
+    for (var t = 0.35; t < dur + 0.5; t += 0.857) { w.push([t - 0.07, 1.6, 0.0035]); ecgQRS(w, t, { vent:true, rA:1.0, tA:-0.35 }); }
+  } },
+  fc:'Quella programmata (spesso 60-70)', reg:'Regolare', p:'Spesso assenti (o spike atriale)', pr:'—', qrs:'Larghi, preceduti da una linea verticale sottile (spike)',
+  ric:['Linea verticale sottilissima prima di ogni QRS','QRS largo tipo blocco di branca sinistra','Cicatrice e “scatoletta” sotto la clavicola'],
+  conf:['Malfunzionamento: spike senza QRS (mancata cattura) o QRS senza spike regolari','TV (nessuno spike)'],
+  el:{ t:'no', txt:'In defibrillazione: piastre ad almeno 8 cm dal generatore (meglio antero-posteriori).' },
+  tx:['Verifica che ogni spike sia seguito dal QRS e dal polso','Mancata cattura con bradicardia: tratta come bradicardia sintomatica (farmaci, pacing transcutaneo)','Chiedi il tesserino del dispositivo'],
+  alert:'Se malfunzionamento con sintomi: centrale.', link:{ l:'Pacing & Blocchi AV', s:'pacing' } },
+
+// ---------- STEMI E ALTRO ----------
+{ id:'stemi-ant', n:'STEMI anteriore', sub:'Sopraslivellamento ST in V1-V4 · discendente anteriore', cat:'altro',
+  leads:[ ['V1', { rA:0.25, sA:-0.7, st:0.33, tA:0.3, qA:0 }], ['V2', { rA:0.3, sA:-0.3, st:0.6, tA:0.55, qA:0 }], ['V3', { rA:0.5, sA:-0.12, st:0.63, tA:0.6 }], ['V4', { rA:0.8, sA:-0.2, st:0.45, tA:0.5 }] ],
+  fc:'Variabile', reg:'Di solito regolare', p:'Normali', pr:'Normale', qrs:'Stretti, possibili onde Q',
+  ric:['ST sopraslivellato ≥1 mm in almeno 2 derivazioni contigue','In V2-V3: ≥2 mm negli uomini ≥40 anni, ≥2,5 mm sotto i 40, ≥1,5 mm nelle donne','Onde T alte e larghe (iperacute) nelle prime fasi'],
+  conf:['Ripolarizzazione precoce (giovani, ST concavo, senza reciprocità)','Blocco di branca sinistra, ipertrofia ventricolare, pericardite (ST diffuso)'],
+  el:{ t:'no', txt:'Piastre a portata: rischio di FV nelle prime ore.' },
+  tx:['Teletrasmetti l’ECG a 12 derivazioni e attiva la rete STEMI','Acido acetilsalicilico 150-300 mg PO o 75-250 mg IV','Su indicazione: Eparina sodica e Ticagrelor / Clopidogrel secondo la rete','Nitroglicerina SL se PAS &gt;90 e dolore persistente','Ossigeno solo se SpO₂ &lt;90%, analgesia con Morfina o Fentanyl'],
+  alert:'Sempre: centrale e trasporto diretto al centro con emodinamica.', link:{ l:'Protocollo Dolore toracico', p:'dolore-toracico' } },
+
+{ id:'stemi-inf', n:'STEMI inferiore', sub:'Sopraslivellamento ST in DII, DIII, aVF · coronaria destra', cat:'altro',
+  leads:[ ['DII', { sA:-0.1, st:0.33, tA:0.45 }], ['DIII', { rA:0.8, sA:-0.1, st:0.48, tA:0.5 }], ['aVF', { rA:0.95, sA:-0.1, st:0.42, tA:0.48 }], ['aVL', { rA:0.5, st:-0.14, tA:-0.18 }] ],
+  fc:'Spesso bassa (bradicardia, BAV)', reg:'Variabile', p:'Normali', pr:'Normale o lungo', qrs:'Stretti',
+  ric:['ST sopraslivellato in DII, DIII, aVF (DIII spesso &gt; DII)','Sottoslivellamento speculare in aVL (e DI)','Frequenti bradicardia e BAV: vagale o ischemia del nodo'],
+  conf:['Pericardite (ST diffuso senza speculare)','Ripolarizzazione precoce'],
+  el:{ t:'no', txt:'Piastre a portata: bradiaritmie e FV.' },
+  tx:['Registra anche V4R: se ST ↑ in V4R = infarto del ventricolo destro','Se VD coinvolto o PAS &lt;90: NO nitrati, fluidi in piccoli boli','Acido acetilsalicilico, poi antitrombotici secondo la rete','Bradicardia sintomatica: Atropina 0,5 mg'],
+  alert:'Sempre: centrale e trasporto diretto al centro con emodinamica.', link:{ l:'Protocollo Dolore toracico', p:'dolore-toracico' } },
+
+{ id:'stemi-lat', n:'STEMI laterale', sub:'Sopraslivellamento ST in DI, aVL, V5, V6 · circonflessa', cat:'altro',
+  leads:[ ['DI', { rA:0.9, sA:-0.1, st:0.33, tA:0.4 }], ['aVL', { rA:0.7, sA:-0.1, st:0.3, tA:0.35 }], ['V6', { rA:1.0, sA:-0.1, st:0.3, tA:0.38 }], ['DIII', { rA:0.6, st:-0.15, tA:-0.15 }] ],
+  fc:'Variabile', reg:'Di solito regolare', p:'Normali', pr:'Normale', qrs:'Stretti',
+  ric:['ST sopraslivellato in DI, aVL, V5-V6','Sottoslivellamento speculare in DIII e aVF','Il sopraslivellamento può essere minimo: la reciprocità aiuta'],
+  conf:['Infarto posteriore: ST ↓ in V1-V3 con R alte → registra V7-V9','Ipertrofia ventricolare sinistra con “strain”'],
+  el:{ t:'no', txt:'Piastre a portata.' },
+  tx:['Teletrasmetti l’ECG e attiva la rete STEMI','Acido acetilsalicilico, antitrombotici secondo la rete','Nitroglicerina se PAS &gt;90, analgesia, ossigeno se SpO₂ &lt;90%'],
+  alert:'Sempre: centrale e trasporto diretto al centro con emodinamica.', link:{ l:'Protocollo Dolore toracico', p:'dolore-toracico' } },
+
+{ id:'iperk', n:'Iperkaliemia', sub:'T appuntite → QRS larghi → onda sinusoidale', cat:'altro',
+  strip:{ seed:41, build:ecgSinus(68, { tA:0.95, tW:0.5, wq:1.5, tOff:0.27, sA:-0.2 }, { pA:0.05 }) },
+  fc:'Spesso bassa', reg:'Regolare', p:'Appiattite o assenti', pr:'Allungato', qrs:'Si allargano con il peggiorare',
+  ric:['T alte, strette, appuntite “a tenda”','P piatte o scomparse, PR lungo','QRS che si allarga: segno di estrema gravità (rischio FV/asistolia)'],
+  conf:['T iperacute dell’IMA (più larghe, con ST alterato)'],
+  el:{ t:'pace', txt:'Il pacing spesso non cattura finché il potassio non scende.' },
+  tx:['Pensa al contesto: dialisi saltata, insufficienza renale, risparmiatori di K, ACE-inibitori, rabdomiolisi','Con alterazioni ECG: Calcio gluconato 10% 30 ml IV in 5-10 min (protegge il cuore, ripetibile)','Salbutamolo 10-20 mg in aerosol (sposta il K nelle cellule)','Sodio bicarbonato se acidosi, su indicazione medica'],
+  alert:'Sempre: centrale.', link:null },
+
+{ id:'wpw', n:'Wolff-Parkinson-White', sub:'Pre-eccitazione: PR corto + onda delta', cat:'altro',
+  strip:{ seed:42, build:ecgSinus(72, { delta:0.42, wq:1.3, tA:0.22, qA:0 }, { pr:0.09 }) },
+  fc:'Normale (in ritmo sinusale)', reg:'Regolare', p:'Normali', pr:'Corto &lt;0,12 s', qrs:'Lievemente larghi con impastamento iniziale (onda delta)',
+  ric:['PR corto, la P quasi tocca il QRS','Salita iniziale del QRS lenta e impastata (onda delta)','Pericolo: FA pre-eccitata, tachicardia irregolare a QRS larghi e variabili'],
+  conf:['Blocco di branca','In tachicardia: TV o FA con aberranza'],
+  el:{ t:'cve', txt:'FA pre-eccitata instabile: cardioversione SINCRONIZZATA 120-150 J.' },
+  tx:['In ritmo sinusale: nessuna terapia urgente, segnala il reperto','FA pre-eccitata: NO Adenosina, Verapamil, Digossina, beta-bloccanti (possono causare FV)','FA pre-eccitata stabile: Amiodarone su indicazione medica','TPSV ortodromica (QRS stretto): manovre vagali e Adenosina come una TPSV'],
+  alert:'Tachicardia in WPW: centrale.', link:null }
+];
+
+// Percorso guidato "Trova il ritmo"
+const ECG_TREE = {
+  start: { q:'Il paziente ha polso?', o:[ ['No', null, ['fv','tvnp','asistolia','pea'], 'RCP 30:2 e piastre subito: il ritmo lo leggi sul defibrillatore.'], ['Sì', 'fc'] ] },
+  fc:    { q:'Frequenza cardiaca?', o:[ ['&lt;60', null, ['bradsin','mobitz1','mobitz2','bav3','pmk']], ['60-100', null, ['stemi-ant','stemi-inf','stemi-lat','bav1','iperk','wpw','pmk']], ['&gt;100', 'qrs'] ] },
+  qrs:   { q:'QRS stretti o larghi?', o:[ ['Stretti (&lt;3 quadratini)', 'regS'], ['Larghi (≥3 quadratini)', 'regL'] ] },
+  regS:  { q:'Ritmo regolare?', o:[ ['Regolare', null, ['tachsin','tpsv','flutter']], ['Irregolare', null, ['fa','flutter']] ] },
+  regL:  { q:'Ritmo regolare?', o:[ ['Regolare', null, ['tv','tpsv']], ['Irregolare', null, ['torsione','wpw','fa']] ] }
+};
+
 const PROTOCOLS = {
   'dispnea': {
     title: '🫁 Dispnea Acuta',
@@ -1662,6 +2070,7 @@ function initPanel(p) {
   if (p === 'checklist') renderCheck(0);
   if (p === 'calcolatori') renderCalc(0);
   if (p === 'pacing') renderPacing();
+  if (p === 'ecg') renderEcg();
 }
 
 function openProto(id) {
@@ -2484,6 +2893,173 @@ PRONTUARIO.forEach(function(d) {
   });
 });
 
+// ========== ECG (UI) ==========
+var ECG_BY_ID = {};
+ECG_RITMI.forEach(function(r) { ECG_BY_ID[r.id] = r; });
+var ecgWizNode = 'start', ecgWizPath = [], ecgWizRes = null, ecgWizNote = '';
+var ecgFrom = 'ecg', ecgListScroll = 0;
+
+function ecgStrips(r, dur, first) {
+  if (r.leads) {
+    var ls = first ? [r.leads[0]] : r.leads;
+    return ls.map(function(l, i) { return '<div class="ecg-mon">' + ecgSVG(ecgLeadSpec(l[1], 50 + i), dur, { lead: l[0] }) + '</div>'; }).join('');
+  }
+  return '<div class="ecg-mon">' + ecgSVG(r.strip, dur, { fs: r.strip.fs, lead: 'DII' }) + '</div>';
+}
+
+function renderEcg() {
+  ecgWizRender();
+  var h = '';
+  Object.keys(ECG_CAT).forEach(function(k) {
+    var cat = ECG_CAT[k];
+    h += '<div class="sec-title" style="color:' + cat.c + '">' + cat.l + '</div>';
+    ECG_RITMI.filter(function(r) { return r.cat === k; }).forEach(function(r) {
+      h += '<button class="ecg-item" style="border-left-color:' + cat.c + '" onclick="openEcg(\'' + r.id + '\')">' +
+        '<div class="ecg-item-top"><span class="ecg-item-n">' + r.n + '</span><span class="proto-arrow">›</span></div>' +
+        '<div class="ecg-thumb">' + ecgStrips(r, 6, true) + '</div>' +
+        '<div class="ecg-item-s">' + r.sub + '</div></button>';
+    });
+  });
+  document.getElementById('ecg-list').innerHTML = h;
+}
+
+// ---- Percorso guidato ----
+function ecgWizRender() {
+  var el = document.getElementById('ecg-wiz');
+  if (!el) return;
+  var h = '<div class="ecg-wiz-h">🧭 Trova il ritmo</div>';
+  if (ecgWizPath.length) h += '<div class="ecg-wiz-path">' + ecgWizPath.join(' › ') + '</div>';
+  if (ecgWizRes) {
+    if (ecgWizNote) h += '<div class="alert red" style="margin-bottom:8px">' + ecgWizNote + '</div>';
+    h += '<div class="ecg-wiz-q">Confronta con:</div><div class="ecg-wiz-res">' +
+      ecgWizRes.map(function(id) { return '<button class="ecg-res-btn" onclick="openEcg(\'' + id + '\')">' + ECG_BY_ID[id].n + ' <span class="proto-arrow">›</span></button>'; }).join('') + '</div>';
+  } else {
+    var node = ECG_TREE[ecgWizNode];
+    h += '<div class="ecg-wiz-q">' + node.q + '</div><div class="ecg-wiz-opts">' +
+      node.o.map(function(o, i) { return '<button class="ecg-opt" onclick="ecgWizGo(' + i + ')">' + o[0] + '</button>'; }).join('') + '</div>';
+  }
+  if (ecgWizPath.length) h += '<button class="reset-btn" onclick="ecgWizReset()">↺ Ricomincia</button>';
+  el.innerHTML = h;
+}
+
+function ecgWizGo(i) {
+  var o = ECG_TREE[ecgWizNode].o[i];
+  ecgWizPath.push(o[0]);
+  if (o[2]) { ecgWizRes = o[2]; ecgWizNote = o[3] || ''; }
+  else ecgWizNode = o[1];
+  ecgWizRender();
+}
+
+function ecgWizReset() {
+  ecgWizNode = 'start'; ecgWizPath = []; ecgWizRes = null; ecgWizNote = '';
+  ecgWizRender();
+}
+
+// ---- Scheda ritmo ----
+function openEcg(id) {
+  var r = ECG_BY_ID[id];
+  if (!r) return;
+  stopSpeech();
+  if (_metroActive) { _stopMetronome(null); }
+  if (currentPanel !== 'ecg-detail') {
+    ecgFrom = currentPanel;
+    if (ecgFrom === 'ecg') ecgListScroll = document.getElementById('content').scrollTop;
+  }
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('panel-ecg-detail').classList.add('active');
+  currentPanel = 'ecg-detail';
+  document.getElementById('content').scrollTop = 0;
+  renderEcgDetail(r);
+}
+
+function ecgBack() {
+  stopSpeech();
+  var dest = ecgFrom && document.getElementById('panel-' + ecgFrom) ? ecgFrom : 'ecg';
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('panel-' + dest).classList.add('active');
+  currentPanel = dest;
+  document.getElementById('content').scrollTop = dest === 'ecg' ? ecgListScroll : 0;
+}
+
+function ecgList(arr, ordered) {
+  if (ordered) {
+    return '<ul class="steps">' + arr.map(function(s, i) {
+      return '<li class="step"><div class="step-n">' + (i + 1) + '</div><div class="step-text">' + s + '</div></li>';
+    }).join('') + '</ul>';
+  }
+  return '<ul class="ecg-ul">' + arr.map(function(s) { return '<li>' + s + '</li>'; }).join('') + '</ul>';
+}
+
+var ECG_EL_ICON = { shock: '⚡', cve: '🔄', pace: '💓', no: 'ℹ️' };
+
+function renderEcgDetail(r) {
+  var cat = ECG_CAT[r.cat];
+  var h = '<div class="pr-head"><div class="detail-title" style="margin-bottom:0;flex:1">' + r.n + '</div>' +
+    '<button class="tts-btn" style="margin-top:4px" onclick="speakEcg(\'' + r.id + '\',this)">🔊 Leggi</button></div>' +
+    '<div class="detail-sub" style="margin-bottom:6px">' + r.sub + '</div>' +
+    '<div class="pr-badges"><span class="pr-badge" style="color:' + cat.c + ';border-color:' + cat.c + '">' + cat.l + '</span></div>';
+  h += '<div class="ecg-strips' + (r.leads ? ' ecg-leads' : '') + '">' + ecgStrips(r, r.leads ? 3 : 6) + '</div>';
+  h += '<div class="ecg-cap-row"><span>25 mm/s · 10 mm/mV · tracciato illustrativo</span>' +
+    '<button class="tts-btn" onclick="ecgZoom(\'' + r.id + '\')">🔍 Ingrandisci</button></div>';
+  h += '<div class="ecg-params">' +
+    [['FC', r.fc], ['Ritmo', r.reg], ['Onde P', r.p], ['PR', r.pr], ['QRS', r.qrs]].map(function(x) {
+      return '<div class="ecg-param"><div class="ecg-param-l">' + x[0] + '</div><div class="ecg-param-v">' + x[1] + '</div></div>';
+    }).join('') + '</div>';
+  h += '<div class="ecg-el ecg-el-' + r.el.t + '">' + ECG_EL_ICON[r.el.t] + ' ' + r.el.txt + '</div>';
+  h += '<div class="pr-sheet" id="ecg-sheet">';
+  h += '<div class="pr-row"><div class="pr-row-l">Come riconoscerlo</div><div class="pr-row-v">' + ecgList(r.ric) + '</div></div>';
+  h += '<div class="pr-row"><div class="pr-row-l">Non confonderlo con</div><div class="pr-row-v">' + ecgList(r.conf) + '</div></div>';
+  h += '<div class="pr-row pr-dose"><div class="pr-row-l">Cosa fare</div><div class="pr-row-v">' + ecgList(r.tx, true) + '</div></div>';
+  h += '</div>';
+  if (r.alert) h += '<div class="alert red" style="margin-top:10px">📞 ' + r.alert + '</div>';
+  if (r.link) {
+    var fn = r.link.p ? "openProto('" + r.link.p + "')" : "openSection('" + r.link.s + "')";
+    h += '<button class="calc-btn" style="margin-top:4px" onclick="' + fn + '">' + r.link.l + ' ›</button>';
+  }
+  h += '<div class="pr-foot">Tracciato illustrativo a scopo didattico e di confronto. Fa fede sempre il monitor del paziente; teletrasmetti l’ECG a 12 derivazioni alla centrale. Terapie secondo ERC 2021 / ESC: verifica con il protocollo locale.</div>';
+  document.getElementById('ecg-detail').innerHTML = h;
+  linkDrugs(document.getElementById('ecg-sheet'));
+}
+
+function speakEcg(id, btn) {
+  var r = ECG_BY_ID[id];
+  if (!r) return;
+  var t = r.n + '. ' + prStrip(r.sub) + '. Frequenza: ' + prStrip(r.fc) + '. Ritmo: ' + prStrip(r.reg) + '. QRS: ' + prStrip(r.qrs) + '. ' +
+    'Come riconoscerlo: ' + r.ric.map(prStrip).join('. ') + '. ' + prStrip(r.el.txt) + ' Cosa fare: ' + r.tx.map(prStrip).join('. ');
+  speakText(t.replace(/\bmg\b/g, 'milligrammi').replace(/\bmcg\b/g, 'microgrammi').replace(/\bJ\b/g, 'joule'), btn);
+}
+
+// ---- Ingrandimento ----
+function ecgZoom(id) {
+  var r = ECG_BY_ID[id];
+  if (!r) return;
+  var body = '';
+  if (r.leads) {
+    body = r.leads.map(function(l, i) { return '<div class="ecg-mon">' + ecgSVG(ecgLeadSpec(l[1], 50 + i), 4, { lead: l[0], px: 1.6 }) + '</div>'; }).join('');
+  } else {
+    body = '<div class="ecg-mon">' + ecgSVG(r.strip, 6, { fs: r.strip.fs, lead: 'DII', px: 1.6 }) + '</div>';
+  }
+  document.getElementById('ecg-modal-t').innerHTML = r.n;
+  document.getElementById('ecg-modal-body').innerHTML = body;
+  document.getElementById('ecg-modal').classList.add('open');
+}
+
+function ecgZoomClose() {
+  document.getElementById('ecg-modal').classList.remove('open');
+  document.getElementById('ecg-modal-body').innerHTML = '';
+}
+
+// Ricerca globale
+SEARCH_INDEX.push({ q: 'ecg ritmi tracciato tracciati monitor elettrocardiogramma aritmie', action: function() { openSection('ecg'); }, title: 'ECG & Ritmi', sec: 'ECG' });
+ECG_RITMI.forEach(function(r) {
+  SEARCH_INDEX.push({
+    q: ('ecg ritmo ' + r.id + ' ' + r.n + ' ' + prStrip(r.sub)).toLowerCase(),
+    action: function() { openEcg(r.id); },
+    title: r.n,
+    sec: 'ECG · ' + ECG_CAT[r.cat].l
+  });
+});
+
 // ========== TTS ENGINE (Feature 1) ==========
 var _ttsCurrentBtn = null;
 
@@ -2600,6 +3176,7 @@ function startVoiceCommand() {
 function _processSpeechCommand(t) {
   var _fid = prFindInText(t);
   if (_fid) { openFarmaco(_fid); showToast('💊 ' + PR_BY_ID[_fid].n, 'green'); return; }
+  if (t.indexOf('ecg') !== -1 || t.indexOf('elettrocardiogramma') !== -1 || t.indexOf('tracciat') !== -1 || t.indexOf('ritmi') !== -1) { openSection('ecg'); showToast('📈 ECG & Ritmi', 'green'); return; }
   if (t.indexOf('arresto') !== -1 || t.indexOf('rcp') !== -1 || t.indexOf('rianimazione') !== -1) {
     openProto('arresto'); showToast('🛑 Protocollo Arresto Cardiaco', 'green');
   } else if (t.indexOf('anafilassi') !== -1 || t.indexOf('allergico') !== -1) {
