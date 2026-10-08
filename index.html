@@ -233,6 +233,54 @@ input, select, textarea, label { pointer-events: auto; }
 #video-modal-hdr-title { font-size: 14px; font-weight: 700; color: var(--text); }
 #video-modal-close { background: var(--bg3); border: 1px solid var(--border); color: var(--text2); border-radius: 6px; padding: 6px 12px; font-size: 13px; cursor: pointer; touch-action: manipulation; }
 
+/* PRONTUARIO */
+.pr-box { background: var(--card); border: 1px solid var(--border); border-radius: var(--r2); padding: 10px 12px 8px; margin-bottom: 10px; }
+.pr-wrow { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.pr-wrow label { font-size: 13px; color: var(--text2); min-width: 44px; }
+.pr-wrow .calc-input, .pr-search, .pr-calc-in .calc-input { font-size: 16px; min-width: 0; }
+.pr-wrow select.calc-input { flex: 0 0 auto; width: 84px; }
+.pr-wrow .reset-btn { margin-top: 0; white-space: nowrap; padding: 8px 10px; flex-shrink: 0; }
+.pr-hint { font-size: 12px; color: var(--text3); line-height: 1.4; }
+.pr-hint.on { color: var(--green); }
+.pr-hint.warn { color: var(--orange); margin-bottom: 4px; }
+.pr-search { width: 100%; margin-bottom: 8px; }
+.pr-chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 2px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+.pr-chips::-webkit-scrollbar { display: none; }
+.pr-chip { flex-shrink: 0; display: flex; align-items: center; gap: 5px; background: var(--bg3); border: 1px solid var(--border); color: var(--text2); border-radius: 16px; padding: 6px 11px; font-size: 12px; font-family: inherit; white-space: nowrap; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+.pr-chip.active { background: var(--card2); color: var(--text); border-color: var(--accent); }
+.pr-chip > * { pointer-events: none; }
+.pr-letter { font-size: 11px; font-weight: 700; color: var(--text3); padding: 10px 2px 4px; }
+.pr-item { width: 100%; text-align: left; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--r); padding: 10px 12px; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; color: var(--text); font-family: inherit; touch-action: manipulation; -webkit-user-select: none; user-select: none; }
+.pr-item:active { background: var(--card2); }
+.pr-item > * { pointer-events: none; }
+.pr-item-main { flex: 1; min-width: 0; }
+.pr-item-name { font-size: 14px; font-weight: 600; }
+.pr-item-sub { font-size: 11px; color: var(--text3); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pr-star { color: var(--yellow); }
+.pr-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 4px; }
+.pr-badges { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.pr-badges .sev { margin-left: 0; }
+.pr-badge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 4px; border: 1px solid; text-transform: uppercase; letter-spacing: 0.04em; }
+.pr-sheet { background: var(--card); border: 1px solid var(--border); border-radius: var(--r2); padding: 2px 14px; margin-top: 10px; }
+.pr-row { padding: 10px 0; border-bottom: 1px solid var(--border); }
+.pr-row:last-child { border-bottom: none; }
+.pr-row-l { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 3px; }
+.pr-row-v { font-size: 14px; color: var(--text); line-height: 1.55; }
+.pr-row.pr-dose .pr-row-v { color: #fff; font-weight: 500; }
+.pr-row.pr-ci .pr-row-l { color: var(--red); }
+.pr-calc { background: var(--bg3); border: 1px solid rgba(45,142,245,0.35); border-radius: var(--r); padding: 10px 12px; margin: 8px 0; }
+.pr-calc-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+.pr-calc-in { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); font-weight: 400; }
+.pr-calc-in .calc-input { width: 76px; flex: 0 0 auto; padding: 6px 8px; }
+.pr-calc-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 8px 0; border-top: 1px solid var(--border); }
+.pr-calc-l { font-size: 13px; color: var(--text); font-weight: 600; }
+.pr-calc-sub { font-size: 11px; color: var(--text3); }
+.pr-calc-val { font-size: 19px; font-weight: 700; color: var(--accent); white-space: nowrap; }
+.pr-calc-tag { font-size: 11px; color: var(--orange); font-weight: 700; }
+.pr-calc-ml { font-size: 11px; color: var(--text2); }
+.pr-foot { font-size: 11px; color: var(--text3); line-height: 1.5; padding: 10px 2px 70px; }
+.drug-link { background: none; border: none; padding: 0; margin: 0; font: inherit; color: inherit; text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 2px; -webkit-text-decoration-color: var(--accent); text-decoration-color: var(--accent); pointer-events: auto; cursor: pointer; touch-action: manipulation; display: inline; line-height: inherit; }
+
 </style>
 </head>
 <body>
@@ -263,8 +311,8 @@ input, select, textarea, label { pointer-events: auto; }
         </div>
         <div class="home-card" role="button" onclick="openSection('farmaci')">
           <div class="hc-icon">💊</div>
-          <div class="hc-title">Dosaggi Farmaci</div>
-          <div class="hc-sub">Per peso/età</div>
+          <div class="hc-title">Prontuario Farmaci</div>
+          <div class="hc-sub">58 schede · dose/peso</div>
           <div class="hc-badge" style="background:var(--orange-bg);color:var(--orange)">RAPIDO</div>
         </div>
         <div class="home-card" role="button" onclick="openSection('scale')">
@@ -340,15 +388,22 @@ input, select, textarea, label { pointer-events: auto; }
     <!-- FARMACI -->
     <div id="panel-farmaci" class="panel">
       <button class="back-btn" onclick="goBack()">← Indietro</button>
-      <div class="detail-title">Dosaggi Farmaci</div>
-      <div class="detail-sub">Dosi standard adulto – verificare sempre peso e controindicazioni</div>
-      <div class="tabs">
-        <button class="tab active" onclick="farmTab(0,'Emergenza')">Emergenza</button>
-        <button class="tab" onclick="farmTab(1,'Cardiologici')">Cardio</button>
-        <button class="tab" onclick="farmTab(2,'Respiratori')">Respir.</button>
-        <button class="tab" onclick="farmTab(3,'Neurologici')">Neuro</button>
+      <div class="detail-title">Prontuario Farmaci</div>
+      <div class="detail-sub">58 schede · tocca un farmaco per dosi, diluizione e controindicazioni</div>
+      <div class="pr-box">
+        <div class="pr-wrow"><label for="pr-peso">Peso</label><input type="number" inputmode="decimal" id="pr-peso" class="calc-input" placeholder="kg" oninput="prSetPeso(this.value)"><button class="reset-btn" onclick="prResetPeso()">Nuovo paz.</button></div>
+        <div class="pr-wrow"><label for="pr-eta">Età</label><input type="number" inputmode="decimal" id="pr-eta" class="calc-input" placeholder="se non conosci il peso"><select id="pr-eta-u" class="calc-input"><option value="a">anni</option><option value="m">mesi</option></select><button class="reset-btn" onclick="prStimaPeso()">Stima</button></div>
+        <div id="pr-peso-info" class="pr-hint"></div>
       </div>
+      <input type="search" id="pr-q" class="calc-input pr-search" placeholder="Cerca farmaco, nome commerciale, indicazione…" autocomplete="off" autocorrect="off" spellcheck="false" oninput="renderFarmaci()">
+      <div class="pr-chips" id="pr-chips"></div>
       <div id="farmaci-content"></div>
+    </div>
+
+    <!-- SCHEDA FARMACO -->
+    <div id="panel-farmaco-detail" class="panel">
+      <button class="back-btn" onclick="prBack()">← Indietro</button>
+      <div id="farmaco-detail"></div>
     </div>
 
     <!-- SCALE -->
@@ -434,44 +489,716 @@ input, select, textarea, label { pointer-events: auto; }
 <script>
 // ========== DATA ==========
 
-const FARMACI = {
-  'Emergenza': [
-    { name:'Adrenalina', dose:'1 mg IV', interval:'ogni 3-5\'', note:'RCP: diluire in 10ml SF. Anafilassi: 0.5mg IM coscia (fiala 1:1000)', urgent:true },
-    { name:'Atropina', dose:'0.5–1 mg IV', interval:'ogni 3-5\' (max 3mg)', note:'Bradicardia sintomatica, blocchi AV. NO in trapianti. Min 0.5mg!', urgent:false },
-    { name:'Amiodarone', dose:'300 mg IV rapido', interval:'poi 150mg se FV/TV persiste', note:'RCP: dopo 3° shock. Non diluire in glucosio 5%', urgent:true },
-    { name:'Adenosina', dose:'6 mg IV BOLO rapido', interval:'poi 12mg → 12mg', note:'TSV: bolo periferico + flush 20ml SF. Avvisa paziente (flush, oppressione)', urgent:true },
-    { name:'Naloxone', dose:'0.4 mg IV/IM', interval:'ogni 2-3\' (max 2mg)', note:'Overdose oppioidi. IM coscia se no accesso. Durata breve: sorveglia!', urgent:true },
-    { name:'Glucosio 33%', dose:'33–66 ml IV (=10–20g)', interval:'bolo lento, ripeti se GCS basso', note:'Ipoglicemia. Se no accesso: Glucagone 1mg IM', urgent:false },
-    { name:'Flumazenil', dose:'0.2 mg IV in 15"', interval:'ogni 60" max 1mg', note:'Sovradosaggio BDZ. Attenzione: epilettici, mix con triciclici', urgent:false },
-    { name:'Midazolam', dose:'0.1 mg/kg IV lento', interval:'max 10mg', note:'Crisi epilettica: 10mg IM/nasale se no accesso', urgent:false },
-  ],
-  'Cardiologici': [
-    { name:'Nitroglicerina SL', dose:'0.4–0.8 mg SL', interval:'ogni 5\' max 3 volte', note:'Dolore toracico, OAP. STOP se PAS <90. NO se Sildenafil 48h', urgent:false },
-    { name:'Furosemide', dose:'40–80 mg IV lento', interval:'può ripetere dopo 60\'', note:'OAP, scompenso. EV lento (>2min). Monitorare PA e diuresi', urgent:false },
-    { name:'Morfina', dose:'2–4 mg IV lento', interval:'ogni 5-10\' (max 10mg)', note:'OAP/dolore severo. Avere Naloxone pronto. Nausea: Metoclopramide', urgent:false },
-    { name:'Metoprololo', dose:'5 mg IV in 2\'', interval:'ogni 5\' max 15mg', note:'FA rapida, TV stabile. CI: blocco AV, broncoasma, FC<60, PA bassa', urgent:false },
-    { name:'ASA', dose:'300 mg PO (masticare)', interval:'dose unica', note:'IMA: al primo contatto. CI: allergia, emorragia attiva', urgent:false },
-    { name:'Ticagrelor', dose:'180 mg PO dose carico', interval:'poi 90mg x2/die', note:'STEMI/NSTEMI: su indicazione medico centrale', urgent:false },
-    { name:'Sodio bicarbonato', dose:'1 mEq/kg IV', interval:'ogni 10\' RCP prolungata', note:'Acidosi metabolica severa. Non mescolare con Ca2+', urgent:false },
-    { name:'Calcio gluconato', dose:'1g IV in 10\'', interval:'ripetibile', note:'Iperkaliemia, ipocalcemia, OD Ca-antagonisti', urgent:false },
-  ],
-  'Respiratori': [
-    { name:'Salbutamolo nebulizzato', dose:'2.5–5 mg neb', interval:'ogni 20\' x3 poi ogni 4h', note:'Asma/BPCO. Soluz 0.5%: 1ml in 3ml SF. Monit FC', urgent:false },
-    { name:'Ipratropio (Atrovent)', dose:'0.5 mg neb', interval:'ogni 6-8h', note:'Associa a salbutamolo in asma/BPCO grave', urgent:false },
-    { name:'Metilprednisolone', dose:'80–125 mg IV', interval:'dose unica, poi orale', note:'Asma grave, BPCO esacerbata, shock anafilattico', urgent:false },
-    { name:'Solfato di magnesio', dose:'2g IV in 20\'', interval:'dose unica', note:'Asma grave refrattaria. Monitorare PA (ipotensione)', urgent:false },
-    { name:'Ketamina', dose:'1–2 mg/kg IV (anestesia)', interval:'0.25–0.5 mg/kg broncodilatazione', note:'Broncospasmo severo su indicaz medico. Preserve airway reflexes', urgent:false },
-    { name:'Aminofillina', dose:'250 mg IV in 20\'', interval:'poi infusione', note:'BPCO/asma refrattaria. CI: aritmie, monitor ECG continuo', urgent:false },
-  ],
-  'Neurologici': [
-    { name:'Diazepam (Valium)', dose:'10 mg IV lento (2mg/min)', interval:'ogni 5-10\' max 30mg', note:'Stato epilettico. Rettale 10mg se no accesso. Monit respiro', urgent:false },
-    { name:'Lorazepam (Tavor)', dose:'4 mg IV (2mg/min)', interval:'dopo 5-10\' ripeti x1', note:'Prima scelta stato epilettico se disponibile', urgent:false },
-    { name:'Midazolam (Ipnovel)', dose:'10 mg IM/nasale', interval:'', note:'Crisi senza accesso venoso. 0.2mg/kg IV se accesso', urgent:false },
-    { name:'Fenitoina', dose:'15–20 mg/kg IV max 50mg/min', interval:'', note:'Seconda linea SE. Monitor ECG e PA. Non in glucosio!', urgent:false },
-    { name:'Mannitolo 18%', dose:'0.5–1 g/kg IV in 15-20\'', interval:'ogni 4-6h', note:'Ipertensione endocranica. Su indicaz medico. 500ml flacone pronto', urgent:false },
-    { name:'Desametasone', dose:'8–16 mg IV', interval:'poi 4-8mg x2/die', note:'Edema cerebrale, meningite. Non in ipertensione endocranica traumatica', urgent:false },
-  ]
+// ========== PRONTUARIO FARMACI 118 ==========
+// Campi: n nome · c commerciale · cl classe · sv salvavita · med solo su indicazione medica
+// conf confezione · ind indicazioni · ad adulto · pd pediatrico · calc calcolo per peso
+// dil diluizione · az inizio/durata · ci controindicazioni · ae effetti avversi · ant antidoto · nt note · al alias per collegamenti
+const PRONT_CLASSI = {
+  acls:     { l:'Arresto/Aritmie',  c:'var(--red)' },
+  cardio:   { l:'Cardiovascolari',  c:'var(--orange)' },
+  resp:     { l:'Respiratori',      c:'var(--teal)' },
+  steroidi: { l:'Cortisonici/Allergia', c:'var(--purple)' },
+  analg:    { l:'Analgesia',        c:'var(--yellow)' },
+  neuro:    { l:'Neuro/Sedazione',  c:'var(--accent)' },
+  antidoti: { l:'Antidoti/Metabolici', c:'var(--green)' },
+  altro:    { l:'Gastro/Ostetr./Fluidi', c:'var(--text2)' },
+  rsi:      { l:'RSI (medico)',     c:'#f472b6' }
 };
+
+const PRONTUARIO = [
+// ---------- ARRESTO / ARITMIE ----------
+{ id:'adrenalina', n:'Adrenalina', c:'Adrenalina S.A.L.F.', cl:'acls', sv:true, al:['Adrenalina','Epinefrina'],
+  conf:'Fiala 1 mg/1 ml (1:1000)',
+  ind:'Arresto cardiaco · Anafilassi · Broncospasmo grave refrattario · Bradicardia/ipotensione refrattaria (infusione)',
+  ad:'ACR: 1 mg IV/IO ogni 3-5 min (ritmi non defibrillabili subito; FV/TV dopo il 3° shock).<br>Anafilassi: 0,5 mg IM faccia anterolaterale coscia, ripetibile dopo 5 min.<br>Infusione: 2-10 mcg/min (0,05-0,5 mcg/kg/min) su indicazione medica.',
+  pd:'ACR: 0,01 mg/kg IV/IO (max 1 mg) ogni 3-5 min.<br>Anafilassi IM: 0,01 mg/kg (max 0,5 mg) — oppure &lt;6 anni 0,15 mg · 6-12 anni 0,3 mg · &gt;12 anni 0,5 mg.<br>Laringite grave: aerosol 0,5 ml/kg di fiala 1:1000 (max 5 ml).',
+  calc:[ {l:'ACR IV/IO', d:0.01, u:'mg', max:1, conc:0.1, cl:'1 fiala diluita a 10 ml = 0,1 mg/ml'},
+         {l:'Anafilassi IM', d:0.01, u:'mg', max:0.5, conc:1, cl:'fiala pura 1 mg/ml'} ],
+  dil:'ACR: 1 fiala + 9 ml SF = 10 ml (0,1 mg/ml). IM: pura, non diluire.',
+  az:'IV immediata, durata 3-5 min · IM 5-10 min',
+  ci:'Nessuna in ACR e anafilassi.',
+  ae:'Tachiaritmie, ipertensione, ischemia miocardica, ansia, tremori.',
+  nt:'In anafilassi sempre IM prima di cercare l\'accesso venoso. Mai il bolo IV da 1 mg in paziente con polso.' },
+
+{ id:'amiodarone', n:'Amiodarone', c:'Cordarone', cl:'acls', sv:true, al:['Amiodarone','Cordarone'],
+  conf:'Fiala 150 mg/3 ml',
+  ind:'FV/TV senza polso refrattaria · TV con polso stabile · FA ad alta risposta (su indicazione)',
+  ad:'ACR: 300 mg IV/IO bolo dopo il 3° shock, poi 150 mg dopo il 5° shock.<br>Con polso: 300 mg in 10-20 min in 250 ml SG5%, poi 900 mg/24 h (su indicazione medica).',
+  pd:'ACR: 5 mg/kg IV/IO (max 300 mg) dopo il 3° e il 5° shock.',
+  calc:[ {l:'ACR', d:5, u:'mg', max:300, conc:50, cl:'fiala pura 50 mg/ml'} ],
+  dil:'ACR: bolo puro o diluito in 20 ml SG5%. Infusione SOLO in Glucosio 5% (precipita in SF).',
+  az:'Minuti · emivita molto lunga',
+  ci:'Bradicardia sinusale, BAV 2°-3° senza pacemaker, ipotensione grave (con polso), allergia allo iodio.',
+  ae:'Ipotensione, bradicardia, flebite, allungamento QT.',
+  nt:'Usare vena di grosso calibro. Con polso infondere lento: il bolo rapido causa ipotensione.' },
+
+{ id:'atropina', n:'Atropina', c:'Atropina solfato', cl:'acls', sv:true, al:['Atropina'],
+  conf:'Fiala 0,5 mg/1 ml (anche 1 mg/1 ml)',
+  ind:'Bradicardia sintomatica · BAV 2° Mobitz I · Intossicazione da organofosfati',
+  ad:'Bradicardia: 0,5 mg IV ogni 3-5 min fino a max 3 mg.<br>Organofosfati: 1-2 mg IV, raddoppiare ogni 5 min fino ad asciugare le secrezioni bronchiali.',
+  pd:'0,02 mg/kg IV/IO (minimo 0,1 mg, max 0,5 mg per dose), ripetibile una volta.',
+  calc:[ {l:'Bradicardia', d:0.02, u:'mg', min:0.1, max:0.5, conc:0.5, cl:'fiala 0,5 mg/ml'} ],
+  dil:'Pura o diluita a 5-10 ml SF, bolo rapido.',
+  az:'IV 1-2 min · durata 30-60 min',
+  ci:'Glaucoma ad angolo chiuso (relativa). Poco efficace in BAV 2° Mobitz II / 3° a QRS largo e nel cuore trapiantato.',
+  ae:'Tachicardia, midriasi, secchezza, ritenzione urinaria, agitazione.',
+  nt:'Dosi &lt;0,5 mg nell\'adulto possono dare bradicardia paradossa. Se inefficace: pacing / isoprenalina / adrenalina.' },
+
+{ id:'adenosina', n:'Adenosina', c:'Krenosin', cl:'acls', sv:false, al:['Adenosina','Krenosin'],
+  conf:'Fiala 6 mg/2 ml',
+  ind:'TPSV da rientro a QRS stretto stabile (dopo manovre vagali)',
+  ad:'6 mg bolo IV rapido, se inefficace 12 mg, poi ancora 12 mg (ERC: 6-12-18 mg).',
+  pd:'0,1 mg/kg bolo rapido (max 6 mg), poi 0,2 mg/kg (max 12 mg).',
+  calc:[ {l:'1ª dose', d:0.1, u:'mg', max:6, conc:3, cl:'fiala 3 mg/ml'}, {l:'2ª dose', d:0.2, u:'mg', max:12, conc:3, cl:'fiala 3 mg/ml'} ],
+  dil:'Pura. Rubinetto a 3 vie: bolo + flush immediato 20 ml SF, braccio sollevato.',
+  az:'Secondi · emivita &lt;10 s',
+  ci:'Asma grave, BAV 2°-3°, malattia del seno, FA pre-eccitata (WPW).',
+  ae:'Asistolia transitoria, flush, dispnea, oppressione toracica (avvisare il paziente).',
+  nt:'Registrare ECG durante la somministrazione. Ridurre a 3 mg in pazienti con dipiridamolo o cuore trapiantato.' },
+
+{ id:'lidocaina', n:'Lidocaina', c:'Xylocaina 2%', cl:'acls', sv:false, al:['Lidocaina','Xylocaina'],
+  conf:'Fiala 2% = 20 mg/ml (5 o 10 ml)',
+  ind:'FV/TV refrattaria se amiodarone non disponibile · Analgesia per infusione intraossea',
+  ad:'ACR: 1-1,5 mg/kg IV (circa 100 mg), poi 0,5-0,75 mg/kg (circa 50 mg) se necessario.<br>IO cosciente: 40 mg (2 ml al 2%) lenti in 2 min prima del flush, poi altri 20 mg.',
+  pd:'ACR: 1 mg/kg IV/IO (max 100 mg).<br>IO cosciente: 0,5 mg/kg (max 40 mg) lento.',
+  calc:[ {l:'ACR', d:1, u:'mg', max:100, conc:20, cl:'2% = 20 mg/ml'}, {l:'Analgesia IO', d:0.5, u:'mg', max:40, conc:20, cl:'2% = 20 mg/ml'} ],
+  dil:'Pura.',
+  az:'1-2 min · durata 10-20 min',
+  ci:'BAV avanzato, allergia agli anestetici amidici.',
+  ae:'Parestesie periorali, confusione, convulsioni, bradicardia.',
+  nt:'Non associare ad amiodarone in ACR (scegliere uno dei due).' },
+
+{ id:'metoprololo', n:'Metoprololo', c:'Lopresor', cl:'acls', sv:false, med:true, al:['Metoprololo','Lopresor'],
+  conf:'Fiala 5 mg/5 ml',
+  ind:'FA/flutter ad alta risposta stabile · TPSV · controllo FC in SCA con tachicardia',
+  ad:'2,5-5 mg IV in 2-5 min, ripetibile ogni 5 min fino a max 15 mg.',
+  pd:'Non utilizzato in ambito extraospedaliero pediatrico.',
+  dil:'Pura, lento.',
+  az:'2-5 min · durata 3-6 h',
+  ci:'Asma/broncospasmo, BAV 2°-3°, FC &lt;60, PAS &lt;100, scompenso acuto/OAP, shock, WPW.',
+  ae:'Bradicardia, ipotensione, broncospasmo.',
+  ant:'Glucagone, atropina.',
+  nt:'Monitor ECG e PA continui. Mai associare a verapamil EV.' },
+
+{ id:'verapamil', n:'Verapamil', c:'Isoptin', cl:'acls', sv:false, med:true, al:['Verapamil','Isoptin'],
+  conf:'Fiala 5 mg/2 ml',
+  ind:'TPSV stabile (alternativa ad adenosina) · controllo FC in FA',
+  ad:'2,5-5 mg IV in 2 min; ripetibile 5-10 mg dopo 15-30 min (max 20 mg).',
+  pd:'Controindicato sotto 1 anno. Nei bambini più grandi solo su indicazione medica.',
+  dil:'Pura, lento.',
+  az:'1-5 min · durata 2-6 h',
+  ci:'TV a QRS largo, WPW con FA, scompenso, ipotensione, BAV 2°-3°, beta-bloccante EV in corso.',
+  ae:'Ipotensione, bradicardia, asistolia.',
+  ant:'Calcio gluconato.',
+  nt:'Se dubbio sulla natura di una tachicardia a QRS largo, NON usare.' },
+
+{ id:'digossina', n:'Digossina', c:'Lanoxin', cl:'acls', sv:false, med:true, al:['Digossina','Lanoxin'],
+  conf:'Fiala 0,5 mg/2 ml',
+  ind:'Controllo FC in FA con scompenso cardiaco',
+  ad:'0,25-0,5 mg IV lento (in 5-10 min).',
+  pd:'Solo su indicazione medica specialistica.',
+  dil:'Pura o in 10 ml SF.',
+  az:'5-30 min · picco 2-6 h',
+  ci:'BAV, WPW, ipokaliemia, paziente già in terapia digitalica (intossicazione).',
+  ae:'Nausea, aritmie, BAV, disturbi visivi (giallo-verde).',
+  nt:'Effetto lento: non è un farmaco di emergenza immediata.' },
+
+{ id:'magnesio', n:'Magnesio solfato', c:'Magnesio solfato', cl:'acls', sv:false, al:['Magnesio solfato','Magnesio'],
+  conf:'Fiala 1 g/10 ml (10%) o 2 g/10 ml (20%): verificare',
+  ind:'Torsione di punta · Asma grave refrattaria · Eclampsia · Ipomagnesiemia',
+  ad:'Torsione di punta: 2 g IV in 10 min.<br>Asma: 2 g IV in 20 min.<br>Eclampsia: 4 g IV in 15-20 min, poi 1 g/h.',
+  pd:'Asma grave: 40-50 mg/kg IV in 20 min (max 2 g).<br>Torsione: 25-50 mg/kg (max 2 g).',
+  calc:[ {l:'Asma / torsione', d:50, u:'mg', max:2000} ],
+  dil:'In 50-100 ml SF.',
+  az:'Immediata IV',
+  ci:'BAV, insufficienza renale grave, miastenia.',
+  ae:'Ipotensione, flush, depressione respiratoria, perdita dei riflessi tendinei.',
+  ant:'Calcio gluconato.',
+  nt:'Infondere lentamente: il bolo rapido dà ipotensione marcata.' },
+
+// ---------- CARDIOVASCOLARI ----------
+{ id:'nitroglicerina', n:'Nitroglicerina', c:'Trinitrina · Natispray · Venitrin', cl:'cardio', sv:false, al:['Nitroglicerina','Trinitrina','Natispray','Venitrin','NTG'],
+  conf:'Cpr SL 0,3 mg · Spray SL 0,4 mg/puff · Fiala 5 mg/1,5 ml',
+  ind:'Dolore toracico ischemico · Edema polmonare acuto · Crisi ipertensiva con scompenso',
+  ad:'SL: 0,3-0,4 mg ogni 5 min, max 3 dosi.<br>Infusione: 10-20 mcg/min, aumentare di 10 mcg/min ogni 5 min (max 200), su indicazione medica.',
+  pd:'Non utilizzata in ambito extraospedaliero pediatrico.',
+  dil:'Infusione: 5 mg in 50 ml SF = 100 mcg/ml → 6 ml/h = 10 mcg/min.',
+  az:'SL 1-3 min · durata 20-30 min',
+  ci:'PAS &lt;90, FC &lt;50 o &gt;100, infarto del ventricolo destro, inibitori PDE5 (sildenafil/vardenafil 24 h, tadalafil 48 h), stenosi aortica grave.',
+  ae:'Ipotensione, cefalea, tachicardia riflessa, sincope.',
+  nt:'Fare ECG a 12 derivazioni (V4R in IMA inferiore) prima della somministrazione.' },
+
+{ id:'furosemide', n:'Furosemide', c:'Lasix', cl:'cardio', sv:false, al:['Furosemide','Lasix'],
+  conf:'Fiala 20 mg/2 ml (anche 250 mg/25 ml)',
+  ind:'Edema polmonare acuto · Scompenso con sovraccarico',
+  ad:'40 mg IV lento (o pari alla dose orale abituale), ripetibile dopo 30-60 min.',
+  pd:'1 mg/kg IV lento (max 40 mg).',
+  calc:[ {l:'Dose', d:1, u:'mg', max:40, conc:10, cl:'fiala 10 mg/ml'} ],
+  dil:'Pura, lento (max 4 mg/min).',
+  az:'IV 5 min (venodilatazione) · diuresi 30 min · durata 2 h',
+  ci:'Ipovolemia, PAS &lt;90, anuria, ipokaliemia grave.',
+  ae:'Ipotensione, ipokaliemia, ototossicità ad alte dosi.',
+  nt:'In OAP il primo farmaco sono nitrati + CPAP; la furosemide aiuta ma non è immediata.' },
+
+{ id:'urapidil', n:'Urapidil', c:'Ebrantil', cl:'cardio', sv:false, med:true, al:['Urapidil','Ebrantil'],
+  conf:'Fiala 50 mg/10 ml (5 mg/ml)',
+  ind:'Emergenza ipertensiva (con danno d\'organo) · Ipertensione in dissecazione/ictus emorragico su indicazione',
+  ad:'10-25 mg IV lento, ripetibile dopo 5 min fino a 50 mg. Mantenimento 5-30 mg/h.',
+  pd:'Solo su indicazione medica specialistica.',
+  dil:'Pura in bolo lento.',
+  az:'2-5 min · durata 4-6 h',
+  ci:'Stenosi aortica, gravidanza.',
+  ae:'Ipotensione, cefalea, nausea, vertigini.',
+  nt:'Ridurre la PA non più del 20-25% nella prima ora (salvo dissecazione). Ictus ischemico: trattare solo se PA &gt;220/120 o candidato a trombolisi (&gt;185/110).' },
+
+{ id:'noradrenalina', n:'Noradrenalina', c:'Noradrenalina tartrato', cl:'cardio', sv:false, med:true, al:['Noradrenalina','Norepinefrina'],
+  conf:'Fiala 2 mg/ml (verificare se espressa come tartrato o base)',
+  ind:'Shock distributivo (settico) · Shock cardiogeno ipotensivo dopo fluidi',
+  ad:'0,05-0,5 mcg/kg/min in pompa (circa 5-30 mcg/min).',
+  pd:'0,05-1 mcg/kg/min in pompa.',
+  dil:'4 mg in 50 ml SG5% = 80 mcg/ml (oppure 2 mg in 50 ml = 40 mcg/ml).',
+  az:'1-2 min · cessa 1-2 min dopo lo stop',
+  ci:'Ipovolemia non corretta.',
+  ae:'Ischemia periferica, necrosi da stravaso, aritmie, ipertensione.',
+  nt:'Usare il calcolatore Drip per la velocità. Vena di grosso calibro, linea dedicata.' },
+
+{ id:'dopamina', n:'Dopamina', c:'Revivan', cl:'cardio', sv:false, med:true, al:['Dopamina','Revivan'],
+  conf:'Fiala 200 mg/5 ml',
+  ind:'Bradicardia sintomatica refrattaria ad atropina · Shock cardiogeno',
+  ad:'5-20 mcg/kg/min in pompa.',
+  pd:'5-20 mcg/kg/min in pompa.',
+  dil:'200 mg in 50 ml SG5% = 4 mg/ml (4000 mcg/ml).',
+  az:'5 min · durata &lt;10 min',
+  ci:'Feocromocitoma, tachiaritmie, FV.',
+  ae:'Tachiaritmie, ipertensione, necrosi da stravaso.',
+  nt:'Usare il calcolatore Drip. Alternativa all\'adrenalina in bradicardia come ponte al pacing.' },
+
+{ id:'isoprenalina', n:'Isoprenalina', c:'Isoprenalina S.A.L.F.', cl:'cardio', sv:false, med:true, al:['Isoprenalina','Isuprel'],
+  conf:'Fiala 0,2 mg/1 ml',
+  ind:'Bradicardia sintomatica / BAV 3° refrattario ad atropina, in attesa di pacing',
+  ad:'Infusione 2-10 mcg/min (iniziare a 5 mcg/min).',
+  pd:'0,05-2 mcg/kg/min, su indicazione medica.',
+  dil:'1 fiala (0,2 mg) in 50 ml SF = 4 mcg/ml → 75 ml/h = 5 mcg/min.',
+  az:'Immediata · breve',
+  ci:'Tachiaritmie, ischemia miocardica acuta (aumenta il consumo di O2), intossicazione digitalica.',
+  ae:'Tachicardia, aritmie ventricolari, ipotensione, ischemia.',
+  nt:'Vedi sezione Pacing per la scala terapeutica.' },
+
+{ id:'asa', n:'Acido acetilsalicilico', c:'Aspirina · Flectadol IV', cl:'cardio', sv:true, al:['Acido acetilsalicilico','ASA','Aspirina','Flectadol'],
+  conf:'Cpr 300/500 mg · Flaconcino Flectadol 500 mg',
+  ind:'Sindrome coronarica acuta (STEMI/NSTEMI) sospetta',
+  ad:'150-300 mg PO masticata, oppure 75-250 mg IV (ESC 2023).',
+  pd:'Non indicata (rischio sindrome di Reye).',
+  dil:'IV: sciogliere il flaconcino in 5 ml di acqua ppi, bolo lento.',
+  az:'PO masticata 15-20 min · IV pochi minuti',
+  ci:'Allergia ai FANS/ASA, sanguinamento attivo, ulcera gastrica attiva, sospetta dissecazione aortica.',
+  ae:'Sanguinamento, broncospasmo nei sensibili.',
+  nt:'Somministrare al primo contatto, previo accordo con centrale. Non serve se già assunta a dose piena.' },
+
+{ id:'ticagrelor', n:'Ticagrelor', c:'Brilique', cl:'cardio', sv:false, med:true, al:['Ticagrelor','Brilique'],
+  conf:'Cpr 90 mg',
+  ind:'STEMI/NSTEMI, dose di carico pre-PCI secondo rete locale',
+  ad:'180 mg PO (2 cpr) dose di carico.',
+  pd:'Non indicato.',
+  az:'30 min · durata 3-5 giorni',
+  ci:'Pregresso ictus emorragico, sanguinamento attivo, epatopatia grave, terapia anticoagulante orale.',
+  ae:'Sanguinamento, dispnea, bradiaritmie.',
+  nt:'Solo su indicazione del medico di centrale / emodinamica.' },
+
+{ id:'clopidogrel', n:'Clopidogrel', c:'Plavix', cl:'cardio', sv:false, med:true, al:['Clopidogrel','Plavix'],
+  conf:'Cpr 75 mg (o 300 mg)',
+  ind:'SCA quando ticagrelor è controindicato · Paziente in anticoagulante orale',
+  ad:'300-600 mg PO dose di carico.',
+  pd:'Non indicato.',
+  az:'2-6 h',
+  ci:'Sanguinamento attivo, epatopatia grave.',
+  ae:'Sanguinamento.',
+  nt:'Solo su indicazione del medico di centrale / emodinamica.' },
+
+{ id:'eparina', n:'Eparina sodica', c:'Eparina Vister', cl:'cardio', sv:false, med:true, al:['Eparina sodica','Eparina'],
+  conf:'Flacone 25.000 UI/5 ml (5.000 UI/ml)',
+  ind:'STEMI avviato a PCI primaria (secondo protocollo rete)',
+  ad:'70-100 UI/kg bolo IV (comunemente 5.000 UI).',
+  pd:'Non indicata in ambito extraospedaliero.',
+  calc:[ {l:'STEMI (70 UI/kg)', d:70, u:'UI', max:5000, conc:5000, cl:'5.000 UI/ml'} ],
+  dil:'Pura.',
+  az:'Immediata IV',
+  ci:'Sanguinamento attivo, piastrinopenia da eparina, anticoagulante orale (valutare con il medico).',
+  ae:'Sanguinamento.',
+  ant:'Protamina.',
+  nt:'Calcolo con max 5.000 UI: usare solo su indicazione emodinamica.' },
+
+// ---------- RESPIRATORI ----------
+{ id:'ossigeno', n:'Ossigeno', c:'O₂ medicale', cl:'resp', sv:true, al:['Ossigeno'],
+  conf:'Bombola · occhialini 1-6 l/min · Venturi 24-60% · maschera reservoir 12-15 l/min',
+  ind:'Ipossiemia · Shock · ACR · Intossicazione da CO',
+  ad:'Target SpO₂ 94-98%. Pazienti a rischio ipercapnia (BPCO, obesità grave, neuromuscolari): target 88-92%. CO, ACR, shock: reservoir 15 l/min.',
+  pd:'Target SpO₂ 94-98%. Ossigeno ad alto flusso se distress grave.',
+  dil:'—',
+  az:'Immediata',
+  ci:'Nessuna in emergenza. Evitare l\'iperossia nello STEMI senza ipossia (SpO₂ ≥90%).',
+  ae:'Ipercapnia e narcosi nei BPCO se iperossigenati.',
+  nt:'Mai negare ossigeno a un paziente ipossico, anche BPCO: titolare.' },
+
+{ id:'salbutamolo', n:'Salbutamolo', c:'Broncovaleas · Ventolin', cl:'resp', sv:true, al:['Salbutamolo','Broncovaleas','Ventolin'],
+  conf:'Soluzione 0,5% (5 mg/ml) · MDI 100 mcg/puff',
+  ind:'Broncospasmo: asma, BPCO riacutizzata, anafilassi · Iperkaliemia',
+  ad:'Aerosol 5 mg (1 ml) + SF fino a 4 ml, ripetibile ogni 20 min per 3 volte (anche continuo in asma grave).<br>MDI con distanziatore: 4-8 puff.',
+  pd:'Aerosol: &lt;5 anni 2,5 mg · ≥5 anni 5 mg.<br>MDI con distanziatore: 2-10 puff (1 puff ogni 2 kg, max 10).',
+  dil:'In SF a 3-4 ml totali. Aerosol con O₂ 6-8 l/min.',
+  az:'5 min · durata 3-6 h',
+  ci:'Nessuna assoluta in emergenza. Cautela in tachiaritmie e cardiopatia ischemica.',
+  ae:'Tachicardia, tremori, ipokaliemia, iperglicemia, lattacidemia.',
+  nt:'Associare ipratropio nelle forme moderate-gravi.' },
+
+{ id:'ipratropio', n:'Ipratropio bromuro', c:'Atem · Breva', cl:'resp', sv:false, al:['Ipratropio','Atem','Atrovent'],
+  conf:'Fiala da aerosol 0,5 mg/2 ml',
+  ind:'Asma grave e BPCO riacutizzata (in associazione al salbutamolo)',
+  ad:'0,5 mg aerosol ogni 20 min per 3 dosi.',
+  pd:'&lt;12 anni 0,25 mg · ≥12 anni 0,5 mg aerosol ogni 20 min per 3 dosi.',
+  dil:'Nella stessa ampolla con il salbutamolo.',
+  az:'15-30 min · durata 4-6 h',
+  ci:'Glaucoma ad angolo chiuso (proteggere gli occhi), allergia all\'atropina.',
+  ae:'Secchezza delle fauci, midriasi se va negli occhi.',
+  nt:'' },
+
+{ id:'budesonide', n:'Budesonide', c:'Pulmicort', cl:'resp', sv:false, al:['Budesonide','Pulmicort'],
+  conf:'Fiala da aerosol 0,5 mg/ml (2 ml)',
+  ind:'Laringite ipoglottica (croup) del bambino',
+  ad:'Uso in emergenza limitato.',
+  pd:'Croup: 2 mg aerosol (2 fiale da 0,5 mg/ml) in dose singola.',
+  dil:'Pura in ampolla.',
+  az:'30 min',
+  ci:'Nessuna in emergenza.',
+  ae:'Raucedine.',
+  nt:'Alternativa: desametasone 0,15-0,6 mg/kg. Nel croup grave: adrenalina aerosol.' },
+
+{ id:'aminofillina', n:'Aminofillina', c:'Aminomal', cl:'resp', sv:false, med:true, al:['Aminofillina','Aminomal'],
+  conf:'Fiala 240 mg/10 ml',
+  ind:'Asma grave refrattaria (seconda linea, poco utilizzata)',
+  ad:'5 mg/kg IV in 20-30 min (NON se già in terapia con teofillina).',
+  pd:'5 mg/kg IV in 20-30 min, su indicazione medica.',
+  calc:[ {l:'Carico', d:5, u:'mg', max:500, conc:24, cl:'fiala 24 mg/ml'} ],
+  dil:'In 100 ml SF.',
+  az:'15-30 min',
+  ci:'Terapia con teofillina, tachiaritmie, epilessia.',
+  ae:'Aritmie, convulsioni, vomito.',
+  nt:'Margine terapeutico stretto: monitor ECG continuo.' },
+
+// ---------- CORTISONICI / ALLERGIA ----------
+{ id:'metilprednisolone', n:'Metilprednisolone', c:'Solu-Medrol', cl:'steroidi', sv:false, al:['Metilprednisolone','Solu-Medrol','Urbason'],
+  conf:'Flaconcino 40 mg / 125 mg / 500 mg',
+  ind:'Asma grave · BPCO riacutizzata · Anafilassi (dopo adrenalina) · Angioedema',
+  ad:'1-2 mg/kg IV (di solito 40-125 mg).',
+  pd:'1-2 mg/kg IV (max 60 mg).',
+  calc:[ {l:'Dose', d:1, u:'mg', max:60} ],
+  dil:'Ricostituire con il solvente, bolo lento.',
+  az:'Effetto dopo 4-6 h',
+  ci:'Nessuna in emergenza.',
+  ae:'Iperglicemia, agitazione.',
+  nt:'Non sostituisce l\'adrenalina in anafilassi né il broncodilatatore in asma.' },
+
+{ id:'idrocortisone', n:'Idrocortisone', c:'Flebocortid', cl:'steroidi', sv:false, al:['Idrocortisone','Flebocortid'],
+  conf:'Flaconcino 100 mg / 500 mg / 1 g',
+  ind:'Insufficienza surrenalica acuta · Anafilassi · Asma grave',
+  ad:'Crisi surrenalica: 100 mg IV/IM.<br>Anafilassi/asma: 200 mg IV lento.',
+  pd:'Crisi surrenalica: 2 mg/kg (max 100 mg).<br>Anafilassi: 6 mesi-6 anni 50 mg · 6-12 anni 100 mg · &gt;12 anni 200 mg.',
+  calc:[ {l:'Crisi surrenalica', d:2, u:'mg', max:100} ],
+  dil:'Ricostituire, bolo lento.',
+  az:'1-2 h',
+  ci:'Nessuna in emergenza.',
+  ae:'Iperglicemia.',
+  nt:'Nel paziente con insufficienza surrenalica nota (Addison, steroidi cronici) e malessere/vomito/shock: farmaco salvavita.' },
+
+{ id:'betametasone', n:'Betametasone', c:'Bentelan', cl:'steroidi', sv:false, al:['Betametasone','Bentelan'],
+  conf:'Fiala 1,5 mg/2 ml · 4 mg/2 ml',
+  ind:'Reazioni allergiche · Asma · Edema',
+  ad:'4-8 mg IV/IM.',
+  pd:'0,1-0,2 mg/kg IV/IM (max 4 mg).',
+  calc:[ {l:'Dose', d:0.1, u:'mg', max:4} ],
+  dil:'Pura.',
+  az:'1-2 h',
+  ci:'Nessuna in emergenza.',
+  ae:'Iperglicemia.',
+  nt:'' },
+
+{ id:'desametasone', n:'Desametasone', c:'Decadron · Soldesam', cl:'steroidi', sv:false, al:['Desametasone','Decadron','Soldesam'],
+  conf:'Fiala 4 mg/1 ml · 8 mg/2 ml',
+  ind:'Edema cerebrale peritumorale · Meningite (su indicazione) · Croup · Asma',
+  ad:'8-10 mg IV.',
+  pd:'Croup: 0,15-0,6 mg/kg PO/IM/IV (max 10 mg).',
+  calc:[ {l:'Croup lieve', d:0.15, u:'mg', max:10}, {l:'Croup grave', d:0.6, u:'mg', max:10} ],
+  dil:'Pura.',
+  az:'1-4 h',
+  ci:'Non indicato nel trauma cranico.',
+  ae:'Iperglicemia, bruciore perineale se bolo rapido.',
+  nt:'' },
+
+{ id:'clorfenamina', n:'Clorfenamina', c:'Trimeton', cl:'steroidi', sv:false, al:['Clorfenamina','Trimeton'],
+  conf:'Fiala 10 mg/1 ml',
+  ind:'Orticaria, prurito, reazioni allergiche (dopo stabilizzazione con adrenalina)',
+  ad:'10 mg IV lento o IM.',
+  pd:'6 mesi-6 anni 2,5 mg · 6-12 anni 5 mg · &gt;12 anni 10 mg (IV lento/IM).',
+  dil:'IV: diluire a 10 ml SF, in 1 min.',
+  az:'15-30 min',
+  ci:'Glaucoma ad angolo chiuso, ipertrofia prostatica (relativa).',
+  ae:'Sonnolenza, ipotensione se bolo rapido.',
+  nt:'Non è un farmaco salvavita in anafilassi.' },
+
+// ---------- ANALGESIA ----------
+{ id:'morfina', n:'Morfina', c:'Morfina cloridrato', cl:'analg', sv:false, al:['Morfina'],
+  conf:'Fiala 10 mg/1 ml',
+  ind:'Dolore severo (NRS ≥7) · Dolore toracico ischemico non controllato da nitrati',
+  ad:'0,05-0,1 mg/kg IV titrata: boli da 2-4 mg ogni 5 min (max 10-15 mg).',
+  pd:'0,1 mg/kg IV (max 5 mg per dose), titrata a 0,05 mg/kg.',
+  calc:[ {l:'Dose iniziale', d:0.1, u:'mg', max:5, conc:1, cl:'1 fiala in 10 ml = 1 mg/ml'} ],
+  dil:'1 fiala + 9 ml SF = 1 mg/ml.',
+  az:'IV 5-10 min · durata 3-4 h',
+  ci:'Depressione respiratoria, ipotensione, TCE con alterazione di coscienza (relativa).',
+  ae:'Depressione respiratoria, nausea/vomito, ipotensione, prurito.',
+  ant:'Naloxone.',
+  nt:'Naloxone pronto prima della somministrazione. Antiemetico (ondansetron) se nausea.' },
+
+{ id:'fentanyl', n:'Fentanyl', c:'Fentanest', cl:'analg', sv:false, al:['Fentanyl','Fentanest'],
+  conf:'Fiala 100 mcg/2 ml (50 mcg/ml)',
+  ind:'Dolore severo, soprattutto traumatico · Analgesia intranasale nel bambino',
+  ad:'1 mcg/kg IV (50-100 mcg), ripetibile 0,5 mcg/kg ogni 5 min. IN: 1,5 mcg/kg.',
+  pd:'IN: 1,5 mcg/kg (max 100 mcg) con MAD. IV: 1 mcg/kg (max 50 mcg).',
+  calc:[ {l:'IV', d:1, u:'mcg', max:100, conc:50, cl:'fiala pura 50 mcg/ml'}, {l:'Intranasale', d:1.5, u:'mcg', max:100, conc:50, cl:'fiala pura 50 mcg/ml'} ],
+  dil:'IV: pura o in 10 ml SF (10 mcg/ml). IN: pura, dividere fra le narici (max 1 ml per narice).',
+  az:'IV 1-2 min · durata 30-60 min',
+  ci:'Depressione respiratoria, ipotensione.',
+  ae:'Depressione respiratoria, rigidità della parete toracica se bolo rapido ad alte dosi.',
+  ant:'Naloxone.',
+  nt:'Meno ipotensivo della morfina: preferibile nel trauma.' },
+
+{ id:'ketamina', n:'Ketamina', c:'Ketanest · Ketalar', cl:'analg', sv:false, med:true, al:['Ketamina','Ketanest','Ketalar'],
+  conf:'Flacone 50 mg/ml (10 ml) · anche 10 mg/ml',
+  ind:'Analgesia nel trauma (dosi sub-dissociative) · Sedazione · Induzione RSI · Broncospasmo grave',
+  ad:'Analgesia: 0,1-0,3 mg/kg IV lento, oppure 0,5-1 mg/kg IN.<br>Induzione: 1-2 mg/kg IV · 4-5 mg/kg IM.',
+  pd:'Analgesia: 0,1-0,3 mg/kg IV · 1 mg/kg IN.<br>Sedazione: 1 mg/kg IV · 4 mg/kg IM.',
+  calc:[ {l:'Analgesia IV', d:0.2, u:'mg', max:25, conc:10, cl:'diluita a 10 mg/ml'}, {l:'Induzione IV', d:1.5, u:'mg', max:200, conc:10, cl:'diluita a 10 mg/ml'} ],
+  dil:'1 ml (50 mg) + 4 ml SF = 10 mg/ml.',
+  az:'IV 1 min · durata 10-15 min',
+  ci:'Ipertensione grave, sindrome coronarica acuta, psicosi, età &lt;3 mesi.',
+  ae:'Reazioni di emergenza (agitazione, allucinazioni), ipersalivazione, laringospasmo raro.',
+  nt:'Mantiene i riflessi delle vie aeree e la PA: ottima nel paziente instabile. Midazolam 1 mg se agitazione.' },
+
+{ id:'paracetamolo', n:'Paracetamolo', c:'Perfalgan · Tachipirina', cl:'analg', sv:false, al:['Paracetamolo','Perfalgan','Tachipirina'],
+  conf:'Flacone 1 g/100 ml (10 mg/ml) · 500 mg/50 ml',
+  ind:'Dolore lieve-moderato · Febbre',
+  ad:'1 g IV in 15 min (se &lt;50 kg: 15 mg/kg).',
+  pd:'15 mg/kg IV in 15 min (&lt;10 kg: 7,5 mg/kg). Max 60 mg/kg/die.',
+  calc:[ {l:'Dose', d:15, u:'mg', max:1000, conc:10, cl:'10 mg/ml'} ],
+  dil:'Pronto all\'uso.',
+  az:'15-30 min · durata 4-6 h',
+  ci:'Epatopatia grave.',
+  ae:'Rari; epatotossicità in sovradosaggio.',
+  nt:'Chiedere sempre se già assunto nelle ultime 6 ore.' },
+
+{ id:'ketorolac', n:'Ketorolac', c:'Toradol', cl:'analg', sv:false, al:['Ketorolac','Toradol'],
+  conf:'Fiala 30 mg/1 ml',
+  ind:'Colica renale · Dolore muscolo-scheletrico moderato',
+  ad:'30 mg IV lento/IM (15 mg se &gt;65 anni o &lt;50 kg).',
+  pd:'Non autorizzato sotto i 16 anni.',
+  dil:'IV: diluire in 10 ml SF o 100 ml, in 15 sec-15 min.',
+  az:'30 min · durata 4-6 h',
+  ci:'Insufficienza renale, ulcera/sanguinamento, gravidanza, asma da FANS, anticoagulanti, ipovolemia.',
+  ae:'Sanguinamento GI, danno renale, broncospasmo.',
+  nt:'' },
+
+{ id:'butilscopolamina', n:'Butilscopolamina', c:'Buscopan', cl:'analg', sv:false, al:['Butilscopolamina','Buscopan'],
+  conf:'Fiala 20 mg/1 ml',
+  ind:'Colica renale/biliare/intestinale',
+  ad:'20 mg IV lento/IM, ripetibile (max 100 mg/die).',
+  pd:'Su indicazione medica: 0,3-0,6 mg/kg (max 20 mg).',
+  dil:'Pura, lento.',
+  az:'5-10 min',
+  ci:'Glaucoma ad angolo chiuso, tachiaritmie, ritenzione urinaria, miastenia.',
+  ae:'Tachicardia, secchezza, disturbi visivi.',
+  nt:'' },
+
+// ---------- NEURO / SEDAZIONE ----------
+{ id:'midazolam', n:'Midazolam', c:'Ipnovel · Buccolam', cl:'neuro', sv:true, al:['Midazolam','Ipnovel','Buccolam'],
+  conf:'Fiala 5 mg/1 ml · 15 mg/3 ml · siringhe buccali Buccolam',
+  ind:'Crisi convulsiva / stato epilettico · Sedazione · Agitazione',
+  ad:'Convulsioni: 10 mg IM (&gt;40 kg) o IN/buccale; IV 0,1-0,2 mg/kg (max 10 mg).<br>Sedazione: 1-2,5 mg IV titrata.',
+  pd:'Convulsioni: 0,2 mg/kg IM/IN/buccale (max 10 mg). IV 0,1 mg/kg (max 5 mg).<br>Buccolam: 3-12 mesi 2,5 mg · 1-5 anni 5 mg · 5-10 anni 7,5 mg · 10-18 anni 10 mg.',
+  calc:[ {l:'IM / IN / buccale', d:0.2, u:'mg', max:10, conc:5, cl:'fiala pura 5 mg/ml'}, {l:'IV', d:0.1, u:'mg', max:5, conc:1, cl:'diluita a 1 mg/ml'} ],
+  dil:'IV: 5 mg + 4 ml SF = 1 mg/ml. IN: pura con MAD, max 1 ml per narice.',
+  az:'IV 2-3 min · IM/IN 5-10 min · durata 30-60 min',
+  ci:'Depressione respiratoria (relativa in stato di male), miastenia.',
+  ae:'Depressione respiratoria, ipotensione.',
+  ant:'Flumazenil.',
+  nt:'Se la crisi non cessa dopo 5 min, ripetere una volta. Dopo 2 dosi di BDZ: seconda linea (levetiracetam).' },
+
+{ id:'diazepam', n:'Diazepam', c:'Valium · Micropam', cl:'neuro', sv:false, al:['Diazepam','Valium','Micropam'],
+  conf:'Fiala 10 mg/2 ml · Microclisma 5 mg e 10 mg',
+  ind:'Crisi convulsiva · Agitazione · Astinenza alcolica',
+  ad:'IV: 0,15-0,2 mg/kg (max 10 mg) a 2-5 mg/min, ripetibile una volta. Rettale 10-20 mg.',
+  pd:'IV: 0,2-0,3 mg/kg (max 10 mg). Rettale 0,5 mg/kg: &lt;3 anni 5 mg · ≥3 anni 10 mg.',
+  calc:[ {l:'IV', d:0.25, u:'mg', max:10, conc:5, cl:'fiala 5 mg/ml'}, {l:'Rettale', d:0.5, u:'mg', max:10} ],
+  dil:'Pura, non diluire (precipita). Vena grossa.',
+  az:'IV 1-3 min · rettale 5-10 min',
+  ci:'Depressione respiratoria, miastenia.',
+  ae:'Depressione respiratoria, ipotensione, flebite.',
+  ant:'Flumazenil.',
+  nt:'' },
+
+{ id:'lorazepam', n:'Lorazepam', c:'Tavor', cl:'neuro', sv:false, al:['Lorazepam','Tavor'],
+  conf:'Fiala 4 mg/1 ml (conservare in frigo)',
+  ind:'Stato epilettico (prima linea IV)',
+  ad:'0,1 mg/kg IV (max 4 mg) a 2 mg/min, ripetibile una volta dopo 5-10 min.',
+  pd:'0,1 mg/kg IV (max 4 mg).',
+  calc:[ {l:'Dose', d:0.1, u:'mg', max:4, conc:2, cl:'diluita 1:1 = 2 mg/ml'} ],
+  dil:'Diluire 1:1 con SF.',
+  az:'2-3 min · durata 6-12 h',
+  ci:'Depressione respiratoria.',
+  ae:'Depressione respiratoria, ipotensione.',
+  ant:'Flumazenil.',
+  nt:'' },
+
+{ id:'levetiracetam', n:'Levetiracetam', c:'Keppra', cl:'neuro', sv:false, med:true, al:['Levetiracetam','Keppra'],
+  conf:'Fiala 500 mg/5 ml (100 mg/ml)',
+  ind:'Stato epilettico refrattario alle benzodiazepine (seconda linea)',
+  ad:'60 mg/kg IV (max 4.500 mg) in 10-15 min.',
+  pd:'60 mg/kg IV (max 4.500 mg) in 10-15 min.',
+  calc:[ {l:'Carico', d:60, u:'mg', max:4500, conc:100, cl:'100 mg/ml'} ],
+  dil:'In 100 ml SF.',
+  az:'15-30 min',
+  ci:'Allergia.',
+  ae:'Sonnolenza, agitazione.',
+  nt:'Ben tollerato, poche interazioni: preferito a fenitoina.' },
+
+{ id:'fenitoina', n:'Fenitoina', c:'Dintoina', cl:'neuro', sv:false, med:true, al:['Fenitoina','Dintoina'],
+  conf:'Fiala 250 mg/5 ml',
+  ind:'Stato epilettico refrattario (seconda linea, alternativa)',
+  ad:'20 mg/kg IV, max 50 mg/min (max 1.500 mg).',
+  pd:'20 mg/kg IV, max 1 mg/kg/min.',
+  calc:[ {l:'Carico', d:20, u:'mg', max:1500, conc:50, cl:'50 mg/ml'} ],
+  dil:'SOLO in SF (precipita in glucosio).',
+  az:'10-30 min',
+  ci:'Bradicardia, BAV, ipotensione.',
+  ae:'Ipotensione, aritmie, necrosi da stravaso.',
+  nt:'Monitor ECG e PA durante l\'infusione.' },
+
+{ id:'mannitolo', n:'Mannitolo 18%', c:'Mannitolo', cl:'neuro', sv:false, med:true, al:['Mannitolo'],
+  conf:'Flacone 18% (18 g/100 ml) · 250/500 ml',
+  ind:'Ipertensione endocranica con segni di erniazione',
+  ad:'0,25-1 g/kg IV in 15-20 min.',
+  pd:'0,25-0,5 g/kg IV in 15-20 min.',
+  calc:[ {l:'0,5 g/kg', d:0.5, u:'g', max:50, conc:0.18, cl:'18% = 0,18 g/ml'} ],
+  dil:'Pronto all\'uso, con filtro.',
+  az:'15-30 min',
+  ci:'Ipovolemia, ipotensione, anuria.',
+  ae:'Ipotensione, disidratazione.',
+  nt:'Nel trauma ipoteso evitare; alternativa salina ipertonica su indicazione.' },
+
+// ---------- ANTIDOTI / METABOLICI ----------
+{ id:'naloxone', n:'Naloxone', c:'Narcan', cl:'antidoti', sv:true, al:['Naloxone','Narcan'],
+  conf:'Fiala 0,4 mg/1 ml',
+  ind:'Depressione respiratoria da oppioidi',
+  ad:'0,4 mg IM, oppure IV titrato 0,04-0,1 mg ogni 2 min (nel dipendente). Ripetibile fino a 2 mg e oltre.',
+  pd:'Overdose: 0,1 mg/kg IV/IM/IO (max 2 mg).<br>Depressione da oppioidi terapeutici: 0,001-0,005 mg/kg.',
+  calc:[ {l:'Overdose', d:0.1, u:'mg', max:2, conc:0.4, cl:'fiala 0,4 mg/ml'} ],
+  dil:'IV titrato: 1 fiala + 9 ml SF = 0,04 mg/ml.',
+  az:'IV 1-2 min · IM 5 min · durata 30-90 min',
+  ci:'Nessuna in emergenza.',
+  ae:'Astinenza acuta, agitazione, vomito, edema polmonare.',
+  nt:'Obiettivo: respiro adeguato, NON risveglio completo. Dura meno di molti oppioidi: sorvegliare e trasportare.' },
+
+{ id:'flumazenil', n:'Flumazenil', c:'Anexate', cl:'antidoti', sv:false, med:true, al:['Flumazenil','Anexate'],
+  conf:'Fiala 0,5 mg/5 ml (0,1 mg/ml)',
+  ind:'Depressione respiratoria da benzodiazepine (soprattutto iatrogena)',
+  ad:'0,2 mg IV in 15 s, poi 0,1 mg ogni 60 s fino a max 1 mg.',
+  pd:'0,01 mg/kg IV (max 0,2 mg), ripetibile ogni minuto fino a max 1 mg.',
+  calc:[ {l:'Dose', d:0.01, u:'mg', max:0.2, conc:0.1, cl:'0,1 mg/ml'} ],
+  dil:'Pura.',
+  az:'1-2 min · durata breve',
+  ci:'Epilessia, uso cronico di BDZ, intossicazione mista con triciclici.',
+  ae:'Convulsioni, astinenza, aritmie.',
+  nt:'Nell\'intossicazione volontaria sconosciuta: preferire supporto delle vie aeree.' },
+
+{ id:'glucagone', n:'Glucagone', c:'GlucaGen · Baqsimi', cl:'antidoti', sv:true, al:['Glucagone','GlucaGen','Baqsimi'],
+  conf:'Kit 1 mg (polvere + solvente) · Spray nasale 3 mg',
+  ind:'Ipoglicemia senza accesso venoso · Intossicazione da beta-bloccanti',
+  ad:'Ipoglicemia: 1 mg IM/SC/IV (o 3 mg IN).<br>Beta-bloccanti: 3-10 mg IV, su indicazione medica.',
+  pd:'&lt;25 kg (o &lt;6-8 anni): 0,5 mg IM · ≥25 kg: 1 mg IM. Spray 3 mg dai 4 anni.',
+  dil:'Ricostituire con il solvente del kit.',
+  az:'10-15 min',
+  ci:'Feocromocitoma.',
+  ae:'Nausea, vomito.',
+  nt:'Poco efficace in alcolisti/digiuno prolungato (riserve epatiche di glicogeno vuote).' },
+
+{ id:'glucosio', n:'Glucosio', c:'Glucosio 10% · 33% · 50%', cl:'antidoti', sv:true, al:['Glucosio'],
+  conf:'Fiale 33% (10 ml = 3,3 g) · flaconi 10% (10 g/100 ml)',
+  ind:'Ipoglicemia (&lt;70 mg/dl con sintomi o &lt;60 mg/dl)',
+  ad:'10-20 g IV: 30-60 ml di glucosio 33%, oppure 100-200 ml di glucosio 10%. Ricontrollare dopo 10 min.',
+  pd:'0,2-0,3 g/kg IV = 2-3 ml/kg di glucosio 10%. Evitare il 33% in vena periferica nel bambino.',
+  calc:[ {l:'Glucosio 10%', d:0.3, u:'g', max:20, conc:0.1, cl:'10% = 0,1 g/ml'} ],
+  dil:'Il 33% in vena di grosso calibro, flush SF.',
+  az:'1-2 min',
+  ci:'Nessuna in ipoglicemia documentata.',
+  ae:'Flebite, necrosi da stravaso (concentrazioni alte).',
+  nt:'In etilisti/malnutriti dare tiamina 100 mg prima o insieme.' },
+
+{ id:'tiamina', n:'Tiamina (vitamina B1)', c:'Benerva', cl:'antidoti', sv:false, al:['Tiamina','Benerva','Vitamina B1'],
+  conf:'Fiala 100 mg/1 ml',
+  ind:'Prevenzione encefalopatia di Wernicke in etilisti/malnutriti prima del glucosio',
+  ad:'100 mg IV lento o IM.',
+  pd:'Raramente necessaria.',
+  dil:'IV in 100 ml SF.',
+  az:'—',
+  ci:'Allergia.',
+  ae:'Rare reazioni anafilattoidi.',
+  nt:'Non ritardare il glucosio per la tiamina.' },
+
+{ id:'carbone', n:'Carbone attivo', c:'Carbomix', cl:'antidoti', sv:false, med:true, al:['Carbone attivo','Carbomix'],
+  conf:'Flacone 50 g in sospensione',
+  ind:'Ingestione di tossico assorbibile entro 1 h (su indicazione Centro Antiveleni)',
+  ad:'50 g PO.',
+  pd:'1 g/kg PO (max 50 g).',
+  calc:[ {l:'Dose', d:1, u:'g', max:50} ],
+  dil:'Sospendere in acqua.',
+  az:'—',
+  ci:'Vie aeree non protette / GCS ridotto, caustici, idrocarburi, alcoli, ferro, litio.',
+  ae:'Vomito, aspirazione.',
+  nt:'Contattare il Centro Antiveleni.' },
+
+{ id:'idrossocobalamina', n:'Idrossocobalamina', c:'Cyanokit', cl:'antidoti', sv:false, med:true, al:['Idrossocobalamina','Cyanokit'],
+  conf:'Flacone 5 g',
+  ind:'Intossicazione da cianuro (fumo d\'incendio con alterazione di coscienza, shock o ACR)',
+  ad:'5 g IV in 15 min, ripetibile.',
+  pd:'70 mg/kg IV (max 5 g).',
+  calc:[ {l:'Dose', d:70, u:'mg', max:5000} ],
+  dil:'Ricostituire con 200 ml SF.',
+  az:'Minuti',
+  ci:'Nessuna in emergenza.',
+  ae:'Colorazione rossa di cute e urine (interferisce con alcuni esami).',
+  nt:'' },
+
+{ id:'bicarbonato', n:'Sodio bicarbonato 8,4%', c:'Sodio bicarbonato', cl:'antidoti', sv:false, med:true, al:['Sodio bicarbonato','Bicarbonato'],
+  conf:'Fiala/flacone 8,4% = 1 mEq/ml',
+  ind:'Iperkaliemia grave · Intossicazione da triciclici con QRS largo · ACR prolungato selezionato',
+  ad:'50 mEq (50 ml) IV, ripetibile.',
+  pd:'1 mEq/kg IV (nel neonato usare 4,2%).',
+  calc:[ {l:'Dose', d:1, u:'mEq', max:50, conc:1, cl:'8,4% = 1 mEq/ml'} ],
+  dil:'Puro, lavare la linea prima e dopo.',
+  az:'Immediata',
+  ci:'Alcalosi.',
+  ae:'Ipernatriemia, ipokaliemia, necrosi da stravaso.',
+  nt:'Incompatibile con calcio e catecolamine nella stessa linea.' },
+
+{ id:'calcio', n:'Calcio gluconato 10%', c:'Calcio gluconato', cl:'antidoti', sv:false, med:true, al:['Calcio gluconato','Calcio cloruro','Calcio'],
+  conf:'Fiala 1 g/10 ml (10%)',
+  ind:'Iperkaliemia con alterazioni ECG · Intossicazione da calcio-antagonisti · Ipocalcemia · Sovradosaggio di magnesio',
+  ad:'30 ml di calcio gluconato 10% IV in 5-10 min (oppure 10 ml di calcio cloruro 10%).',
+  pd:'0,5 ml/kg di calcio gluconato 10% (max 20 ml) in 5-10 min.',
+  calc:[ {l:'Gluconato 10%', d:50, u:'mg', max:2000, conc:100, cl:'10% = 100 mg/ml'} ],
+  dil:'Puro, lento.',
+  az:'1-3 min · durata 30-60 min',
+  ci:'Terapia digitalica (cautela), ipercalcemia.',
+  ae:'Bradicardia se rapido, necrosi da stravaso.',
+  nt:'Non nella stessa linea del bicarbonato (precipita).' },
+
+// ---------- GASTRO / OSTETRICIA / FLUIDI ----------
+{ id:'ondansetron', n:'Ondansetron', c:'Zofran', cl:'altro', sv:false, al:['Ondansetron','Zofran'],
+  conf:'Fiala 4 mg/2 ml · 8 mg/4 ml',
+  ind:'Nausea e vomito (anche da oppioidi)',
+  ad:'4-8 mg IV lento.',
+  pd:'0,1-0,15 mg/kg IV lento (max 4 mg), dai 6 mesi.',
+  calc:[ {l:'Dose', d:0.15, u:'mg', max:4, conc:2, cl:'fiala 2 mg/ml'} ],
+  dil:'Pura in almeno 30 s.',
+  az:'5 min',
+  ci:'QT lungo congenito.',
+  ae:'Cefalea, allungamento QT.',
+  nt:'' },
+
+{ id:'metoclopramide', n:'Metoclopramide', c:'Plasil', cl:'altro', sv:false, al:['Metoclopramide','Plasil'],
+  conf:'Fiala 10 mg/2 ml',
+  ind:'Nausea e vomito',
+  ad:'10 mg IV lento (in almeno 3 min).',
+  pd:'Controindicato sotto 1 anno. 1-18 anni: 0,1-0,15 mg/kg (max 10 mg), seconda scelta.',
+  calc:[ {l:'Dose', d:0.1, u:'mg', max:10, conc:5, cl:'fiala 5 mg/ml'} ],
+  dil:'Pura, lento.',
+  az:'1-3 min',
+  ci:'Parkinson, feocromocitoma, occlusione intestinale, epilessia.',
+  ae:'Reazioni extrapiramidali (distonie), sonnolenza.',
+  nt:'Se distonia acuta: difenidramina/biperidene su indicazione medica.' },
+
+{ id:'ossitocina', n:'Ossitocina', c:'Syntocinon', cl:'altro', sv:false, al:['Ossitocina','Syntocinon'],
+  conf:'Fiala 5 UI/1 ml (anche 10 UI)',
+  ind:'Prevenzione e trattamento emorragia post-partum (dopo l\'espulsione del feto)',
+  ad:'10 UI IM, oppure 5 UI IV lento. Infusione 20-40 UI in 500 ml SF.',
+  pd:'Non pertinente.',
+  dil:'IV: diluire, mai bolo rapido.',
+  az:'IM 3-5 min · IV 1 min',
+  ci:'Prima dell\'espulsione del feto (o se gemello non nato).',
+  ae:'Ipotensione e tachicardia se bolo IV rapido, nausea.',
+  nt:'Associare massaggio uterino. Considerare acido tranexamico.' },
+
+{ id:'tranexamico', n:'Acido tranexamico', c:'Tranex · Ugurol', cl:'altro', sv:true, al:['Acido tranexamico','Tranex','Ugurol'],
+  conf:'Fiala 500 mg/5 ml',
+  ind:'Trauma con emorragia significativa (entro 3 h) · Emorragia post-partum',
+  ad:'1 g IV in 10 min, poi 1 g in 8 h.',
+  pd:'15 mg/kg IV in 10 min (max 1 g).',
+  calc:[ {l:'Bolo', d:15, u:'mg', max:1000, conc:100, cl:'fiala 100 mg/ml'} ],
+  dil:'1 g in 100 ml SF in 10 min.',
+  az:'Minuti',
+  ci:'Oltre 3 h dal trauma (inefficace/dannoso), tromboembolia in atto.',
+  ae:'Ipotensione se rapido, convulsioni (dosi alte).',
+  nt:'Prima si dà, meglio è. Annotare l\'orario del trauma.' },
+
+{ id:'cristalloidi', n:'Cristalloidi (SF 0,9% · Ringer)', c:'Soluzione fisiologica · Ringer lattato/acetato', cl:'altro', sv:true, al:['Cristalloidi','Ringer','Soluzione fisiologica'],
+  conf:'Sacche 250 / 500 / 1000 ml',
+  ind:'Ipovolemia · Shock · Sepsi · Ustioni',
+  ad:'Boli da 250-500 ml rivalutando. Sepsi: fino a 30 ml/kg.<br>Trauma: ipotensione permissiva PAS 80-90 (polso radiale presente); TCE: PAS ≥110.',
+  pd:'Boli da 10 ml/kg rivalutando dopo ciascuno (max 40-60 ml/kg in 1 h). Trauma: 10 ml/kg.',
+  calc:[ {l:'Bolo', d:10, u:'ml', max:500} ],
+  dil:'—',
+  az:'Immediata',
+  ci:'OAP / sovraccarico.',
+  ae:'Sovraccarico, edema polmonare, coagulopatia da diluizione.',
+  nt:'Preferire Ringer nei grandi volumi. Riscaldare i liquidi nel trauma.' },
+
+// ---------- RSI (solo medico) ----------
+{ id:'propofol', n:'Propofol', c:'Diprivan', cl:'rsi', sv:false, med:true, al:['Propofol','Diprivan'],
+  conf:'Fiala 200 mg/20 ml (10 mg/ml)',
+  ind:'Induzione e sedazione (solo medico)',
+  ad:'Induzione: 1-2,5 mg/kg IV; nel paziente instabile 0,5-1 mg/kg.',
+  pd:'Induzione: 2,5-3,5 mg/kg IV (ridurre se instabile).',
+  calc:[ {l:'Induzione', d:1.5, u:'mg', max:200, conc:10, cl:'10 mg/ml'} ],
+  dil:'Puro.',
+  az:'30-45 s · durata 5-10 min',
+  ci:'Shock, allergia a uova/soia (relativa).',
+  ae:'Ipotensione marcata, apnea, dolore all\'iniezione.',
+  nt:'Nel paziente instabile preferire ketamina.' },
+
+{ id:'rocuronio', n:'Rocuronio', c:'Esmeron', cl:'rsi', sv:false, med:true, al:['Rocuronio','Esmeron'],
+  conf:'Fiala 50 mg/5 ml (10 mg/ml), conservare in frigo',
+  ind:'Curarizzazione per RSI (solo medico)',
+  ad:'1-1,2 mg/kg IV.',
+  pd:'1-1,2 mg/kg IV.',
+  calc:[ {l:'RSI', d:1.2, u:'mg', max:150, conc:10, cl:'10 mg/ml'} ],
+  dil:'Puro.',
+  az:'60 s · durata 30-60 min',
+  ci:'Allergia.',
+  ae:'Anafilassi (rara).',
+  ant:'Sugammadex.',
+  nt:'Paralisi lunga: obbligatorio avere un piano B per le vie aeree.' },
+
+{ id:'succinilcolina', n:'Succinilcolina', c:'Midarine', cl:'rsi', sv:false, med:true, al:['Succinilcolina','Midarine'],
+  conf:'Fiala 100 mg/2 ml (50 mg/ml), conservare in frigo',
+  ind:'Curarizzazione per RSI (solo medico)',
+  ad:'1-1,5 mg/kg IV.',
+  pd:'&lt;10 kg: 2 mg/kg · bambini: 1-2 mg/kg IV.',
+  calc:[ {l:'RSI', d:1.5, u:'mg', max:150, conc:50, cl:'50 mg/ml'} ],
+  dil:'Pura o diluita a 10 mg/ml.',
+  az:'30-60 s · durata 5-10 min',
+  ci:'Iperkaliemia, ustioni/schiacciamento/allettamento &gt;48-72 h, malattie neuromuscolari, ipertermia maligna.',
+  ae:'Iperkaliemia, bradicardia (bambini, dosi ripetute), fascicolazioni.',
+  nt:'Nel bambino preparare atropina.' }
+];
 
 const PROTOCOLS = {
   'dispnea': {
@@ -898,7 +1625,6 @@ const CHECKLISTS = {
 // ========== STATE ==========
 var currentPanel = 'home';
 var prevPanel = 'home';
-var currentFarmTab = 0;
 var currentScaleTab = 0;
 var currentCheckTab = 0;
 var currentCalcTab = 0;
@@ -954,37 +1680,6 @@ function goProtoBack() {
   document.getElementById('panel-' + prevPanel).classList.add('active');
   currentPanel = prevPanel;
   document.getElementById('content').scrollTop = 0;
-}
-
-// ========== FARMACI ==========
-function farmTab(i, cat) {
-  currentFarmTab = i;
-  document.querySelectorAll('#panel-farmaci .tab').forEach((t,j)=>t.classList.toggle('active',i===j));
-  renderFarmaci(i, cat);
-}
-
-function renderFarmaci(i) {
-  var cats = Object.keys(FARMACI);
-  var cat = cats[i] || cats[0];
-  var drugs = FARMACI[cat];
-  var html = '';
-  drugs.forEach(function(d, idx) {
-    var border = d.urgent ? 'red-border' : 'blue-border';
-    var drugCls = d.urgent ? 'urgent' : 'safe';
-    var sev = d.urgent ? 'red' : 'green';
-    var sevLabel = d.urgent ? 'URGENTE' : 'STD';
-    html += '<div class="card ' + border + '">';
-    html += '<div class="card-title" style="justify-content:space-between">';
-    html += '<span>' + (d.urgent ? '🚨 ' : '') + d.name + ' <span class="sev ' + sev + '">' + sevLabel + '</span></span>';
-    html += '<button class="tts-btn" onclick="speakDrug(' + i + ',' + idx + ',this)">🔊 Leggi</button>';
-    html += '</div>';
-    html += '<div style="margin:4px 0"><span class="drug ' + drugCls + '">' + d.dose + '</span>';
-    html += d.interval ? '<span class="drug-dose">' + d.interval + '</span>' : '';
-    html += '</div>';
-    html += '<div class="card-body" style="margin-top:6px">' + d.note + '</div>';
-    html += '</div>';
-  });
-  document.getElementById('farmaci-content').innerHTML = html;
 }
 
 // ========== SCALE ==========
@@ -1425,6 +2120,7 @@ function showBlock(i) {
     </div>`
   ];
   document.getElementById('block-detail').innerHTML = blocks[i];
+  linkDrugs(document.getElementById('block-detail'));
 }
 
 // ========== PROTO RENDER ==========
@@ -1438,6 +2134,7 @@ function renderProto(id) {
     '</div>' +
     '<div class="detail-sub">' + p.sub + '</div>' +
     p.content;
+  linkDrugs(document.getElementById('proto-content'));
 }
 
 // ========== SEARCH ==========
@@ -1476,18 +2173,18 @@ document.getElementById('search-input').addEventListener('input', function() {
   const results = SEARCH_INDEX.filter(r => r.q.includes(q) || r.title.toLowerCase().includes(q));
   const el = document.getElementById('search-results');
   if(!results.length) { el.innerHTML='<div class="alert orange">Nessun risultato per "'+q+'"</div>'; return; }
-  el.innerHTML = results.map((r,i) => `<button class="search-result" onclick="searchGo(${i}, '${q}')">
+  el.innerHTML = results.map((r,i) => `<button class="search-result" onclick="searchGo(${i})">
     <div class="sr-title">${r.title}</div>
     <div class="sr-section">${r.sec}</div>
-  </div>`).join('');
+  </button>`).join('');
   window._searchResults = results;
 });
 
-function searchGo(i, q) {
-  const results = SEARCH_INDEX.filter(r => r.q.includes(q) || r.title.toLowerCase().includes(q));
+function searchGo(i) {
+  const r = (window._searchResults || [])[i];
   document.getElementById('search-input').value = '';
   hideSearch();
-  results[i].action();
+  if (r) r.action();
 }
 
 function hideSearch() {
@@ -1498,6 +2195,294 @@ function hideSearch() {
     if(nb) { document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active')); nb.classList.add('active'); }
   }
 }
+
+// ========== PRONTUARIO (UI) ==========
+var prPeso = 0, prClasse = 'tutti', prFrom = 'farmaci', prListScroll = 0;
+var prFav = [];
+try { prFav = JSON.parse(localStorage.getItem('118pro-fav') || '[]') || []; } catch (e) { prFav = []; }
+
+var PR_BY_ID = {};
+PRONTUARIO.forEach(function(d) { PR_BY_ID[d.id] = d; });
+PRONTUARIO.sort(function(a, b) { return a.n.localeCompare(b.n, 'it'); });
+
+// Alias → id, per collegare i nomi dei farmaci nei protocolli e nei comandi vocali
+var PR_ALIAS = [];
+PRONTUARIO.forEach(function(d) { (d.al || [d.n]).forEach(function(a) { PR_ALIAS.push({ a: a, id: d.id }); }); });
+PR_ALIAS.sort(function(x, y) { return y.a.length - x.a.length; });
+var PR_ALIAS_MAP = {};
+PR_ALIAS.forEach(function(x) { PR_ALIAS_MAP[x.a.toLowerCase()] = x.id; });
+var PR_RE = new RegExp('(^|[^A-Za-zÀ-ÿ])(' + PR_ALIAS.map(function(x) {
+  return x.a.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}).join('|') + ')(?![A-Za-zÀ-ÿ])', 'gi');
+
+function prFmt(x) {
+  var r = x >= 100 ? Math.round(x) : x >= 10 ? Math.round(x * 10) / 10 : Math.round(x * 100) / 100;
+  return String(r).replace('.', ',');
+}
+
+function prStrip(html) {
+  var tmp = document.createElement('div');
+  tmp.innerHTML = String(html || '').replace(/<br\s*\/?>/gi, '. ');
+  return (tmp.textContent || '').replace(/\s+/g, ' ').trim();
+}
+
+function prIsFav(id) { return prFav.indexOf(id) !== -1; }
+
+function prToggleFav(id) {
+  var i = prFav.indexOf(id);
+  if (i === -1) prFav.push(id); else prFav.splice(i, 1);
+  try { localStorage.setItem('118pro-fav', JSON.stringify(prFav)); } catch (e) {}
+  var b = document.getElementById('pr-fav-btn');
+  if (b) b.textContent = prIsFav(id) ? '★ Preferito' : '☆ Preferito';
+}
+
+// ---- Peso paziente (non viene salvato: si azzera a ogni nuovo paziente) ----
+function prSetPeso(v) {
+  prPeso = parseFloat(String(v).replace(',', '.')) || 0;
+  ['pr-peso', 'pr-peso2'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && document.activeElement !== el) el.value = prPeso ? String(prPeso).replace('.', ',') : '';
+  });
+  prPesoInfo();
+  prRenderCalc();
+}
+
+function prPesoInfo() {
+  var el = document.getElementById('pr-peso-info');
+  if (!el) return;
+  if (!prPeso) { el.className = 'pr-hint'; el.textContent = 'Inserisci il peso: nelle schede le dosi pediatriche si calcolano da sole.'; }
+  else if (prPeso >= 40) { el.className = 'pr-hint warn'; el.textContent = 'Peso ' + prFmt(prPeso) + ' kg: verifica sempre con le dosi adulto.'; }
+  else { el.className = 'pr-hint on'; el.textContent = '✓ Dosi calcolate per ' + prFmt(prPeso) + ' kg'; }
+}
+
+function prResetPeso() {
+  var e = document.getElementById('pr-eta'); if (e) e.value = '';
+  var p = document.getElementById('pr-peso'); if (p) p.value = '';
+  prSetPeso(0);
+  showToast('Peso azzerato — nuovo paziente', 'green');
+}
+
+function prStimaPeso() {
+  var e = parseFloat(String(document.getElementById('pr-eta').value).replace(',', '.'));
+  var u = document.getElementById('pr-eta-u').value;
+  if (!e || e <= 0) { showToast('Inserisci l\'età', 'orange'); return; }
+  var mesi = u === 'm' ? e : e * 12, w;
+  if (mesi < 12) w = 0.5 * mesi + 4;
+  else {
+    var a = mesi / 12;
+    if (a <= 5) w = 2 * a + 8;
+    else if (a <= 12) w = 3 * a + 7;
+    else { showToast('Oltre 12 anni: chiedi o stima il peso reale', 'orange'); return; }
+  }
+  w = Math.round(w);
+  document.getElementById('pr-peso').value = w;
+  prSetPeso(w);
+  showToast('Peso stimato ' + w + ' kg (formula APLS)', 'green');
+}
+
+// ---- Elenco ----
+function prChips() {
+  var el = document.getElementById('pr-chips');
+  if (!el) return;
+  var chips = [['tutti', 'Tutti', ''], ['sv', '🚨 Salvavita', ''], ['fav', '⭐ Preferiti', '']];
+  Object.keys(PRONT_CLASSI).forEach(function(k) { chips.push([k, PRONT_CLASSI[k].l, PRONT_CLASSI[k].c]); });
+  el.innerHTML = chips.map(function(c) {
+    var dot = c[2] ? '<span class="proto-dot" style="background:' + c[2] + ';width:8px;height:8px"></span>' : '';
+    return '<button class="pr-chip' + (prClasse === c[0] ? ' active' : '') + '" onclick="prSetClasse(\'' + c[0] + '\')">' + dot + c[1] + '</button>';
+  }).join('');
+}
+
+function prSetClasse(k) { prClasse = k; renderFarmaci(); }
+
+function renderFarmaci() {
+  prChips();
+  prPesoInfo();
+  var qEl = document.getElementById('pr-q');
+  var q = qEl ? qEl.value.trim().toLowerCase() : '';
+  var list = PRONTUARIO.filter(function(d) {
+    if (prClasse === 'sv' && !d.sv) return false;
+    if (prClasse === 'fav' && !prIsFav(d.id)) return false;
+    if (PRONT_CLASSI[prClasse] && d.cl !== prClasse) return false;
+    if (q) {
+      var hay = (d.n + ' ' + d.c + ' ' + (d.al || []).join(' ') + ' ' + d.ind).toLowerCase();
+      if (hay.indexOf(q) === -1) return false;
+    }
+    return true;
+  });
+  var html = '';
+  if (!list.length) {
+    html = prClasse === 'fav' && !q
+      ? '<div class="alert yellow">Nessun preferito. Apri una scheda e tocca ☆ Preferito.</div>'
+      : '<div class="alert orange">Nessun farmaco trovato</div>';
+  }
+  var lastL = '';
+  list.forEach(function(d) {
+    var L = d.n.charAt(0).toUpperCase();
+    if (L !== lastL) { html += '<div class="pr-letter">' + L + '</div>'; lastL = L; }
+    var cls = PRONT_CLASSI[d.cl];
+    html += '<button class="pr-item" style="border-left-color:' + cls.c + '" onclick="openFarmaco(\'' + d.id + '\')">' +
+      '<div class="pr-item-main"><div class="pr-item-name">' + (d.sv ? '🚨 ' : '') + d.n +
+      (prIsFav(d.id) ? ' <span class="pr-star">★</span>' : '') +
+      (d.med ? ' <span class="sev orange">MEDICO</span>' : '') + '</div>' +
+      '<div class="pr-item-sub">' + d.c + ' · ' + d.conf + '</div></div>' +
+      '<div class="proto-arrow">›</div></button>';
+  });
+  document.getElementById('farmaci-content').innerHTML = html;
+}
+
+// ---- Scheda ----
+function openFarmaco(id) {
+  var d = PR_BY_ID[id];
+  if (!d) return;
+  stopSpeech();
+  if (currentPanel !== 'farmaco-detail') {
+    prFrom = currentPanel;
+    if (prFrom === 'farmaci') prListScroll = document.getElementById('content').scrollTop;
+  }
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('panel-farmaco-detail').classList.add('active');
+  currentPanel = 'farmaco-detail';
+  document.getElementById('content').scrollTop = 0;
+  renderFarmaco(d);
+}
+
+function prBack() {
+  stopSpeech();
+  var dest = prFrom && document.getElementById('panel-' + prFrom) ? prFrom : 'farmaci';
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('panel-' + dest).classList.add('active');
+  currentPanel = dest;
+  if (dest === 'farmaci') {
+    renderFarmaci();
+    document.getElementById('content').scrollTop = prListScroll;
+  } else {
+    document.getElementById('content').scrollTop = 0;
+  }
+}
+
+function prRow(label, val, extra) {
+  if (!val) return '';
+  return '<div class="pr-row' + (extra ? ' ' + extra : '') + '"><div class="pr-row-l">' + label + '</div><div class="pr-row-v">' + val + '</div></div>';
+}
+
+function prCalcRows(d) {
+  if (!d.calc || !d.calc.length) return '';
+  if (!prPeso) return '<div class="pr-hint">Inserisci il peso per calcolare la dose.</div>';
+  var h = prPeso >= 40 ? '<div class="pr-hint warn">Peso ≥40 kg: confronta con la dose adulto.</div>' : '';
+  d.calc.forEach(function(c) {
+    var dose = c.d * prPeso, tag = '';
+    if (c.min && dose < c.min) { dose = c.min; tag = ' (minima)'; }
+    if (c.max && dose > c.max) { dose = c.max; tag = ' (MAX)'; }
+    var ml = c.conc ? dose / c.conc : 0;
+    h += '<div class="pr-calc-row"><div><div class="pr-calc-l">' + c.l + '</div>' +
+      '<div class="pr-calc-sub">' + prFmt(c.d) + ' ' + c.u + '/kg' + (c.max ? ' · max ' + prFmt(c.max) + ' ' + c.u : '') + '</div></div>' +
+      '<div style="text-align:right"><div class="pr-calc-val">' + prFmt(dose) + ' ' + c.u + '<span class="pr-calc-tag">' + tag + '</span></div>' +
+      (ml ? '<div class="pr-calc-ml">= ' + prFmt(ml) + ' ml · ' + c.cl + '</div>' : '') + '</div></div>';
+  });
+  return h;
+}
+
+function prRenderCalc() {
+  var out = document.getElementById('pr-calc-out');
+  if (out && currentPanel === 'farmaco-detail' && window._prCur) out.innerHTML = prCalcRows(window._prCur);
+}
+
+function renderFarmaco(d) {
+  window._prCur = d;
+  var cls = PRONT_CLASSI[d.cl];
+  var h = '<div class="pr-head"><div class="detail-title" style="margin-bottom:0;flex:1">' + (d.sv ? '🚨 ' : '') + d.n + '</div>' +
+    '<button class="tts-btn" style="margin-top:4px" onclick="speakFarmaco(\'' + d.id + '\',this)">🔊 Leggi</button></div>' +
+    '<div class="detail-sub" style="margin-bottom:6px">' + d.c + '</div>' +
+    '<div class="pr-badges"><span class="pr-badge" style="color:' + cls.c + ';border-color:' + cls.c + '">' + cls.l + '</span>' +
+    (d.sv ? '<span class="sev red">SALVAVITA</span>' : '') +
+    '<button class="tts-btn" id="pr-fav-btn" onclick="prToggleFav(\'' + d.id + '\')">' + (prIsFav(d.id) ? '★ Preferito' : '☆ Preferito') + '</button></div>';
+  if (d.med) h += '<div class="alert orange" style="margin-top:8px">Somministrare solo su indicazione del medico di centrale o con MSA.</div>';
+  h += '<div class="pr-sheet">';
+  h += prRow('Confezione', d.conf);
+  h += prRow('Indicazioni', d.ind);
+  h += prRow('Dose adulto', d.ad, 'pr-dose');
+  h += prRow('Dose pediatrica', d.pd);
+  if (d.calc && d.calc.length) {
+    h += '<div class="pr-calc"><div class="pr-calc-head"><span>🧮 Dose per peso</span>' +
+      '<span class="pr-calc-in"><input type="number" inputmode="decimal" id="pr-peso2" class="calc-input" placeholder="kg" value="' + (prPeso || '') + '" oninput="prSetPeso(this.value)"> kg</span></div>' +
+      '<div id="pr-calc-out">' + prCalcRows(d) + '</div></div>';
+  }
+  h += prRow('Diluizione e somministrazione', d.dil);
+  h += prRow('Inizio · durata', d.az);
+  h += prRow('Controindicazioni', d.ci, 'pr-ci');
+  h += prRow('Effetti avversi', d.ae);
+  h += prRow('Antidoto', d.ant);
+  h += prRow('Note', d.nt);
+  h += '</div>';
+  h += '<div class="pr-foot">Dosi di riferimento (ERC 2021, ESC, schede tecniche). Verifica sempre con il protocollo locale e il medico di centrale.</div>';
+  document.getElementById('farmaco-detail').innerHTML = h;
+}
+
+function speakFarmaco(id, btn) {
+  var d = PR_BY_ID[id];
+  if (!d) return;
+  var t = d.n + '. ' + (d.med ? 'Solo su indicazione medica. ' : '') +
+    'Confezione: ' + prStrip(d.conf) + '. Dose adulto: ' + prStrip(d.ad) + '. ';
+  if (prPeso && d.calc) {
+    t += 'Per ' + prFmt(prPeso) + ' chili: ';
+    d.calc.forEach(function(c) {
+      var dose = c.d * prPeso;
+      if (c.min && dose < c.min) dose = c.min;
+      if (c.max && dose > c.max) dose = c.max;
+      t += c.l + ' ' + prFmt(dose) + ' ' + c.u + (c.conc ? ', pari a ' + prFmt(dose / c.conc) + ' millilitri' : '') + '. ';
+    });
+  } else {
+    t += 'Dose pediatrica: ' + prStrip(d.pd) + '. ';
+  }
+  t += 'Controindicazioni: ' + prStrip(d.ci);
+  speakText(t.replace(/\bmg\b/g, 'milligrammi').replace(/\bmcg\b/g, 'microgrammi').replace(/\bml\b/g, 'millilitri'), btn);
+}
+
+// ---- Collegamenti: i nomi dei farmaci nei protocolli aprono la scheda ----
+function linkDrugs(root) {
+  if (!root) return;
+  var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+  var nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function(tn) {
+    var p = tn.parentNode;
+    if (!p || !p.closest || p.closest('button, a, [onclick], script, style')) return;
+    var txt = tn.nodeValue;
+    PR_RE.lastIndex = 0;
+    if (!PR_RE.test(txt)) return;
+    PR_RE.lastIndex = 0;
+    var frag = document.createDocumentFragment(), last = 0, m;
+    while ((m = PR_RE.exec(txt))) {
+      var start = m.index + m[1].length;
+      frag.appendChild(document.createTextNode(txt.slice(last, start)));
+      var b = document.createElement('button');
+      b.className = 'drug-link';
+      b.textContent = m[2];
+      b.setAttribute('onclick', "openFarmaco('" + PR_ALIAS_MAP[m[2].toLowerCase()] + "')");
+      frag.appendChild(b);
+      last = start + m[2].length;
+    }
+    frag.appendChild(document.createTextNode(txt.slice(last)));
+    p.replaceChild(frag, tn);
+  });
+}
+
+function prFindInText(t) {
+  PR_RE.lastIndex = 0;
+  var m = PR_RE.exec(t);
+  PR_RE.lastIndex = 0;
+  return m ? PR_ALIAS_MAP[m[2].toLowerCase()] : null;
+}
+
+// Ricerca globale: ogni scheda è trovabile dalla barra in alto
+PRONTUARIO.forEach(function(d) {
+  SEARCH_INDEX.push({
+    q: (d.n + ' ' + d.c + ' ' + (d.al || []).join(' ') + ' ' + d.ind).toLowerCase(),
+    action: function() { openFarmaco(d.id); },
+    title: d.n + ' – scheda',
+    sec: 'Prontuario · ' + PRONT_CLASSI[d.cl].l
+  });
+});
 
 // ========== TTS ENGINE (Feature 1) ==========
 var _ttsCurrentBtn = null;
@@ -1543,18 +2528,6 @@ function stopSpeech() {
     window.speechSynthesis.cancel();
   }
   _ttsClearState();
-}
-
-function speakDrug(catIdx, drugIdx, btn) {
-  var cats = Object.keys(FARMACI);
-  var cat = cats[catIdx];
-  var d = FARMACI[cat] && FARMACI[cat][drugIdx];
-  if (!d) return;
-  var text = d.name + '. ' + (d.urgent ? 'Farmaco urgente. ' : '') +
-    'Dose: ' + d.dose + '. ' +
-    (d.interval ? 'Ogni: ' + d.interval + '. ' : '') +
-    'Note: ' + d.note;
-  speakText(text, btn);
 }
 
 function speakProto(id, btn) {
@@ -1625,6 +2598,8 @@ function startVoiceCommand() {
 }
 
 function _processSpeechCommand(t) {
+  var _fid = prFindInText(t);
+  if (_fid) { openFarmaco(_fid); showToast('💊 ' + PR_BY_ID[_fid].n, 'green'); return; }
   if (t.indexOf('arresto') !== -1 || t.indexOf('rcp') !== -1 || t.indexOf('rianimazione') !== -1) {
     openProto('arresto'); showToast('🛑 Protocollo Arresto Cardiaco', 'green');
   } else if (t.indexOf('anafilassi') !== -1 || t.indexOf('allergico') !== -1) {
