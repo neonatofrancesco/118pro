@@ -1,4 +1,4 @@
-const CACHE = '118pro-v5';
+const CACHE = '118pro-v6';
 const ASSETS = [
   './',
   './index.html',
